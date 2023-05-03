@@ -32,15 +32,7 @@ namespace CapstoneProject.Service
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public DbConnection GetConnection()
-        {
-            DbConnection _connection = Database.GetDbConnection();
-            if (_connection.State == ConnectionState.Closed)
-            {
-                _connection.Open();
-            }
-            return _connection;
-        }
+        
 
         public string GetUserId()
         {
