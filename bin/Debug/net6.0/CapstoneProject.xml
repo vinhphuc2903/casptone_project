@@ -1,0 +1,531 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CapstoneProject</name>
+    </assembly>
+    <members>
+        <member name="M:CapstoneProject.Areas.WeatherForecast.Controllers.WeatherForecastController.Get(CapstoneProject.Areas.WeatherForecast.Models.Schemas.SearchConditon)">
+            <summary>
+            Data master sắp xếp theo doanh thu
+            <para>Created at: 28/12/2022</para>
+            <para>Created by: TruongNQ</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.WeatherForecast.Controllers.WeatherForecastController.GetEmployee">
+            <summary>
+            Data master sắp xếp theo doanh thu
+            <para>Created at: 28/12/2022</para>
+            <para>Created by: TruongNQ</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="P:CapstoneProject.Areas.WeatherForecast.Models.Schemas.SearchConditon.Id">
+            <summary>
+            Id ngày cần tìm kiếm
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.Areas.WeatherForecast.Models.IWeatherForecastModel.Get(CapstoneProject.Areas.WeatherForecast.Models.Schemas.SearchConditon)">
+            <summary>
+            Get Weather Forecast
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CapstoneProject.Areas.WeatherForecast.Models.IWeatherForecastModel.GetEmployees">
+            <summary>
+            Lấy danh sách nhân viên
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CapstoneProject.AutofacModules.AppModule">
+            <summary>
+            Đăng ký các dịch vụ dùng cho việc tạo và xử lý sự kiện thông qua autofac
+            <para>Created at: 10/07/2020</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.AutofacModules.AppModule.Load(Autofac.ContainerBuilder)">
+            <summary>
+            Ghi đè phương thức load của autofac để đăng ký dịch vụ
+            <para>Created at: 10/07/2020</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+            <param name="builder">builder dùng để đăng ký dịch vụ</param>
+        </member>
+        <member name="T:CapstoneProject.AutofacModules.WeatherModule">
+            <summary>
+            Đăng ký các dịch vụ dùng cho việc tạo và xử lý sự kiện thông qua autofac
+            <para>Created at: </para>
+            <para>Created by: VP</para>
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.AutofacModules.WeatherModule.Load(Autofac.ContainerBuilder)">
+            <summary>
+            Ghi đè phương thức load của autofac để đăng ký dịch vụ
+            </summary>
+            <param name="builder">builder dùng để đăng ký dịch vụ</param>
+        </member>
+        <member name="T:CapstoneProject.Commons.Helpers">
+            <summary>
+            Các xử lý chung thường xuyên sử dụng trong hệ thống.
+            <para>Author: QuyPN</para>
+            <para>Created: 15/02/2020</para>
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.Commons.Helpers.RenderToken(System.String,System.Int32)">
+            <summary>
+            Sinh chuỗi token ngẫu nhiên theo id account đăng nhập, độ dài mặc định 100 ký tự.
+            <para>Author: QuyPN</para>
+            <para>Created: 15/02/2020</para>
+            </summary>
+            <param name="str">Chuỗi không trùng nhau sẽ cộng thêm vào token</param>
+            <param name="length">Dộ dài của token, mặc định 100 ký tự</param>
+            <returns> Chuỗi token </returns>
+        </member>
+        <member name="M:CapstoneProject.Commons.Helpers.CreateScanCode(System.String)">
+            <summary>
+            Tạo ra chuỗi code để scan mã số khách hàng
+            <para>Author: QuyPN</para>
+            <para>Created: 15/02/2020</para>
+            </summary>
+            <param name="customerId">Mã số khách hàng</param>
+            <returns>Chuỗi scan khi thanh toán</returns>
+        </member>
+        <member name="M:CapstoneProject.Commons.Helpers.DecodeScanCode(System.String)">
+            <summary>
+            Giải mã chuỗi scan ra mã khách hàng
+            <para>Author: QuyPN</para>
+            <para>Created: 15/02/2020</para>
+            </summary>
+            <param name="scanCode">Mã số khi scan</param>
+            <returns>Chuỗi scan khi thanh toán</returns>
+        </member>
+        <member name="M:CapstoneProject.Commons.Helpers.ConvertToUnSign(System.String,System.Boolean)">
+            <summary>
+            Chuyển từ tiếng việt có dấu thành tiếng việt không dấu.
+            <para>Author: QuyPN</para>
+            <para>Created: 15/02/2020</para>
+            </summary>
+            <param name="s">Chuỗi tiếng việt cần chuyển</param>
+            <param name="isReplaceSpecialChracter">Có thay thế các ký tự đặc biệt hay không</param>
+            <returns>Kết quả sau khi chuyển</returns>
+        </member>
+        <member name="M:CapstoneProject.Commons.Helpers.GetCookie(System.String,System.String)">
+            <summary>
+            Lấy dữ liệu từ cookies theo khóa, nếu không có dữ liệu thì trả về theo dữ liệu mặc định truyền vào hoặc rỗng
+            <para>Author: QuyPN</para>
+            <para>Created: 15/02/2020</para>
+            </summary>
+            <param name="key">Khóa cần lấy dữ liệu trong cookie</param>
+            <param name="returnDefault">Kết quả trả về mặc định nếu không có dữ liệu trong cookie, mặc định là chuỗi rỗng</param>
+            <returns>Giá trị lưu trữ trong cookie</returns>
+        </member>
+        <member name="M:CapstoneProject.Commons.Helpers.DeleteFiles(System.Collections.Generic.List{System.String})">
+            <summary>
+            Xóa file theo danh sách url đã cung cấp.
+            <para>Author: QuyPN</para>
+            <para>Created: 15/02/2020</para>
+            </summary>
+            <param name="fileUrls">Danh sách url file sẽ xóa</param>
+            <returns>True nếu xóa thành công tất cả các file. Exception nếu có lỗi.</returns>
+        </member>
+        <member name="M:CapstoneProject.Commons.Helpers.DeleteFiles(System.String[])">
+            <summary>
+            Xóa file theo danh sách url đã cung cấp.
+            <para>Author: QuyPN</para>
+            <para>Created: 15/02/2020</para>
+            </summary>
+            <param name="fileUrls">Danh sách url file sẽ xóa</param>
+            <returns>True nếu xóa thành công tất cả các file. Exception nếu có lỗi.</returns>
+        </member>
+        <member name="M:CapstoneProject.Commons.Helpers.DeleteFile(System.String)">
+            <summary>
+            Xóa 1 file url đã cung cấp.
+            <para>Author: QuyPN</para>
+            <para>Created: 15/02/2020</para>
+            </summary>
+            <param name="fileUrl">Đường dẫn đến file cần xóa</param>
+            <returns>True nếu xóa thành công file. Exception nếu có lỗi.</returns>
+        </member>
+        <member name="M:CapstoneProject.Commons.Helpers.SaveFileUpload(Microsoft.AspNetCore.Http.IFormFile,System.String,System.String,System.Collections.Generic.List{System.String},System.Boolean,System.Int32)">
+            <summary>
+            Lưu file gửi từ client vào thư mục của server.
+            <para>Author: QuyPN</para>
+            <para>Created: 15/02/2020</para>
+            </summary>
+            <param name="file">File được gửi lên</param>
+            <param name="folder">Đường dẫn đến thư mục muốn lưu (mặc định là /public/images/upload/)</param>
+            <param name="fileName">Tên file muốn lưu (nếu không truyền vào sẽ lấy theo ngày giờ upload)</param>
+            <param name="typeFiles">Các kiểu file được chấp nhận (mặc định là không check)</param>
+            <param name="sizeFile">Dung lượng tối đa của file (mặc định là 10MB)</param>
+            <returns>
+            Đường dẫn đến file đã upload thành công.
+            Trả về "1" nếu file upload không đúng định dạng.
+            Trả về "2" nếu file upload quá dung lượng quy định.
+            Trả về "" nếu upload sảy ra lỗi.
+            </returns>
+        </member>
+        <member name="M:CapstoneProject.Commons.Helpers.SaveListFileUpload(System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile},System.String,System.String,System.Int32,System.Collections.Generic.List{System.String},System.Int32)">
+            <summary>
+            Upload nhiều hình ảnh 1 lúc đồng thời tạo thumb cho các hình ảnh đó.
+            <para>Author: QuyPN</para>
+            <para>Created: 15/02/2020</para>
+            </summary>
+            <param name="files">Các file hình ảnh được gửi lên từ client</param>
+            <param name="folder">Thư mục sẽ lưu ảnh chính (mặc định là /public/images/upload/)</param>
+            <param name="folderThumb">Thư mục sẽ lưu Thumb của nahr chính (mặc định là /public/images/upload/thumb/)</param>
+            <param name="maxSize">Kích thước theo chiều nagng của Thumb, tính theo pixcel</param>
+            <param name="typeFiles">Loại file được phé tải lêm (mặc định là không check)</param>
+            <param name="sizeFile">Dung lượng tối đa mỗi file (mặc định là 10MB)</param>
+            <returns>
+            Trả về list đối tượng chưa link đến hình ảnh chính và thumb tương ứng
+            </returns>
+        </member>
+        <member name="M:CapstoneProject.Commons.Helpers.SqlServerEscapeString(System.String)">
+            <summary>
+            Thay thế các ký tự trong chuỗi search để có thể dùng được ở Store procedure.
+            <para>Author: QuyPN</para>
+            <para>Created: 15/02/2020</para>
+            </summary>
+            <param name="str">Chuỗi cần thay thế</param>
+            <returns>Chuỗi sau khi đã thay thế</returns>
+        </member>
+        <member name="M:CapstoneProject.Commons.Helpers.GenerationOTP(System.Int32)">
+            <summary>
+            Tạo mã OTP ngẫu nhiên
+            <para>Author: DungNT</para>
+            <para>Created: 21/04/2021</para>
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.Commons.Helpers.DifferenceCalculate(System.String,System.String)">
+            <summary>
+                Calculate the difference between 2 strings using the Levenshtein distance algorithm
+            </summary>
+            <param name="source1">First string</param>
+            <param name="source2">Second string</param>
+            <returns></returns>
+        </member>
+        <member name="M:CapstoneProject.Commons.Helpers.GenerateCode(System.String,System.Int32,System.Int32,System.Char)">
+            <summary>
+            Hàm tạo code cho tài nguyên
+            </summary>
+            <param name="prefix">code prefix</param>
+            <param name="maxLength">max length</param>
+            <param name="Id">base Id</param>
+            <param name="charHolder">Hodler character</param>
+            <returns></returns>
+        </member>
+        <member name="T:CapstoneProject.Commons.ImgUploadWithThumb">
+            <summary>
+            Thông tin đường dẫn của hình ảnh đã upload đi kèm đường dẫn đến Thumb.
+            <para>Author: QuyPN</para>
+            <para>Created: 15/02/2020</para>
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Commons.ImgUploadWithThumb.LinkImg">
+            <summary>
+            Link đến hình ảnh chính
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Commons.ImgUploadWithThumb.Thumb">
+            <summary>
+            Link đến hình thumb
+            </summary>
+        </member>
+        <member name="T:CapstoneProject.Commons.Security">
+            <summary>
+            Các xử lý liên quan đến mã hóa và giải mã dữ liệu
+            <para>Author: QuyPN</para>
+            <para>Created: 15/02/2020</para>
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.Commons.Security.GetMD5(System.String,System.String,System.String)">
+            <summary>
+            Mã hóa MD5 của 1 chuỗi có thêm chuối khóa đầu và cuối.
+            <para>Author: QuyPN</para>
+            <para>Created: 15/02/2020</para>
+            </summary>
+            <param name="str">Chuỗi cần mã hóa.</param>
+            <param name="firstStr">Chuỗi bảo mật đầu</param>
+            <param name="lastStr">Chuỗi bảo mật cuối</param>
+            <returns>Chuỗi sau khi đã được mã hóa.</returns>
+        </member>
+        <member name="M:CapstoneProject.Commons.Security.GetSimpleMD5(System.String)">
+            <summary>
+            Mã hóa MD5 của 1 chuỗi không có thêm chuối khóa đầu và cuối.
+            <para>Author: QuyPN</para>
+            <para>Created: 15/02/2020</para>
+            </summary>
+            <param name="str">Chuỗi cần mã hóa</param>
+            <returns>Chuỗi sau khi đã được mã hóa</returns>
+        </member>
+        <member name="M:CapstoneProject.Commons.Security.Base64Encode(System.String)">
+            <summary>
+            Mã hóa base64 của 1 chuỗi
+            <para>Author: QuyPN</para>
+            <para>Created: 15/02/2020</para>
+            </summary>
+            <param name="plainText">Chuỗi cần mã hóa</param>
+            <returns>Chuỗi sau khi mã hóa</returns>
+        </member>
+        <member name="M:CapstoneProject.Commons.Security.Base64Decode(System.String)">
+            <summary>
+            Chuyển mã base64 về chuỗi trước khi mã hóa.
+            <para>Author: QuyPN</para>
+            <para>Created: 15/02/2020</para>
+            </summary>
+            <param name="base64EncodedData">Chuỗi mã hóa</param>
+            <returns>Chuỗi sau khi giải mã</returns>
+        </member>
+        <member name="M:CapstoneProject.Commons.Security.checkCaptcha(System.String)">
+            <summary>
+            Kiểm tra captcha token có hợp lệ hay ko
+            <para>Author: DungNT</para>
+            <para>Created: 16/05/2020</para>
+            </summary>
+            <param name="checkCaptcha">Chuỗi mã hóa</param>
+            <returns>Trang thái kiểm tra: (true: hợp lệ)-(false: không hợp lệ)</returns>
+        </member>
+        <member name="M:CapstoneProject.Databases.DataContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{CapstoneProject.Databases.DataContext},Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+            <param name="options">Các cài đặt ban đầu</param>
+        </member>
+        <member name="T:CapstoneProject.Databases.ITable">
+            <summary>
+            Dữ liệu chung cho các table trong hệ thống (thông tin việc tạo, update và delete dữ liệu).
+            <para>Author: VinhPhuc</para>
+            <para>Created: 03/05/2023</para>
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.ITable.CreatedAt">
+            <summary>
+            Ngày tạo dữ liệu
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.ITable.CreatedBy">
+            <summary>
+            Người tạo dữ liệu
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.ITable.CreatedIp">
+            <summary>
+            Ip của máy tạo dữ liệu
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.ITable.UpdatedAt">
+            <summary>
+            Ngày cập nhật dữ liệu
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.ITable.UpdatedBy">
+            <summary>
+            Người cập nhật dữ liệu
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.ITable.UpdatedIp">
+            <summary>
+            Ip của máy đã cập nhật dữ liệu
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.ITable.DelFlag">
+            <summary>
+            Cờ xóa dữ liệu
+            </summary>
+        </member>
+        <member name="T:CapstoneProject.Databases.TableHaveIdInt">
+            <summary>
+            Bảng có khóa chính là kiểu int và tự động tăng.
+            <para>Author: VinhPhuc</para>
+            <para>Created: 03/05/2023</para>
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.TableHaveIdInt.Id">
+            <summary>
+            Id định danh (khóa chính)
+            </summary>
+        </member>
+        <member name="T:CapstoneProject.Extensions.AppExtensions">
+            <summary>
+            Lớp mở rộng để cấu hình app cho 1 microservice.
+            <para>Created at: 10/07/2020</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.Extensions.AppExtensions.UseCustomSwagger(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String,System.String[])">
+            <summary>
+            Cấu hình việc sử dụng swagger cho app
+            <para>Created at: 10/07/2020</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+            <param name="app">Application hiện tại của service</param>
+            <param name="serviceName">Tên microservice đang cấu hình</param>
+            <param name="versions">Các version cần tạo</param>
+            <returns>Application đang câu hình</returns>
+        </member>
+        <member name="M:CapstoneProject.Extensions.AppExtensions.UseCustomHealthChecks(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)">
+            <summary>
+            Cấu hình việc sử dụng kiểm tra trạng thái microservice cho app
+            <para>Created at: 10/07/2020</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+            <param name="app">Application hiện tại của service</param>
+            <param name="serviceName">Tên microservice đang cấu hình</param>
+            <returns>Application đang câu hình</returns>
+        </member>
+        <member name="M:CapstoneProject.Extensions.AppExtensions.UseCustomCors(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String,System.String)">
+            <summary>
+            Cấu hình việc sử dụng cross origin cho app
+            <para>Created at: 10/07/2020</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+            <param name="app">Application hiện tại của service</param>
+            <param name="serviceName">Tên microservice đang cấu hình</param>
+            <param name="corsName">Tên của cài đặt cross orgin cần sử dụng</param>
+            <returns>Application đang câu hình</returns>
+        </member>
+        <member name="T:CapstoneProject.Extensions.HostExtensions">
+            <summary>
+            Lớp mở rộng để cài đặt các cấu hình lúc build host.
+            <para>Created at: 10/07/2020</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.Extensions.HostExtensions.UseCustomLog(Microsoft.AspNetCore.Hosting.IWebHostBuilder,System.String)">
+            <summary>
+            Cấu hình việc ghi log và sử dụng serilog
+            <para>Created at: 10/07/2020</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+            <param name="builder">Đối tượng build host hiện tại</param>
+            <param name="serviceName">Tên service cần cấu hình</param>
+            <returns>Đối tượng build host đã cấu hình</returns>
+        </member>
+        <member name="M:CapstoneProject.Extensions.HostExtensions.CustomConfigureAppConfiguration(Microsoft.AspNetCore.Hosting.IWebHostBuilder)">
+            <summary>
+            Cấu hình việc sử dụng file config của hệ thống
+            <para>Created at: 10/07/2020</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+            <param name="builder">Đối tượng build host hiện tại</param>
+            <param name="serviceName">Tên service cần cấu hình</param>
+            <returns>Đối tượng build host đã cấu hình</returns>
+        </member>
+        <member name="T:CapstoneProject.Extensions.ServicesExtensions">
+            <summary>
+            Lớp mở rộng để cấu hình các dịch vụ cần thiết cho 1 microservice
+            <para>Created at: 10/07/2020</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.Extensions.ServicesExtensions.AddCustomCors(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            Cấu hình cross orgin cho API
+            <para>Created at: 10/07/2020</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+            <param name="services">Các dịch vụ của API hiện tại</param>
+            <param name="configuration">Các cấu hình API hiện tại</param>
+            <param name="corsName">Tên cấu hình cross orgin </param>
+            <returns>Dịch vụ sau khi đã cài đặt</returns>
+        </member>
+        <member name="M:CapstoneProject.Extensions.ServicesExtensions.AddCustomApiVersioning(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Cấu hình sử dụng version cho API
+            <para>Created at: 10/07/2020</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+            <param name="services">Các dịch vụ của API hiện tại</param>
+            <param name="configuration">Các cấu hình API hiện tại</param>
+            <returns>Dịch vụ sau khi đã cài đặt</returns>
+        </member>
+        <member name="M:CapstoneProject.Extensions.ServicesExtensions.AddCustomSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String,System.String)">
+            <summary>
+            Cấu hình sử dụng Swagger để tạo API doc và test API
+            <para>Created at: 10/07/2020</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+            <param name="services">Các dịch vụ của API hiện tại</param>
+            <param name="configuration">Các cấu hình API hiện tại</param>
+            <param name="serviceName">Tên microservice cần cấu hình</param>
+            <param name="version">Version của API doc</param>
+            <returns>Dịch vụ sau khi đã cài đặt</returns>
+        </member>
+        <member name="T:CapstoneProject.Extensions.SwaggerExcludeAttribute">
+            <summary>
+            Thuộc tính để thêm vào property để bỏ qua khi render swagger UI
+            <para>Created at: 08/08/2020</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+        </member>
+        <member name="T:CapstoneProject.Extensions.SwaggerParameterFilter">
+            <summary>
+            Lọc các tham số của API sẽ render trên UI, bỏ qua các tham số trên dường dẫn (api_version) và thêm các giá trị mặc định cho các tham số
+            <para>Created at: 08/08/2020</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.Extensions.SwaggerParameterFilter.Swashbuckle#AspNetCore#SwaggerGen#IOperationFilter#Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            Ghi đè phương thức để lọc tham số
+            <para>Created at: 08/08/2020</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:CapstoneProject.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="F:CapstoneProject.Program.ServiceName">
+            <summary>
+            Tên của microservice hiện tại
+            </summary>
+        </member>
+        <member name="P:FMStyle.RPT.Models.Schemas.BaseListOfData`1.Data">
+            <summary>
+            Danh sách data
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:FMStyle.RPT.Models.Schemas.BaseListOfDataWithSum`2.SummaryData">
+            <summary>
+            Tổng
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:FMStyle.RPT.Models.Schemas.BaseSearchCondition.From">
+            <summary>
+            Từ ngày
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:FMStyle.RPT.Models.Schemas.BaseSearchCondition.To">
+            <summary>
+            Đến ngày
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:FMStyle.RPT.Models.Schemas.BaseSearchCondition.CurrentPage">
+            <summary>
+            Trang hiện tại
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:FMStyle.RPT.Models.Schemas.BaseSearchCondition.PageSize">
+            <summary>
+            Số record trên 1 page
+            </summary>
+            <value></value>
+        </member>
+    </members>
+</doc>
