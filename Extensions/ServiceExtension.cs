@@ -12,16 +12,17 @@ using System.IO;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Collections.Generic;
 using Microsoft.OpenApi.Any;
-//using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.VisualBasic;
 using Newtonsoft.Json.Linq;
 using CapstoneProject.Commons;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Cryptography;
 
 namespace CapstoneProject.Extensions
 {
@@ -189,79 +190,79 @@ namespace CapstoneProject.Extensions
         /// <param name="services">Các dịch vụ của API hiện tại</param>
         /// <param name="configuration">Các cấu hình API hiện tại</param>
         /// <returns>Dịch vụ sau khi đã cài đặt</returns>
-        //public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
-        //{
-        //    try
-        //    {
-        //        /// <summary>
-        //        /// Từ khoá trong file config chứa các thông tin authentication
-        //        /// </summary>
-        //        string C_JWT = "Audience";
-        //        /// <summary>
-        //        /// Khoá bí mật dùng để mã hoá và giải mã thông tin đăng nhập
-        //        /// </summary>
-        //        string C_JWT_SECRET_KEY = "Secret";
-        //        /// <summary>
-        //        /// Đối tượng phát hành token
-        //        /// </summary>
-        //        string C_JWT_ISSUER = "Iss";
-        //        /// <summary>
-        //        /// Đối tượng sử dụng token
-        //        /// </summary>
-        //        string C_JWT_AUDIENCE = "Aud";
-        //        // Lấy thông tin cấu hình xác thực từ file appsetting.json
-        //        // Nếu không có cài đặt sẽ lấy giá trị mặc định
-        //        var audienceConfig = configuration.GetSection(C_JWT);
-        //        // Lấy khoá bí mật
-        //        //var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(audienceConfig[C_JWT_SECRET_KEY] != null ? audienceConfig[C_JWT_SECRET_KEY] : Constants.JWT_SECRET_KEY));
-        //        // Cấu hình thong tin để xác thực token
-        //        var tokenValidationParameters = new TokenValidationParameters
-        //        {
-        //            ValidateIssuerSigningKey = true,
-        //            IssuerSigningKey = signingKey,
-        //            ValidateIssuer = true,
-        //            ValidIssuer = audienceConfig[C_JWT_ISSUER] != null ? audienceConfig[C_JWT_ISSUER] : Constants.JWT_ISSUER,
-        //            ValidateAudience = true,
-        //            ValidAudience = audienceConfig[C_JWT_AUDIENCE] != null ? audienceConfig[C_JWT_AUDIENCE] : Constants.JWT_AUD,
-        //            //ValidateLifetime = true,
-        //            ClockSkew = TimeSpan.Zero,
-        //            //RequireExpirationTime = true,
-        //        };
+        public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
+        {
+            try
+            {
+                /// <summary>
+                /// Từ khoá trong file config chứa các thông tin authentication
+                /// </summary>
+                string C_JWT = "Audience";
+                /// <summary>
+                /// Khoá bí mật dùng để mã hoá và giải mã thông tin đăng nhập
+                /// </summary>
+                string C_JWT_SECRET_KEY = "Secret";
+                /// <summary>
+                /// Đối tượng phát hành token
+                /// </summary>
+                string C_JWT_ISSUER = "Iss";
+                /// <summary>
+                /// Đối tượng sử dụng token
+                /// </summary>
+                string C_JWT_AUDIENCE = "Aud";
+                // Lấy thông tin cấu hình xác thực từ file appsetting.json
+                // Nếu không có cài đặt sẽ lấy giá trị mặc định
+                var audienceConfig = configuration.GetSection(C_JWT);
+                // Lấy khoá bí mật
+                var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(audienceConfig[C_JWT_SECRET_KEY] != null ? audienceConfig[C_JWT_SECRET_KEY] : Constants.JWT_SECRET_KEY));
+                // Cấu hình thong tin để xác thực token
+                var tokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = signingKey,
+                    ValidateIssuer = true,
+                    ValidIssuer = audienceConfig[C_JWT_ISSUER] != null ? audienceConfig[C_JWT_ISSUER] : Constants.JWT_ISSUER,
+                    ValidateAudience = true,
+                    ValidAudience = audienceConfig[C_JWT_AUDIENCE] != null ? audienceConfig[C_JWT_AUDIENCE] : Constants.JWT_AUD,
+                    //ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero,
+                    //RequireExpirationTime = true,
+                };
 
-        //        // Thêm dịch vụ xác thực vào các dịch vụ hiện tại
-        //        services
-        //            .AddAuthentication(options =>
-        //            {
-        //                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        //                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                // Thêm dịch vụ xác thực vào các dịch vụ hiện tại
+                services
+                    .AddAuthentication(options =>
+                    {
+                        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 
-        //            })
-        //            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
-        //            {
-        //                options.RequireHttpsMetadata = false;
-        //                options.SaveToken = true;
-        //                options.Events = new JwtBearerEvents
-        //                {
-        //                    OnMessageReceived = context =>
-        //                    {
-        //                        var accessToken = context.Request.Query["Token"];
-        //                        var path = context.HttpContext.Request.Path;
-        //                        if (!String.IsNullOrEmpty(accessToken.ToString()) &&
-        //                            (path.ToString().StartsWith("/hub/")))
-        //                        {
-        //                            context.Token = accessToken;
-        //                        }
-        //                        return Task.CompletedTask;
-        //                    }
-        //                };
-        //                options.TokenValidationParameters = tokenValidationParameters;
-        //            });
-        //        ;
-        //    }
-        //    catch { }
+                    })
+                    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+                    {
+                        options.RequireHttpsMetadata = false;
+                        options.SaveToken = true;
+                        options.Events = new JwtBearerEvents
+                        {
+                            OnMessageReceived = context =>
+                            {
+                                var accessToken = context.Request.Query["Token"];
+                                var path = context.HttpContext.Request.Path;
+                                if (!String.IsNullOrEmpty(accessToken.ToString()) &&
+                                    (path.ToString().StartsWith("/hub/")))
+                                {
+                                    context.Token = accessToken;
+                                }
+                                return Task.CompletedTask;
+                            }
+                        };
+                        options.TokenValidationParameters = tokenValidationParameters;
+                    });
+                ;
+            }
+            catch { }
 
-        //    return services;
-        //}
+            return services;
+        }
 
         /// <summary>
         /// Cấu hình kiểm tra tình trạng của microservice
@@ -302,55 +303,55 @@ namespace CapstoneProject.Extensions
         //    catch { }
 
         //    return services;
-        }
+    }
 
-        /// <summary>
-        /// Thêm một số cài đặt cấu hình khác
-        /// <para>Created at: 10/07/2020</para>
-        /// <para>Created by: QuyPN</para>
-        /// </summary>
-        /// <param name="services">Các dịch vụ của API hiện tại</param>
-        /// <param name="configuration">Các cấu hình API hiện tại</param>
-        /// <returns>Dịch vụ sau khi đã cài đặt</returns>
-        //public static IServiceCollection AddCustomConfiguration(this IServiceCollection services, IConfiguration configuration)
-        //{
-        //    try
-        //    {
-        //        // Thêm dịch vụ tuỳ chọn
-        //        services
-        //            .AddOptions()
-        //            ;
-        //        // Cấu hình giá trị trả về cho một số lỗi nhất định
-        //        services
-        //            .Configure<ApiBehaviorOptions>(options =>
-        //            {
-        //                options.InvalidModelStateResponseFactory = context =>
-        //                {
-        //                    var problemDetails = new ValidationProblemDetails(context.ModelState)
-        //                    {
-        //                        Instance = context.HttpContext.Request.Path,
-        //                        Status = StatusCodes.Status400BadRequest,
-        //                        Detail = "Please refer to the errors property for additional details."
-        //                    };
+    /// <summary>
+    /// Thêm một số cài đặt cấu hình khác
+    /// <para>Created at: 10/07/2020</para>
+    /// <para>Created by: QuyPN</para>
+    /// </summary>
+    /// <param name="services">Các dịch vụ của API hiện tại</param>
+    /// <param name="configuration">Các cấu hình API hiện tại</param>
+    /// <returns>Dịch vụ sau khi đã cài đặt</returns>
+    //public static IServiceCollection AddCustomConfiguration(this IServiceCollection services, IConfiguration configuration)
+    //{
+    //    try
+    //    {
+    //        // Thêm dịch vụ tuỳ chọn
+    //        services
+    //            .AddOptions()
+    //            ;
+    //        // Cấu hình giá trị trả về cho một số lỗi nhất định
+    //        services
+    //            .Configure<ApiBehaviorOptions>(options =>
+    //            {
+    //                options.InvalidModelStateResponseFactory = context =>
+    //                {
+    //                    var problemDetails = new ValidationProblemDetails(context.ModelState)
+    //                    {
+    //                        Instance = context.HttpContext.Request.Path,
+    //                        Status = StatusCodes.Status400BadRequest,
+    //                        Detail = "Please refer to the errors property for additional details."
+    //                    };
 
-        //                    return new BadRequestObjectResult(problemDetails)
-        //                    {
-        //                        ContentTypes = { "application/problem+json", "application/problem+xml" }
-        //                    };
-        //                };
-        //            })
-        //            ;
-                // If using Kestrel:
-                //services.Configure<KestrelServerOptions>(options =>
-                //{
-                //    options.AllowSynchronousIO = true;
-                //});
+    //                    return new BadRequestObjectResult(problemDetails)
+    //                    {
+    //                        ContentTypes = { "application/problem+json", "application/problem+xml" }
+    //                    };
+    //                };
+    //            })
+    //            ;
+    // If using Kestrel:
+    //services.Configure<KestrelServerOptions>(options =>
+    //{
+    //    options.AllowSynchronousIO = true;
+    //});
 
-                // If using IIS:
-                //services.Configure<IISServerOptions>(options =>
-                //{
-                //    options.AllowSynchronousIO = true;
-                //});
+    // If using IIS:
+    //services.Configure<IISServerOptions>(options =>
+    //{
+    //    options.AllowSynchronousIO = true;
+    //});
     //        }
     //        catch { }
 

@@ -4,40 +4,153 @@
         <name>CapstoneProject</name>
     </assembly>
     <members>
-        <member name="M:CapstoneProject.Areas.WeatherForecast.Controllers.WeatherForecastController.Get(CapstoneProject.Areas.WeatherForecast.Models.Schemas.SearchConditon)">
+        <member name="M:CapstoneProject.Areas.Employee.Controllers.EmployesController.GetEmployee">
             <summary>
-            Data master sắp xếp theo doanh thu
-            <para>Created at: 28/12/2022</para>
-            <para>Created by: TruongNQ</para>
+            Lấy tất cả nhân viên theo điều kiện tìm kiếm
+            <para>Created at: 04/05/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
             <response code="401">Chưa đăng nhập</response>
             <response code="500">Lỗi khi có exception</response>
         </member>
-        <member name="M:CapstoneProject.Areas.WeatherForecast.Controllers.WeatherForecastController.GetEmployee">
-            <summary>
-            Data master sắp xếp theo doanh thu
-            <para>Created at: 28/12/2022</para>
-            <para>Created by: TruongNQ</para>
-            </summary>
-            <response code="401">Chưa đăng nhập</response>
-            <response code="500">Lỗi khi có exception</response>
-        </member>
-        <member name="P:CapstoneProject.Areas.WeatherForecast.Models.Schemas.SearchConditon.Id">
-            <summary>
-            Id ngày cần tìm kiếm
-            </summary>
-        </member>
-        <member name="M:CapstoneProject.Areas.WeatherForecast.Models.IWeatherForecastModel.Get(CapstoneProject.Areas.WeatherForecast.Models.Schemas.SearchConditon)">
-            <summary>
-            Get Weather Forecast
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:CapstoneProject.Areas.WeatherForecast.Models.IWeatherForecastModel.GetEmployees">
+        <member name="M:CapstoneProject.Areas.Employee.Models.IEmployeesModel.GetEmployees">
             <summary>
             Lấy danh sách nhân viên
             </summary>
             <returns></returns>
+        </member>
+        <member name="P:CapstoneProject.Areas.Employee.Models.Schemas.SearchConditon.Id">
+            <summary>
+            Id ngày cần tìm kiếm
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.Areas.Users.Controllers.LoginController.CheckAccount(CapstoneProject.Areas.Users.Models.LoginModel.Schemas.LoginInfo)">
+            <summary>
+            Login
+            <para>Created at: 04/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Users.Controllers.LoginController.CreateUser(CapstoneProject.Areas.Users.Models.UserModel.Schemas.AccountInfo)">
+            <summary>
+            Tạo tài khoản
+            <para>Created at: 04/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Users.Controllers.UsersController.GetDetailUser(System.String)">
+            <summary>
+            Lấy tất cả nhân viên theo điều kiện tìm kiếm
+            <para>Created at: 04/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Users.Models.LoginModel.ILoginModel.CheckAccount(CapstoneProject.Areas.Users.Models.LoginModel.Schemas.LoginInfo)">
+            <summary>
+            Login
+            </summary>
+            <param name="userId"></param>
+            <param name="phone"></param>
+            <param name="username"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CapstoneProject.Areas.Users.Models.LoginModel.ILoginModel.CreateUser(CapstoneProject.Areas.Users.Models.UserModel.Schemas.AccountInfo)">
+            <summary>
+            Tạo tài khoản
+            </summary>
+            <returns>ResponseInfo</returns>
+        </member>
+        <member name="M:CapstoneProject.Areas.Users.Models.LoginModel.LoginModel.GetTokenLogin(System.String)">
+            <summary>
+            Lấy token của tài khoản đang đăng nhập
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CapstoneProject.Areas.Users.Models.LoginModel.LoginModel.CheckAccount(CapstoneProject.Areas.Users.Models.LoginModel.Schemas.LoginInfo)">
+            <summary>
+            Login
+            </summary>
+            <param name="userId"></param>
+            <param name="phone"></param>
+            <param name="username"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CapstoneProject.Areas.Users.Models.LoginModel.Schemas.LoginInfo.Username">
+            <summary>
+            UserName login
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Users.Models.LoginModel.Schemas.LoginInfo.Password">
+            <summary>
+            Password login
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Users.Models.UserModel.Schemas.AccountInfo.Username">
+            <summary>
+            Tên đăng nhập
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Users.Models.UserModel.Schemas.AccountInfo.Password">
+            <summary>
+            Mật khẩu
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Users.Models.UserModel.Schemas.AccountInfo.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Users.Models.UserModel.Schemas.AccountInfo.Name">
+            <summary>
+            Tên người dùng
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Users.Models.UserModel.Schemas.AccountInfo.DateOfBirth">
+            <summary>
+            Ngày sinh
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Users.Models.UserModel.Schemas.AccountInfo.Phone">
+            <summary>
+            Số điện thoại
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Users.Models.UserModel.Schemas.AccountInfo.Gender">
+            <summary>
+            Giới tính
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Users.Models.UserModel.Schemas.SearchConditon.Id">
+            <summary>
+            Id ngày cần tìm kiếm
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.Areas.Users.Models.UserModel.IUsersModel.GetDetailUser(System.String)">
+            <summary>
+            Lấy thông tin chi tiết tài khoản
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CapstoneProject.Auths.Auth">
+            <summary>
+            Filter dùng để xác thực quyền truy caapf của user đối ới api.
+            <para>Author: QuyPN</para>
+            <para>Created: 08/08/2020</para>
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.Auths.Auth.OnAuthorization(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)">
+            <summary>
+            Ghi đè phương thức dùng để lọc request.
+            <para>Author: QuyPN</para>
+            <para>Created: 08/08/2020</para>
+            </summary>
+            <param name="filterContext">Data của 1 request.</param>
         </member>
         <member name="T:CapstoneProject.AutofacModules.AppModule">
             <summary>
@@ -54,18 +167,118 @@
             </summary>
             <param name="builder">builder dùng để đăng ký dịch vụ</param>
         </member>
-        <member name="T:CapstoneProject.AutofacModules.WeatherModule">
+        <member name="T:CapstoneProject.AutofacModules.EmployeeModule">
             <summary>
             Đăng ký các dịch vụ dùng cho việc tạo và xử lý sự kiện thông qua autofac
             <para>Created at: </para>
             <para>Created by: VP</para>
             </summary>
         </member>
-        <member name="M:CapstoneProject.AutofacModules.WeatherModule.Load(Autofac.ContainerBuilder)">
+        <member name="M:CapstoneProject.AutofacModules.EmployeeModule.Load(Autofac.ContainerBuilder)">
             <summary>
             Ghi đè phương thức load của autofac để đăng ký dịch vụ
             </summary>
             <param name="builder">builder dùng để đăng ký dịch vụ</param>
+        </member>
+        <member name="T:CapstoneProject.AutofacModules.UserModule">
+            <summary>
+            Đăng ký các dịch vụ dùng cho việc tạo và xử lý sự kiện thông qua autofac
+            <para>Created at: </para>
+            <para>Created by: VP</para>
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.AutofacModules.UserModule.Load(Autofac.ContainerBuilder)">
+            <summary>
+            Ghi đè phương thức load của autofac để đăng ký dịch vụ
+            </summary>
+            <param name="builder">builder dùng để đăng ký dịch vụ</param>
+        </member>
+        <member name="T:CapstoneProject.Commons.CodeMaster.R001.DEVELOPER">
+            <summary>
+            DEV : Role Developer<br/>
+            </summary>
+        </member>
+        <member name="T:CapstoneProject.Commons.CodeMaster.R001.ADMIN">
+            <summary>
+            ADM : Role Administrator<br/>
+            </summary>
+        </member>
+        <member name="T:CapstoneProject.Commons.CodeMaster.R001.USER">
+            <summary>
+            USER : Role User<br/>
+            </summary>
+        </member>
+        <member name="T:CapstoneProject.Commons.CodeMaster.R001.CSKH">
+            <summary>
+            CSKH : Role Chăm sóc khách hàng<br/>
+            </summary>
+        </member>
+        <member name="T:CapstoneProject.Commons.Enum.CodeResponse">
+            <summary>
+            Các giá trị hằng số xác định kết quả trả về từ server.
+            <para>Author: VinhPhuc.</para>
+            <para>Created at: 13/05/2023.</para>
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.CodeResponse.OK">
+            <summary>
+            Thành công
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.CodeResponse.SERVER_ERROR">
+            <summary>
+            Lỗi hệ thống
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.CodeResponse.NOT_FOUND">
+            <summary>
+            Không tìm thấy
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.CodeResponse.NOT_LOGIN">
+            <summary>
+            Chưa login
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.CodeResponse.NOT_ACCESS">
+            <summary>
+            Không có quyền truy cập
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.CodeResponse.NOT_VALIDATE">
+            <summary>
+            Lỗi dữ liệu không đúng yêu cầu
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.CodeResponse.HAVE_ERROR">
+            <summary>
+            Có lỗi phát sinh
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.USERNAME_OR_PASSWORD_NOT_INCORRECT">
+            <summary>
+            Số điện thoại hoặc mật khẩu không chính xác, vui lòng nhập lại.
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.PHONE_IS_USED">
+            <summary>
+            Số điện thoại đã tồn tại
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.EMAIL_IS_USED">
+            <summary>
+            Email đã tồn tại
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.USERNAME_IS_USED">
+            <summary>
+            Tên đăng nhập đã tồn tại
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.GENDER_NOT_EXIST">
+            <summary>
+            Giới tính không tồn tại
+            </summary>
         </member>
         <member name="T:CapstoneProject.Commons.Helpers">
             <summary>
@@ -234,6 +447,43 @@
             Link đến hình thumb
             </summary>
         </member>
+        <member name="T:CapstoneProject.Commons.Schemas.ResponseInfo">
+            <summary>
+            Lấy thông tin trả về từ ajax.
+            Author: QuyPN
+            Created at: 01/01/2020
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Commons.Schemas.ResponseInfo.Code">
+            <summary>
+            Mã trả về tương ứng cho xử lý
+            <para>200: Thành công</para>
+            <para>201: Lỗi dữ liệu nhập vào</para>
+            <para>202: Có lỗi khác phát sinh</para>
+            <para>403: Không có quyền truy cập</para>
+            <para>500: Lỗi server</para>
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Commons.Schemas.ResponseInfo.MsgNo">
+            <summary>
+            Mã của thông báo sẽ hiển thị
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Commons.Schemas.ResponseInfo.ListError">
+            <summary>
+            Danh sách lỗi phát sinh
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Commons.Schemas.ResponseInfo.Data">
+            <summary>
+            Dữ liệu cần trả về client
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.Commons.Schemas.ResponseInfo.#ctor">
+            <summary>
+            Khởi tạo giá trị
+            </summary>
+        </member>
         <member name="T:CapstoneProject.Commons.Security">
             <summary>
             Các xử lý liên quan đến mã hóa và giải mã dữ liệu
@@ -288,8 +538,118 @@
             <param name="checkCaptcha">Chuỗi mã hóa</param>
             <returns>Trang thái kiểm tra: (true: hợp lệ)-(false: không hợp lệ)</returns>
         </member>
+        <member name="P:CapstoneProject.Databases.DataContext.Employee">
+            Danh sach Table
+            <summary>
+            Table Employees (Employees)
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.DataContext.UserTokens">
+            <summary>
+            Table SYSUSRTOK (UserTokens)
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.DataContext.Users">
+            <summary>
+            Table Users (User)
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:CapstoneProject.Databases.DataContext.UserRoles" -->
+        <!-- Badly formed XML comment ignored for member "P:CapstoneProject.Databases.DataContext.Roles" -->
         <member name="M:CapstoneProject.Databases.DataContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{CapstoneProject.Databases.DataContext},Microsoft.AspNetCore.Http.IHttpContextAccessor)">
             <param name="options">Các cài đặt ban đầu</param>
+        </member>
+        <member name="M:CapstoneProject.Databases.DataContext.SaveChangesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Ghi đè phương thức lưu vào DB để lưu thêm các dữ liệu mặc định cần thiết
+            <para>Created at: 10/07/2023</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns>
+            Số lượng record ảnh hưởng
+            </returns>       
+        </member>
+        <member name="M:CapstoneProject.Databases.DataContext.OnBeforeSaving">
+            <summary>
+            Lưu thêm các thông tin cần thiết mặc định khi cập nhật dữ diệu vào Database.
+            <para>Created at: 10/07/2020</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.Databases.DataContext.GetAccountId">
+            <summary>
+            Lấy user id đang đăng nhập nếu có
+            <para>Created at: 08/08/2020</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+            <returns>user id của user đang đăng nhập. Trả về 0 nếu không có thông tin user đăng nhập</returns>
+        </member>
+        <member name="M:CapstoneProject.Databases.DataContext.GetRequestIp">
+            <summary>
+            Lấy Ip của request hiện tại
+            <para>Created at: 15/05/2020</para>
+            <para>Created by: DungNT</para>
+            </summary>
+            <returns>Ip của request hiện tại</returns>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Employee.Employees.UserId">
+            <summary>
+            Id user nhân viên
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Users.User.Username">
+            <summary>
+            Tên đăng nhập
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Users.User.Password">
+            <summary>
+            Mật khẩu
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Users.User.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Users.User.Phone">
+            <summary>
+            Số điện thoại
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Users.User.Name">
+            <summary>
+            Tên người dùng
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Users.User.DateOfBirth">
+            <summary>
+            Ngày sinh
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Users.User.EmployeeId">
+            <summary>
+            Mã nhân viên
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Users.User.Gender">
+            <summary>
+            Giới tính:
+            M: Nam
+            F: Nữ
+            O: Giới tính khác
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Users.User.LastLogin">
+            <summary>
+            Thời gian login gần nhất
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Users.User.LastLogout">
+            <summary>
+            Thời gian logout gần nhất
+            </summary>
         </member>
         <member name="T:CapstoneProject.Databases.ITable">
             <summary>
@@ -451,6 +811,16 @@
             <param name="version">Version của API doc</param>
             <returns>Dịch vụ sau khi đã cài đặt</returns>
         </member>
+        <member name="M:CapstoneProject.Extensions.ServicesExtensions.AddCustomAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Cấu hình sử dụng xác thực cho API
+            <para>Created at: 10/07/2020</para>
+            <para>Created by: QuyPN</para>
+            </summary>
+            <param name="services">Các dịch vụ của API hiện tại</param>
+            <param name="configuration">Các cấu hình API hiện tại</param>
+            <returns>Dịch vụ sau khi đã cài đặt</returns>
+        </member>
         <member name="T:CapstoneProject.Extensions.SwaggerExcludeAttribute">
             <summary>
             Thuộc tính để thêm vào property để bỏ qua khi render swagger UI
@@ -486,10 +856,140 @@
         <member name="M:CapstoneProject.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:CapstoneProject.Migrations.Add_Table_User">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.Add_Table_User.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.Add_Table_User.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.Add_Table_User.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.updatetable">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatetable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatetable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatetable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.datanull">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.datanull.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.datanull.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.datanull.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="F:CapstoneProject.Program.ServiceName">
             <summary>
             Tên của microservice hiện tại
             </summary>
+        </member>
+        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.Token.JwtToken">
+            <summary>
+            Token xác thực của phiên đăng nhập hiện tại
+            </summary>
+        </member>
+        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.Token.RefreshToken">
+            <summary>
+            Token ngẫu nhiên của phiên đăng nhập hiện tại
+            </summary>
+        </member>
+        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.User.Username">
+            <summary>
+            Tên đăng nhập, email hoặc số điện thoại
+            </summary>
+            <example>root</example>
+        </member>
+        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.User.Password">
+            <summary>
+            Mật khẩu đăng nhập đã mã hoá MD5
+            </summary>
+            <example>628c709b5d084dc6b22a6dbe87665419</example>
+        </member>
+        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.User.LatOfMap">
+            <summary>
+            Vĩ độ vị trí đăng nhập
+            </summary>
+            <example>16.0862274</example>
+        </member>
+        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.User.LongOfMap">
+            <summary>
+            Kinh độ vị trí đăng nhập
+            </summary>
+            <example>108.1500744</example>
+        </member>
+        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.User.Browser">
+            <summary>
+            Thông tin thiết bị đăng nhập
+            </summary>
+            <example>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15</example>
+        </member>
+        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.User.PlayerId">
+            <summary>
+            Id của thiết bị trên OneSignal
+            </summary>
+            <example>5bec2a2d-6147-4c9c-8e21-b1b888040b0e</example>
+        </member>
+        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.User.Serial">
+            <summary>
+            Số serial của thiết bị đang đăng nhập
+            </summary>
+            <example>G6TZL899N70M</example>
+        </member>
+        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.User.CaptchaToken">
+            <summary>
+            Token Captcha
+            </summary>
+            <example>fvzzdv123cfrfrgsfwefhtyuyiuou</example>
+        </member>
+        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.UserSocial.LatOfMap">
+            <summary>
+            Vĩ độ vị trí đăng nhập
+            </summary>
+            <example>16.0862274</example>
+        </member>
+        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.UserSocial.LongOfMap">
+            <summary>
+            Kinh độ vị trí đăng nhập
+            </summary>
+            <example>108.1500744</example>
+        </member>
+        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.UserSocial.Browser">
+            <summary>
+            Thông tin thiết bị đăng nhập
+            </summary>
+            <example>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15</example>
+        </member>
+        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.UserSocial.PlayerId">
+            <summary>
+            Id của thiết bị trên OneSignal
+            </summary>
+            <example>5bec2a2d-6147-4c9c-8e21-b1b888040b0e</example>
+        </member>
+        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.UserSocial.Serial">
+            <summary>
+            Số serial của thiết bị đang đăng nhập
+            </summary>
+            <example>G6TZL899N70M</example>
+        </member>
+        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.UserSocial.CaptchaToken">
+            <summary>
+            Token Captcha
+            </summary>
+            <example>fvzzdv123cfrfrgsfwefhtyuyiuou</example>
         </member>
         <member name="P:FMStyle.RPT.Models.Schemas.BaseListOfData`1.Data">
             <summary>

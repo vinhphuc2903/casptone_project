@@ -1,5 +1,5 @@
 ﻿using System;
-namespace CapstoneProject.Areas.WeatherForecast.Models.Schemas
+namespace CapstoneProject.Areas.Employee.Models.Schemas
 {
 	public class SearchConditon
 	{

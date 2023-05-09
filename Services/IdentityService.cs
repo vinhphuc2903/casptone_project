@@ -3,20 +3,20 @@ using System.Data.Common;
 using System.Linq;
 using System.Security.Claims;
 using System.Web;
+using Azure.Core;
 using CapstoneProject.Databases;
+using CapstoneProject.Databases.Schemas.System.Users;
 using Dapper;
-using CapstoneProject.Databases.Schemas;
 using Microsoft.AspNetCore.Http;
-using System.Data;
 
-namespace CapstoneProject.Service
+namespace CapstoneProject.Services
 {
     public interface IIdentityService
     {
         bool CheckPermission(string areaName = "", string controllerName = "", string functionName = "", string accountId = "0");
         string GetUserId();
         string GetToken();
-        string GetApiKey();
+        //string GetApiKey();
         string GetSerial();
     }
 
@@ -31,8 +31,6 @@ namespace CapstoneProject.Service
             _httpContext = httpContext ?? throw new ArgumentNullException(nameof(httpContext));
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-
-        
 
         public string GetUserId()
         {
@@ -56,17 +54,27 @@ namespace CapstoneProject.Service
                     {
                         accessToken = accessToken.Replace("Bearer", "").Trim();
                         DbConnection _connection = _context.GetConnection();
+                        //string getCurrentUserSQL = $@"
+                        //        SELECT
+                        //            ""UserTokens"".""Id""
+                        //        FROM ""UserTokens""
+                        //        WHERE
+                        //            ""UserTokens"".""DelFlag""          = false
+                        //        -- AND ""UserTokens"".""UserId""           = {accountId}
+                        //        AND ""UserTokens"".""JwtToken""         = '{accessToken}'
+                        //        -- AND ""UserTokens"".""Timeout""          >= '{DateTimeOffset.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffffffK")}';
+                        //    ";
                         string getCurrentUserSQL = $@"
-                                SELECT
-                                    ""UserTokens"".""Id""
-                                FROM ""UserTokens""
-                                WHERE
-                                    ""UserTokens"".""DelFlag""          = false
-                                AND ""UserTokens"".""UserId""           = {accountId}
-                                AND ""UserTokens"".""JwtToken""         = '{accessToken}'
-                                AND ""UserTokens"".""Timeout""          >= '{DateTimeOffset.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffffffK")}';
-                            ";
-                        UserToken userToken = _connection.QueryFirstOrDefault<UserToken>(getCurrentUserSQL);
+                            SELECT
+                                UserTokens.Id
+                            FROM UserTokens
+                            WHERE
+                                UserTokens.DelFlag = 0
+                                -- AND UserTokens.UserId = @AccountId
+                                AND UserTokens.JwtToken = @AccessToken
+                                -- AND UserTokens.Timeout >= @CurrentTime;
+                        ";
+                        UserToken userToken = _connection.QueryFirstOrDefault<UserToken>(getCurrentUserSQL, new { AccessToken = accessToken });
                         _connection.Close();
                         if (userToken == null)
                         {
@@ -80,7 +88,7 @@ namespace CapstoneProject.Service
                 }
                 return accountId;
             }
-            catch
+            catch(Exception e)
             {
                 return "0";
             }
@@ -103,51 +111,51 @@ namespace CapstoneProject.Service
             }
         }
 
-        public string GetApiKey()
-        {
-            try
-            {
-                string apiKey = "";
-                string apiKeyRequest = _httpContext.HttpContext.Request.Headers["x-apikey"];
-                if (String.IsNullOrEmpty(apiKeyRequest))
-                {
-                    apiKeyRequest = _httpContext.HttpContext.Request.Query["ApiKey"];
-                }
-                if (!String.IsNullOrEmpty(apiKeyRequest))
-                {
-                    apiKeyRequest = apiKeyRequest.Trim();
-                    DbConnection _connection = _context.GetConnection();
-                    string getCurrentApiKeySQL = $@"
-                        SELECT
-                            ""ApiKeys"".""Key""
-                        ,   ""ApiKeys"".""Aud""
-                        FROM ""ApiKeys""
-                        WHERE
-                            ""ApiKeys"".""DelFlag""             = false
-                        AND ""ApiKeys"".""Key""                 = '{apiKeyRequest}'
-                        AND (
-                            ""ApiKeys"".""From""                IS NULL
-                        OR  ""ApiKeys"".""From""                <= '{DateTimeOffset.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffffffK")}'
-                        )
-                        AND (
-                            ""ApiKeys"".""To""                  IS NULL
-                        OR  ""ApiKeys"".""To""                  >= '{DateTimeOffset.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffffffK")}'
-                        );
-                    ";
-                    ApiKey apiKeyDB = _connection.QueryFirstOrDefault<ApiKey>(getCurrentApiKeySQL);
-                    _connection.Close();
-                    if (apiKeyDB != null)
-                    {
-                        apiKey = apiKeyDB.Key;
-                    }
-                }
-                return apiKey;
-            }
-            catch
-            {
-                return "";
-            }
-        }
+        //public string GetApiKey()
+        //{
+        //    try
+        //    {
+        //        string apiKey = "";
+        //        string apiKeyRequest = _httpContext.HttpContext.Request.Headers["x-apikey"];
+        //        if (String.IsNullOrEmpty(apiKeyRequest))
+        //        {
+        //            apiKeyRequest = _httpContext.HttpContext.Request.Query["ApiKey"];
+        //        }
+        //        if (!String.IsNullOrEmpty(apiKeyRequest))
+        //        {
+        //            apiKeyRequest = apiKeyRequest.Trim();
+        //            DbConnection _connection = _context.GetConnection();
+        //            string getCurrentApiKeySQL = $@"
+        //                SELECT
+        //                    ""ApiKeys"".""Key""
+        //                ,   ""ApiKeys"".""Aud""
+        //                FROM ""ApiKeys""
+        //                WHERE
+        //                    ""ApiKeys"".""DelFlag""             = false
+        //                AND ""ApiKeys"".""Key""                 = '{apiKeyRequest}'
+        //                AND (
+        //                    ""ApiKeys"".""From""                IS NULL
+        //                OR  ""ApiKeys"".""From""                <= '{DateTimeOffset.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffffffK")}'
+        //                )
+        //                AND (
+        //                    ""ApiKeys"".""To""                  IS NULL
+        //                OR  ""ApiKeys"".""To""                  >= '{DateTimeOffset.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffffffK")}'
+        //                );
+        //            ";
+        //            ApiKey apiKeyDB = _connection.QueryFirstOrDefault<ApiKey>(getCurrentApiKeySQL);
+        //            _connection.Close();
+        //            if (apiKeyDB != null)
+        //            {
+        //                apiKey = apiKeyDB.Key;
+        //            }
+        //        }
+        //        return apiKey;
+        //    }
+        //    catch
+        //    {
+        //        return "";
+        //    }
+        //}
 
         public string GetSerial()
         {
