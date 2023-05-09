@@ -5,16 +5,18 @@ using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
+using CapstoneProject.Auths;
 
 namespace CapstoneProject.Controllers
 {
-    //[ApiVersion("1.0")]
+    [ApiVersion("1.0")]
     [ApiController]
     [Produces("application/json")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType((int)HttpStatusCode.NotAcceptable)]
-    // [CheckRequestId(Order = 1)]
+    //[Auth]
+    //[CheckRequestId(Order = 1)]
 
     public class BaseController : ControllerBase
     {

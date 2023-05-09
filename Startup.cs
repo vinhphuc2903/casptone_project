@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using CapstoneProject.Services;
 
 namespace CapstoneProject
 {
@@ -52,6 +53,25 @@ namespace CapstoneProject
             //         new QueryStringApiVersionReader("api-version"),
             //         new HeaderApiVersionReader("api-version"));
             // });
+            services
+                .AddCustomApiVersioning(Configuration)
+                //.AddCustomHealthChecks(Configuration, Program.ServiceName)
+                .AddCustomCors(Configuration)
+                .AddControllers()
+                ;
+            services.AddCustomAuthentication(Configuration);
+
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("AllowAllOrigins",
+            //        builder =>
+            //        {
+            //            builder.AllowAnyOrigin()
+            //                   .AllowAnyHeader()
+            //                   .AllowAnyMethod();
+            //        });
+            //});
+
             services.AddHttpContextAccessor();
             services
                     .AddApiVersioning(options =>
@@ -76,8 +96,8 @@ namespace CapstoneProject
             services.AddControllers();
 
             // Add authentication and authorization
-            services.AddAuthentication();
-            services.AddAuthorization();
+            // services.AddAuthentication();
+            // services.AddAuthorization();
             services.AddEndpointsApiExplorer();
             // Add Swagger documentation
             services.AddSwaggerGen();
@@ -133,6 +153,7 @@ namespace CapstoneProject
 
             //    //c.OperationFilter<SecurityRequirementsOperationFilter>();
             //});
+            services.AddTransient<IIdentityService, IdentityService>();
 
             // Add db
             services.AddDbContext<DataContext>(options =>
@@ -144,7 +165,8 @@ namespace CapstoneProject
         {
             // Register your own things directly with Autofac here.
             builder.RegisterModule(new AutofacModules.AppModule());
-            builder.RegisterModule(new AutofacModules.WeatherModule());
+            builder.RegisterModule(new AutofacModules.EmployeeModule());
+            builder.RegisterModule(new AutofacModules.UserModule());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -172,19 +194,23 @@ namespace CapstoneProject
             });
 
             // Use authentication and authorization
-            app.UseAuthentication();
-            app.UseAuthorization();
+            app.UseAuthentication(); // Bổ sung middleware xác thực
+            app.UseAuthorization(); // Bổ sung middleware phân quyền
             //app.UseEndpoints(endpoints =>
             //{
-            //endpoints.MapControllers();
+            //    endpoints.MapControllers();
             //});
 
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app
+                .UseRouting()
+                .UseCustomCors(Program.ServiceName)
+                .UseCustomAuth(Program.ServiceName)
+                .UseEndpoints(
+                    endpoints =>
+                    {
+                        endpoints.MapControllers();
+                    }
+                );
         }
 
     }

@@ -42,6 +42,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.5" />
     <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="System.Security.Cryptography.Cng" Version="5.0.0" />
+    <PackageReference Include="System.Security.Claims" Version="4.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -79,6 +82,22 @@
     <None Remove="Services\" />
     <None Remove="Dapper" />
     <None Remove="Databases\Schemas\System\Users\" />
+    <None Remove="Auths\" />
+    <None Remove="System.Security.Cryptography.Cng" />
+    <None Remove="Commons\Schemas\" />
+    <None Remove="Commons\Enum\" />
+    <None Remove="Areas\Users\Models\LoginModel\" />
+    <None Remove="Areas\Users\Models\UserModel\" />
+    <None Remove="Areas\Users\Models\UserModel\Schemas\" />
+    <None Remove="Areas\Users\Models\LoginModel\Schemas\" />
+    <None Remove="Databases\Schemas\Setting\" />
+    <None Remove="Commons\CodeMaster\" />
+    <None Remove="Commons\CodeMaster\R001cs" />
+    <None Remove="System.Security.Claims" />
+    <None Remove="Microsoft.AspNetCore.Cors" />
+    <None Remove="Databases\Schemas\System\Orders\" />
+    <None Remove="Databases\Schemas\System\Ticket\" />
+    <None Remove="Databases\Schemas\System\Film\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\" />
@@ -92,5 +111,17 @@
     <Folder Include="Commons\" />
     <Folder Include="Services\" />
     <Folder Include="Databases\Schemas\System\Users\" />
+    <Folder Include="Auths\" />
+    <Folder Include="Commons\Schemas\" />
+    <Folder Include="Commons\Enum\" />
+    <Folder Include="Areas\Users\Models\LoginModel\" />
+    <Folder Include="Areas\Users\Models\UserModel\" />
+    <Folder Include="Areas\Users\Models\UserModel\Schemas\" />
+    <Folder Include="Areas\Users\Models\LoginModel\Schemas\" />
+    <Folder Include="Databases\Schemas\Setting\" />
+    <Folder Include="Commons\CodeMaster\" />
+    <Folder Include="Databases\Schemas\System\Orders\" />
+    <Folder Include="Databases\Schemas\System\Ticket\" />
+    <Folder Include="Databases\Schemas\System\Film\" />
   </ItemGroup>
 </Project>

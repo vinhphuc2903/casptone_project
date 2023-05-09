@@ -146,3 +146,4 @@
 /Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Relational.Design.dll
 /Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.SqlServer.Design.dll
 /Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/Dapper.dll
