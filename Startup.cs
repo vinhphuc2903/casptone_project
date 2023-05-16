@@ -167,6 +167,7 @@ namespace CapstoneProject
             builder.RegisterModule(new AutofacModules.AppModule());
             builder.RegisterModule(new AutofacModules.EmployeeModule());
             builder.RegisterModule(new AutofacModules.UserModule());
+            builder.RegisterModule(new AutofacModules.FilmModule());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

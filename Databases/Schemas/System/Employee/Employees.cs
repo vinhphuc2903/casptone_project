@@ -5,10 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 using CapstoneProject.Databases;
 using CapstoneProject.Databases.Schemas.System.Users;
+
 namespace CapstoneProject.Databases.Schemas.System.Employee
 {
     [Table("Employees")]
-    public class Employees : TableHaveIdInt, ITable
+    public partial class Employees : TableHaveIdInt, ITable
     {
         /// <summary>
         /// Id user nhân viên
@@ -40,7 +41,7 @@ namespace CapstoneProject.Databases.Schemas.System.Employee
         public int? UpdatedBy { set; get; }
 
         [StringLength(50)]
-        public string UpdatedIp { set; get; }
+        public string? UpdatedIp { set; get; }
 
         public bool DelFlag { set; get; }
 

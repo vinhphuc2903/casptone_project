@@ -4,6 +4,7 @@ using CapstoneProject.Databases;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapstoneProject.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230511170523_Add new table")]
+    partial class Addnewtable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -310,13 +313,6 @@ namespace CapstoneProject.Migrations
                     b.Property<bool>("DelFlag")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Director")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Introduce")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsSubtittle")
                         .HasColumnType("bit");
 
@@ -330,12 +326,17 @@ namespace CapstoneProject.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Time")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TrailerLink")
+                    b.Property<string>("Time")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TralerLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TypeFilmId")
+                        .IsRequired()
+                        .HasColumnType("int");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("datetimeoffset");
@@ -348,6 +349,8 @@ namespace CapstoneProject.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TypeFilmId");
 
                     b.ToTable("Films");
                 });
@@ -392,45 +395,6 @@ namespace CapstoneProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TypeFilm");
-                });
-
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Film.TypeFilmDetail", b =>
-                {
-                    b.Property<int>("FilmId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TypeFilmId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedIp")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<bool>("DelFlag")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<int?>("UpdatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UpdatedIp")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("FilmId", "TypeFilmId");
-
-                    b.HasIndex("TypeFilmId");
-
-                    b.ToTable("TypeFilmDetail");
                 });
 
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Food.Foods", b =>
@@ -1059,23 +1023,15 @@ namespace CapstoneProject.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Film.TypeFilmDetail", b =>
+            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Film.Films", b =>
                 {
-                    b.HasOne("CapstoneProject.Databases.Schemas.System.Film.Films", "Films")
-                        .WithMany("TypeFilmDetail")
-                        .HasForeignKey("FilmId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("CapstoneProject.Databases.Schemas.System.Film.TypeFilm", "TypeFilms")
-                        .WithMany("TypeFilmDetail")
+                    b.HasOne("CapstoneProject.Databases.Schemas.System.Film.TypeFilm", "TypeFilm")
+                        .WithMany("Films")
                         .HasForeignKey("TypeFilmId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Films");
-
-                    b.Navigation("TypeFilms");
+                    b.Navigation("TypeFilm");
                 });
 
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Food.Foods", b =>
@@ -1238,13 +1194,11 @@ namespace CapstoneProject.Migrations
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Film.Films", b =>
                 {
                     b.Navigation("ShowTime");
-
-                    b.Navigation("TypeFilmDetail");
                 });
 
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Film.TypeFilm", b =>
                 {
-                    b.Navigation("TypeFilmDetail");
+                    b.Navigation("Films");
                 });
 
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Food.Foods", b =>

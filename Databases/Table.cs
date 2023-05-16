@@ -36,7 +36,7 @@ namespace CapstoneProject.Databases
         /// Ip của máy đã cập nhật dữ liệu
         /// </summary>
         [StringLength(50)]
-        public string UpdatedIp { set; get; }
+        public string? UpdatedIp { set; get; }
         /// <summary>
         /// Cờ xóa dữ liệu
         /// </summary>

@@ -21,9 +21,12 @@ namespace CapstoneProject.Databases.Schemas.System.Users
 		/// Tổng số điểm
 		/// </summary>
 		public int Point { get; set; }
-		/// <summary>
-		/// Mã rank tương ứng
-		/// </summary>
+        /// <summary>
+        /// Mã rank tương ứng
+        /// 1000. Bac
+        /// 3000. Vang
+        /// 10000. Kim Cuong
+        /// </summary>
         public string RankName { set; get; }
 
         public DateTimeOffset CreatedAt { set; get; }
@@ -38,7 +41,7 @@ namespace CapstoneProject.Databases.Schemas.System.Users
         public int? UpdatedBy { set; get; }
 
         [StringLength(50)]
-        public string UpdatedIp { set; get; }
+        public string? UpdatedIp { set; get; }
 
         public bool DelFlag { set; get; }
 

@@ -5,18 +5,18 @@ using CapstoneProject.Databases;
 
 namespace CapstoneProject.Databases.Schemas.System.Film
 {
-    [Table("TypeFilm")]
-    public partial class TypeFilm : TableHaveIdInt, ITable
+    [Table("TypeFilmDetail")]
+    public partial class TypeFilmDetail : ITable
     {
-        public TypeFilm()
-        {
-            TypeFilmDetail = new HashSet<TypeFilmDetail>();
-        }
         /// <summary>
-        /// Tên thể loại film
+        /// Mã film
         /// </summary>
-        public string Name { get; set; }
-
+        public int FilmId { get; set; }
+        /// <summary>
+        /// Mã thể loại
+        /// </summary>
+        public int TypeFilmId { get; set; }
+        
         public DateTimeOffset CreatedAt { set; get; }
 
         public int CreatedBy { set; get; }
@@ -33,7 +33,9 @@ namespace CapstoneProject.Databases.Schemas.System.Film
 
         public bool DelFlag { set; get; }
 
-        public virtual ICollection<TypeFilmDetail> TypeFilmDetail { get; set; }
+        public virtual Films? Films { get; set; }
+
+        public virtual TypeFilm? TypeFilms { get; set; }
     }
 }
 
