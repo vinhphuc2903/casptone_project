@@ -31,7 +31,7 @@ namespace CapstoneProject.Databases.Schemas.System.Users
         public int? UpdatedBy { set; get; }
 
         [StringLength(50)]
-        public string UpdatedIp { set; get; }
+        public string? UpdatedIp { set; get; }
 
         public bool DelFlag { set; get; }
 

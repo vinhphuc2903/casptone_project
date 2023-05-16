@@ -24,6 +24,189 @@
             Id ngày cần tìm kiếm
             </summary>
         </member>
+        <member name="M:CapstoneProject.Areas.Film.Controllers.FilmAdminController.AddNewFilmData(CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData)">
+            <summary>
+            Thêm film mới
+            <para>Created at: 14/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Film.Controllers.FilmController.GetListFilm(CapstoneProject.Areas.Film.Models.FilmModels.Schemas.SearchCondition)">
+            <summary>
+            Lấy tất cả bộ film theo điều kiện tìm kiếm
+            <para>Created at: 14/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.Name">
+            <summary>
+            Tên loại phim
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.Time">
+            <summary>
+            Độ dài phim
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.AgeLimit">
+            <summary>
+            Độ tuổi giới hạn
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.DateStart">
+            <summary>
+            Ngày bắt đầu chiếu phim
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.DateEnd">
+            <summary>
+            Ngày kết thúc chiếu phim
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.Language">
+            <summary>
+            Ngôn ngữ
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.IsSubtittle">
+            <summary>
+            Phụ đề
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.Actor">
+            <summary>
+            Danh sách diễn viên
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.Director">
+            <summary>
+            Danh sách đạo diễn
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.Introduce">
+            <summary>
+            Giới thiệu film
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.Country">
+            <summary>
+            Đất nước 
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.Status">
+            <summary>
+            Trạng thái phim
+            - 10: Phim mới
+            - 20: Đang công chiếu
+            - 30: Tạm hoãn
+            - 40: Đã xóa
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.BackgroundImage">
+            <summary>
+            Link ảnh backGround
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.TrailerLink">
+            <summary>
+            Link trailer film Youtobe
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.FilmInfo.Name">
+            <summary>
+            Tên loại phim
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.FilmInfo.Time">
+            <summary>
+            Độ dài phim
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.FilmInfo.AgeLimit">
+            <summary>
+            Độ tuổi giới hạn
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.FilmInfo.DateStart">
+            <summary>
+            Ngày bắt đầu chiếu phim
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.FilmInfo.DateEnd">
+            <summary>
+            Ngày kết thúc chiếu phim
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.FilmInfo.Language">
+            <summary>
+            Ngôn ngữ
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.FilmInfo.IsSubtittle">
+            <summary>
+            Phụ đề
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.FilmInfo.Actor">
+            <summary>
+            Danh sách diễn viên
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.FilmInfo.Director">
+            <summary>
+            Danh sách đạo diễn
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.FilmInfo.Introduce">
+            <summary>
+            Giới thiệu film
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.FilmInfo.Country">
+            <summary>
+            Đất nước 
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.FilmInfo.Status">
+            <summary>
+            Trạng thái phim
+            - 10: Phim mới
+            - 20: Đang công chiếu
+            - 30: Tạm hoãn
+            - 40: Đã xóa
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.FilmInfo.BackgroundImage">
+            <summary>
+            Link ảnh backGround
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.FilmInfo.TrailerLink">
+            <summary>
+            Link trailer film Youtobe
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.SearchCondition.TypeFilm">
+            <summary>
+            Thể loại film
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.SearchCondition.CurrentPage">
+            <summary>
+            Trang hiện tại.
+            </summary>
+            <value>1</value>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.SearchCondition.PageSize">
+            <summary>
+            Số dòng trên một trang.
+            </summary>
+            <value>20</value>
+        </member>
         <member name="M:CapstoneProject.Areas.Users.Controllers.LoginController.CheckAccount(CapstoneProject.Areas.Users.Models.LoginModel.Schemas.LoginInfo)">
             <summary>
             Login
@@ -42,7 +225,16 @@
             <response code="401">Chưa đăng nhập</response>
             <response code="500">Lỗi khi có exception</response>
         </member>
-        <member name="M:CapstoneProject.Areas.Users.Controllers.UsersController.GetDetailUser(System.String)">
+        <member name="M:CapstoneProject.Areas.Users.Controllers.UsersController.GetDetailUser(System.Int32)">
+            <summary>
+            Lấy tất cả nhân viên theo điều kiện tìm kiếm
+            <para>Created at: 04/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Users.Controllers.UsersController.GetDetailUserLogin">
             <summary>
             Lấy tất cả nhân viên theo điều kiện tìm kiếm
             <para>Created at: 04/05/2023</para>
@@ -131,10 +323,23 @@
             Id ngày cần tìm kiếm
             </summary>
         </member>
-        <member name="M:CapstoneProject.Areas.Users.Models.UserModel.IUsersModel.GetDetailUser(System.String)">
+        <member name="M:CapstoneProject.Areas.Users.Models.UserModel.IUsersModel.GetDetailUser(System.Int32)">
             <summary>
             Lấy thông tin chi tiết tài khoản
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CapstoneProject.Areas.Users.Models.UserModel.IUsersModel.GetUserIsLogin">
+            <summary>
+            Lấy thông tin tài khoản đang đăng nhập
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CapstoneProject.Areas.Users.Models.UserModel.UserModel.GetUserIsLogin">
+            <summary>
+            Lấy thông tin tài khoản đang đăng nhập
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="T:CapstoneProject.Auths.Auth">
@@ -175,6 +380,19 @@
             </summary>
         </member>
         <member name="M:CapstoneProject.AutofacModules.EmployeeModule.Load(Autofac.ContainerBuilder)">
+            <summary>
+            Ghi đè phương thức load của autofac để đăng ký dịch vụ
+            </summary>
+            <param name="builder">builder dùng để đăng ký dịch vụ</param>
+        </member>
+        <member name="T:CapstoneProject.AutofacModules.FilmModule">
+            <summary>
+            Đăng ký các dịch vụ dùng cho việc tạo và xử lý sự kiện thông qua autofac
+            <para>Created at: </para>
+            <para>Created by: VP</para>
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.AutofacModules.FilmModule.Load(Autofac.ContainerBuilder)">
             <summary>
             Ghi đè phương thức load của autofac để đăng ký dịch vụ
             </summary>
@@ -447,6 +665,50 @@
             Link đến hình thumb
             </summary>
         </member>
+        <member name="T:CapstoneProject.Commons.Paging">
+            <summary>
+            Quản lý việc phân trang, lưu các tham số dùng cho việc phân trang của 1 danh sách.
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/05/2023</para>
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Commons.Paging.CurrentPage">
+            <summary>
+            Trang hiện tại
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Commons.Paging.TotalPages">
+            <summary>
+            Tổng số trang hiển thị
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Commons.Paging.NumberOfRecord">
+            <summary>
+            Số dòng tối đa trên 1 trang
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Commons.Paging.TotalRecord">
+            <summary>
+            Tổng số các dòng
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.Commons.Paging.#ctor">
+            <summary>
+            Hàm khởi tạo mặc định để gán các tham số mặc định khi khởi tạo 1 biến để lưu phân trang.
+            <para>Author: QuyPN</para>
+            <para>Created: 15/02/2020</para>
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.Commons.Paging.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Hàm khởi tạo có các tham số để gán các tham số theo ý người khởi tạo.
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/05/2023</para>
+            </summary>
+            <param name="TotalRecord">Tổng số hàng trong 1 bảng</param>
+            <param name="CurrenPage">Trang hiện tại đang hiển thị</param>
+            <param name="NumberOfRecord">Số hàng sẽ hiển thị trong 1 trang, mặc định là 30</param>
+        </member>
         <member name="T:CapstoneProject.Commons.Schemas.ResponseInfo">
             <summary>
             Lấy thông tin trả về từ ajax.
@@ -554,8 +816,87 @@
             Table Users (User)
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:CapstoneProject.Databases.DataContext.UserRoles" -->
-        <!-- Badly formed XML comment ignored for member "P:CapstoneProject.Databases.DataContext.Roles" -->
+        <member name="P:CapstoneProject.Databases.DataContext.UserRoles">
+            <summary>
+            Table UserRole (UserRoles)
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.DataContext.Roles">
+            <summary>
+            Table Role (Roles)
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.DataContext.UserPoint">
+            <summary>
+            Table UserPoint (UserPoint)
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.DataContext.Size">
+            <summary>
+            Table Size
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:CapstoneProject.Databases.DataContext.OrderFoodDetail">
+            <summary>
+            Table Order Food Detail
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:CapstoneProject.Databases.DataContext.OrderTicketDetail">
+            <summary>
+            Table Order Ticket Detail
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:CapstoneProject.Databases.DataContext.Orders">
+            <summary>
+            Table Order
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:CapstoneProject.Databases.DataContext.ShowTime">
+            <summary>
+            Table Show time
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:CapstoneProject.Databases.DataContext.Ticket">
+            <summary>
+            Table Ticket
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:CapstoneProject.Databases.DataContext.Films">
+            <summary>
+            Table Films
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.DataContext.TypeFilms">
+            <summary>
+            Table TypeFilm
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.DataContext.Seats">
+            <summary>
+            Table Seats
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.DataContext.CinemaRooms">
+            <summary>
+            Table Cinemarooms
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.DataContext.Foods">
+            <summary>
+            Table Foods
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.DataContext.TypeFilmDetails">
+            <summary>
+            Table Foods
+            </summary>
+        </member>
         <member name="M:CapstoneProject.Databases.DataContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{CapstoneProject.Databases.DataContext},Microsoft.AspNetCore.Http.IHttpContextAccessor)">
             <param name="options">Các cài đặt ban đầu</param>
         </member>
@@ -593,9 +934,259 @@
             </summary>
             <returns>Ip của request hiện tại</returns>
         </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.CinemaRoom.CinemaRooms.TotalColumn">
+            <summary>
+            Tổng số cột
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.CinemaRoom.CinemaRooms.TotalRow">
+            <summary>
+            Tổng số hàng
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.CinemaRoom.CinemaRooms.TotalSeat">
+            <summary>
+            Tổng số ghế
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.CinemaRoom.Seat.SeatCode">
+            <summary>
+            Mã ghế ngồi
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.CinemaRoom.Seat.CinemaRoomId">
+            <summary>
+            Mã phòng
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.CinemaRoom.Seat.Type">
+            <summary>
+            Loại ghế:
+            - 10: ghế thường
+            - 20: ghế vip
+            - 30: ghế đôi
+            </summary>
+        </member>
         <member name="P:CapstoneProject.Databases.Schemas.System.Employee.Employees.UserId">
             <summary>
             Id user nhân viên
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.Name">
+            <summary>
+            Tên loại phim
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.Time">
+            <summary>
+            Độ dài phim
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.AgeLimit">
+            <summary>
+            Độ tuổi giới hạn
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.DateStart">
+            <summary>
+            Ngày bắt đầu chiếu phim
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.DateEnd">
+            <summary>
+            Ngày kết thúc chiếu phim
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.Language">
+            <summary>
+            Ngôn ngữ
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.IsSubtittle">
+            <summary>
+            Phụ đề
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.Actor">
+            <summary>
+            Danh sách diễn viên
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.Director">
+            <summary>
+            Danh sách đạo diễn
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.Introduce">
+            <summary>
+            Giới thiệu film
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.Country">
+            <summary>
+            Đất nước 
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.Status">
+            <summary>
+            Trạng thái phim
+            - 10: Phim mới
+            - 20: Đang công chiếu
+            - 30: Tạm hoãn
+            - 40: Đã xóa
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.BackgroundImage">
+            <summary>
+            Link ảnh backGround
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.TrailerLink">
+            <summary>
+            Link trailer film Youtobe
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.TypeFilm.Name">
+            <summary>
+            Tên thể loại film
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.TypeFilmDetail.FilmId">
+            <summary>
+            Mã film
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.TypeFilmDetail.TypeFilmId">
+            <summary>
+            Mã thể loại
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Food.Foods.Type">
+            <summary>
+            Type:
+            - 10: Bắp
+            - 20: Oshi  -Bimbim
+            - 30: Nước ngọt
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Orders.OrderFoodDetail.OrderId">
+            <summary>
+            Id đơn hàng
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Orders.OrderFoodDetail.FoodId">
+            <summary>
+            Id đồ ăn
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Orders.OrderFoodDetail.Status">
+            <summary>
+            Trạng thái đơn hàng
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Orders.Orders.UserId">
+            <summary>
+            Id khách hàng
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Orders.Orders.Status">
+            <summary>
+            Trạng thái đơn hàng
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Orders.Orders.EmployeeId">
+            <summary>
+            Nhan vien ban
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Orders.OrderTicketDetail.OrderId">
+            <summary>
+            Id đơn hàng
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Orders.OrderTicketDetail.TicketId">
+            <summary>
+            Id vé đơn hàng
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Orders.OrderTicketDetail.Status">
+            <summary>
+            Trạng thái đơn hàng
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Ticket.ShowTime.Name">
+            <summary>
+            Ten xuat chieu
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Ticket.ShowTime.Code">
+            <summary>
+            Ma xuat chieu
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Ticket.ShowTime.FilmId">
+            <summary>
+            Mã film theo suất chiếu
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Ticket.ShowTime.CinemaRoomId">
+            <summary>
+            Xuat chieu
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Ticket.ShowTime.Total">
+            <summary>
+            Tổng vé phát ra
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Ticket.ShowTime.TotalSold">
+            <summary>
+            Tổng vé đã bán
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Ticket.ShowTime.TotalRemain">
+            <summary>
+            Tổng vé còn lại
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Ticket.ShowTime.DateShow">
+            <summary>
+            Ngày chiếu
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Ticket.ShowTime.FromHour">
+            <summary>
+            Từ giờ
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Ticket.ShowTime.ToHour">
+            <summary>
+            Đến giờ
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Ticket.ShowTime.FromMinus">
+            <summary>
+            Từ phút
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Ticket.ShowTime.ToMinus">
+            <summary>
+            Đến phút
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Ticket.Tickets.Price">
+            <summary>
+            Gia ve
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Ticket.Tickets.SeatId">
+            <summary>
+            Id cho ngoi
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Ticket.Tickets.ShowtimeId">
+            <summary>
+            Id Suat chieu
             </summary>
         </member>
         <member name="P:CapstoneProject.Databases.Schemas.System.Users.User.Username">
@@ -633,6 +1224,11 @@
             Mã nhân viên
             </summary>
         </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Users.User.UserPointId">
+            <summary>
+            Mã điểm khách hàng
+            </summary>
+        </member>
         <member name="P:CapstoneProject.Databases.Schemas.System.Users.User.Gender">
             <summary>
             Giới tính:
@@ -649,6 +1245,24 @@
         <member name="P:CapstoneProject.Databases.Schemas.System.Users.User.LastLogout">
             <summary>
             Thời gian logout gần nhất
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Users.UserPoint.UserId">
+            <summary>
+            Id khách hàng
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Users.UserPoint.Point">
+            <summary>
+            Tổng số điểm
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Users.UserPoint.RankName">
+            <summary>
+            Mã rank tương ứng
+            1000. Bac
+            3000. Vang
+            10000. Kim Cuong
             </summary>
         </member>
         <member name="T:CapstoneProject.Databases.ITable">
@@ -892,104 +1506,58 @@
         <member name="M:CapstoneProject.Migrations.datanull.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:CapstoneProject.Migrations.Addnewtable">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.Addnewtable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.Addnewtable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.Addnewtable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.updatedatabase">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatedatabase.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatedatabase.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatedatabase.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.TypeFilmDetails">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.TypeFilmDetails.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.TypeFilmDetails.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.TypeFilmDetails.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.Updateint">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.Updateint.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.Updateint.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.Updateint.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="F:CapstoneProject.Program.ServiceName">
             <summary>
             Tên của microservice hiện tại
             </summary>
-        </member>
-        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.Token.JwtToken">
-            <summary>
-            Token xác thực của phiên đăng nhập hiện tại
-            </summary>
-        </member>
-        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.Token.RefreshToken">
-            <summary>
-            Token ngẫu nhiên của phiên đăng nhập hiện tại
-            </summary>
-        </member>
-        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.User.Username">
-            <summary>
-            Tên đăng nhập, email hoặc số điện thoại
-            </summary>
-            <example>root</example>
-        </member>
-        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.User.Password">
-            <summary>
-            Mật khẩu đăng nhập đã mã hoá MD5
-            </summary>
-            <example>628c709b5d084dc6b22a6dbe87665419</example>
-        </member>
-        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.User.LatOfMap">
-            <summary>
-            Vĩ độ vị trí đăng nhập
-            </summary>
-            <example>16.0862274</example>
-        </member>
-        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.User.LongOfMap">
-            <summary>
-            Kinh độ vị trí đăng nhập
-            </summary>
-            <example>108.1500744</example>
-        </member>
-        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.User.Browser">
-            <summary>
-            Thông tin thiết bị đăng nhập
-            </summary>
-            <example>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15</example>
-        </member>
-        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.User.PlayerId">
-            <summary>
-            Id của thiết bị trên OneSignal
-            </summary>
-            <example>5bec2a2d-6147-4c9c-8e21-b1b888040b0e</example>
-        </member>
-        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.User.Serial">
-            <summary>
-            Số serial của thiết bị đang đăng nhập
-            </summary>
-            <example>G6TZL899N70M</example>
-        </member>
-        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.User.CaptchaToken">
-            <summary>
-            Token Captcha
-            </summary>
-            <example>fvzzdv123cfrfrgsfwefhtyuyiuou</example>
-        </member>
-        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.UserSocial.LatOfMap">
-            <summary>
-            Vĩ độ vị trí đăng nhập
-            </summary>
-            <example>16.0862274</example>
-        </member>
-        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.UserSocial.LongOfMap">
-            <summary>
-            Kinh độ vị trí đăng nhập
-            </summary>
-            <example>108.1500744</example>
-        </member>
-        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.UserSocial.Browser">
-            <summary>
-            Thông tin thiết bị đăng nhập
-            </summary>
-            <example>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15</example>
-        </member>
-        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.UserSocial.PlayerId">
-            <summary>
-            Id của thiết bị trên OneSignal
-            </summary>
-            <example>5bec2a2d-6147-4c9c-8e21-b1b888040b0e</example>
-        </member>
-        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.UserSocial.Serial">
-            <summary>
-            Số serial của thiết bị đang đăng nhập
-            </summary>
-            <example>G6TZL899N70M</example>
-        </member>
-        <member name="P:FMStyle.API.Areas.Auth.Models.Login.Schemas.UserSocial.CaptchaToken">
-            <summary>
-            Token Captcha
-            </summary>
-            <example>fvzzdv123cfrfrgsfwefhtyuyiuou</example>
         </member>
         <member name="P:FMStyle.RPT.Models.Schemas.BaseListOfData`1.Data">
             <summary>

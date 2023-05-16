@@ -98,6 +98,15 @@
     <None Remove="Databases\Schemas\System\Orders\" />
     <None Remove="Databases\Schemas\System\Ticket\" />
     <None Remove="Databases\Schemas\System\Film\" />
+    <None Remove="Databases\Schemas\System\CinemaRooms\" />
+    <None Remove="Databases\Schemas\System\Foods\" />
+    <None Remove="Areas\Film\" />
+    <None Remove="Areas\Film\Controllers\" />
+    <None Remove="Areas\Film\Model\" />
+    <None Remove="Areas\Film\Models\FilmModels\" />
+    <None Remove="Areas\Film\Models\FilmAdminModels\" />
+    <None Remove="Areas\Film\Models\FilmModels\Schemas\" />
+    <None Remove="Areas\Film\Models\FilmAdminModels\Schemas\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\" />
@@ -123,5 +132,14 @@
     <Folder Include="Databases\Schemas\System\Orders\" />
     <Folder Include="Databases\Schemas\System\Ticket\" />
     <Folder Include="Databases\Schemas\System\Film\" />
+    <Folder Include="Databases\Schemas\System\CinemaRoom\" />
+    <Folder Include="Databases\Schemas\System\Food\" />
+    <Folder Include="Areas\Film\" />
+    <Folder Include="Areas\Film\Controllers\" />
+    <Folder Include="Areas\Film\Models\" />
+    <Folder Include="Areas\Film\Models\FilmModels\" />
+    <Folder Include="Areas\Film\Models\FilmAdminModels\" />
+    <Folder Include="Areas\Film\Models\FilmModels\Schemas\" />
+    <Folder Include="Areas\Film\Models\FilmAdminModels\Schemas\" />
   </ItemGroup>
 </Project>

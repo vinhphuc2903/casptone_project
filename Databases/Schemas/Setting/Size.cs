@@ -1,34 +1,27 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using CapstoneProject.Databases.Schemas.System.Users;
+using System.Data;
+using CapstoneProject.Databases.Schemas.System.Food;
 
 namespace CapstoneProject.Databases.Schemas.Setting
 {
-    [Table("Roles")]
-
-    public partial class Role : ITable
+    [Table("Size")]
+    public partial class Size : TableHaveIdInt, ITable
     {
-        public Role()
-		{
-            Users = new HashSet<UserRole>();
+        public Size()
+        {
+            Foods = new HashSet<Foods>();
         }
-        [Key]
-        [StringLength(5)]
-        public string Id { set; get; }
 
-        [Required]
-        [StringLength(50)]
-        public string Name { set; get; }
-
-        public int Type { set; get; }
+		public string Name { get; set; }
 
         public DateTimeOffset CreatedAt { set; get; }
 
         public int CreatedBy { set; get; }
 
         [StringLength(50)]
-        public string CreatedIp { set; get; }
+        public string? CreatedIp { set; get; }
 
         public DateTimeOffset? UpdatedAt { set; get; }
 
@@ -39,7 +32,7 @@ namespace CapstoneProject.Databases.Schemas.Setting
 
         public bool DelFlag { set; get; }
 
-        public virtual ICollection<UserRole> Users { set; get; }
+        public virtual ICollection<Foods> Foods { get; set; }
     }
 }
 

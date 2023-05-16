@@ -3,12 +3,18 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CapstoneProject.Databases;
 using CapstoneProject.Databases.Schemas.System.Users;
+using CapstoneProject.Databases.Schemas.System.Employee;
 
 namespace CapstoneProject.Databases.Schemas.System.Orders
 {
     [Table("Orders")]
     public partial class Orders : TableHaveIdInt, ITable
     {
+        public Orders()
+        {
+            OrderFoodDetails = new HashSet<OrderFoodDetail>();
+            OrderTicketDetails = new HashSet<OrderTicketDetail>();
+        }
         /// <summary>
         /// Id khách hàng
         /// </summary>
@@ -18,6 +24,10 @@ namespace CapstoneProject.Databases.Schemas.System.Orders
         /// Trạng thái đơn hàng
         /// </summary>
         public string Status { get; set; }
+        /// <summary>
+        /// Nhan vien ban
+        /// </summary>
+        public int ? EmployeeId { get; set; }
 
         public DateTimeOffset CreatedAt { set; get; }
 
@@ -31,12 +41,17 @@ namespace CapstoneProject.Databases.Schemas.System.Orders
         public int? UpdatedBy { set; get; }
 
         [StringLength(50)]
-        public string UpdatedIp { set; get; }
+        public string? UpdatedIp { set; get; }
 
         public bool DelFlag { set; get; }
 
         public virtual User User { set; get; }
 
+        public virtual Employees ? Employee { get; set; }
+
+        public virtual ICollection<OrderFoodDetail> OrderFoodDetails { get; set; }
+
+        public virtual ICollection<OrderTicketDetail> OrderTicketDetails { get; set; }
     }
 }
 
