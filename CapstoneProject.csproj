@@ -107,6 +107,13 @@
     <None Remove="Areas\Film\Models\FilmAdminModels\" />
     <None Remove="Areas\Film\Models\FilmModels\Schemas\" />
     <None Remove="Areas\Film\Models\FilmAdminModels\Schemas\" />
+    <None Remove="Areas\ShowTime\" />
+    <None Remove="Areas\ShowTime\Controllers\" />
+    <None Remove="Areas\ShowTime\Models\" />
+    <None Remove="Areas\ShowTime\Models\Schemas\" />
+    <None Remove="Areas\CinemaRoom\" />
+    <None Remove="Areas\CinemaRoom\Controllers\" />
+    <None Remove="Areas\CinemaRoom\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\" />
@@ -141,5 +148,12 @@
     <Folder Include="Areas\Film\Models\FilmAdminModels\" />
     <Folder Include="Areas\Film\Models\FilmModels\Schemas\" />
     <Folder Include="Areas\Film\Models\FilmAdminModels\Schemas\" />
+    <Folder Include="Areas\ShowTime\" />
+    <Folder Include="Areas\ShowTime\Controllers\" />
+    <Folder Include="Areas\ShowTime\Models\" />
+    <Folder Include="Areas\ShowTime\Models\Schemas\" />
+    <Folder Include="Areas\CinemaRoom\" />
+    <Folder Include="Areas\CinemaRoom\Controllers\" />
+    <Folder Include="Areas\CinemaRoom\Models\" />
   </ItemGroup>
 </Project>

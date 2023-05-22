@@ -114,7 +114,22 @@ namespace CapstoneProject.Databases
         /// Table Foods
         /// </summary>
         public virtual DbSet<TypeFilmDetail> TypeFilmDetails { get; set; }
-
+        /// <summary>
+        /// Table Districts
+        /// </summary>
+        public virtual DbSet<Districts> Districts { get; set; }
+        /// <summary>
+        /// Table Provinces
+        /// </summary>
+        public virtual DbSet<Provinces> Provinces { get; set; }
+        /// <summary>
+        /// Table Communes
+        /// </summary>
+        public virtual DbSet<Communes> Communes { get; set; }
+        /// <summary>
+        /// Table Branches
+        /// </summary>
+        public virtual DbSet<Branch> Branches { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -180,6 +195,10 @@ namespace CapstoneProject.Databases
                     e.FilmId,
                     e.TypeFilmId
                 });
+
+            modelBuilder.Entity<Branch>()
+                .HasKey(e => e.Id);
+
 
             // Setting relationship
 
@@ -309,6 +328,72 @@ namespace CapstoneProject.Databases
             //    .WithMany(u => u.Tickets)
             //    .HasForeignKey(u => u.ShowtimeId)
             //    .OnDelete(DeleteBehavior.Restrict);
+
+            // province
+            modelBuilder.Entity<Provinces>()
+               .HasMany(e => e.Districts)
+               .WithOne(e => e.Provinces)
+               .HasForeignKey(e => e.ProvinceId)
+               .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Provinces>()
+                .HasMany(e => e.User)
+                .WithOne(e => e.Provinces)
+                .HasForeignKey(e => e.ProvinceId)
+                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Provinces>()
+                .HasMany(e => e.Branches)
+                .WithOne(e => e.Province)
+                .HasForeignKey(e => e.ProvinceId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            //district
+            modelBuilder.Entity<Districts>()
+                .HasMany(e => e.Communes)
+                .WithOne(e => e.Districts)
+                .HasForeignKey(e => e.DistrictId)
+                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Districts>()
+                .HasMany(e => e.User)
+                .WithOne(e => e.Districts)
+                .HasForeignKey(e => e.DistrictId)
+                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Districts>()
+                .HasMany(e => e.Branches)
+                .WithOne(e => e.District)
+                .HasForeignKey(e => e.DistrictId)
+                .OnDelete(DeleteBehavior.NoAction);
+            //Comune
+            modelBuilder.Entity<Communes>()
+                .HasMany(e => e.User)
+                .WithOne(e => e.Communes)
+                .HasForeignKey(e => e.CommuneId)
+                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Communes>()
+                .HasMany(e => e.Branches)
+                .WithOne(e => e.Commune)
+                .HasForeignKey(e => e.CommuneId)
+                .OnDelete(DeleteBehavior.NoAction);
+            //Branches
+            modelBuilder.Entity<Branch>()
+                .HasMany(e => e.Employee)
+                .WithOne(e => e.Branches)
+                .HasForeignKey(e => e.BranchId)
+                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Branch>()
+                .HasMany(e => e.Orders)
+                .WithOne(e => e.Branches)
+                .HasForeignKey(e => e.BranchId)
+                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Branch>()
+                .HasMany(e => e.CinemaRoom)
+                .WithOne(e => e.Branches)
+                .HasForeignKey(e => e.BranchId)
+                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Branch>()
+                .HasMany(e => e.ShowTimes)
+                .WithOne(e => e.Branches)
+                .HasForeignKey(e => e.BranchId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
         public DbConnection GetConnection()

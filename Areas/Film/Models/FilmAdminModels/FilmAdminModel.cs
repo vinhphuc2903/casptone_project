@@ -83,39 +83,39 @@ namespace CapstoneProject.Areas.Film.Models.FilmAdminModels
             ResponseInfo responseInfo = new ResponseInfo();
             try
             {
-                //var film = await _context.Films.Where(x => !x.DelFlag && x.Name.Contains(newFilmData.FilmData.Name)).FirstOrDefaultAsync();
+                var film = await _context.Films.Where(x => !x.DelFlag && x.Name.Contains(newFilmData.Name)).FirstOrDefaultAsync();
                 FilmData typefilm = new FilmData()
                 {
-                    Name = newFilmData.Name,
-                    Actor = newFilmData.Actor,
-                    Director = newFilmData.Director,
-                    AgeLimit = newFilmData.AgeLimit,
-                    Time = newFilmData.Time,
-                    Introduce = newFilmData.Introduce,
-                    TrailerLink = newFilmData.TrailerLink,
-                    Country = newFilmData.Country,
-                    BackgroundImage = newFilmData.BackgroundImage,
-                    DateStart = newFilmData.DateStart,
-                    DateEnd = newFilmData.DateEnd,
-                    Status = newFilmData.Status,
-                    Language = newFilmData.Language
+                   Name = newFilmData.Name,
+                   Actor = newFilmData.Actor,
+                   Director = newFilmData.Director,
+                   AgeLimit = newFilmData.AgeLimit,
+                   Time = newFilmData.Time,
+                   Introduce = newFilmData.Introduce,
+                   TrailerLink = newFilmData.TrailerLink.Replace("watch?v=", "embed/"),
+                   Country = newFilmData.Country,
+                   BackgroundImage = newFilmData.BackgroundImage,
+                   DateStart = newFilmData.DateStart,
+                   DateEnd = newFilmData.DateEnd,
+                   Status = newFilmData.Status,
+                   Language = newFilmData.Language
                 };
                 await _context.Films.AddAsync(typefilm);
                 await _context.SaveChangesAsync();
                 var listType = newFilmData.ListTypeFilm.Trim().Replace(" ", "").Split(',');
                 foreach (var type in listType)
                 {
-                    TypeFilmData typeFilm = new TypeFilmData()
-                    {
-                        FilmId = typefilm.Id,
-                        TypeFilmId = Int32.Parse(type)
-                    };
-                    await _context.TypeFilmDetails.AddAsync(typeFilm);
-                    await _context.SaveChangesAsync();
-
+                   TypeFilmData typeFilm = new TypeFilmData()
+                   {
+                       FilmId = typefilm.Id,
+                       TypeFilmId = Int32.Parse(type)
+                   };
+                   await _context.TypeFilmDetails.AddAsync(typeFilm);
+                   await _context.SaveChangesAsync();
                 }
+                await _context.SaveChangesAsync();
                 transaction = await _context.Database.BeginTransactionAsync();
-                await transaction?.CommitAsync();
+                transaction?.CommitAsync();
                 return responseInfo;
             }
             catch (Exception ex)

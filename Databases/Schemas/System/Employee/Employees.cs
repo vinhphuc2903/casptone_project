@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 using CapstoneProject.Databases;
+using CapstoneProject.Databases.Schemas.Setting;
 using CapstoneProject.Databases.Schemas.System.Users;
 
 namespace CapstoneProject.Databases.Schemas.System.Employee
@@ -29,6 +30,8 @@ namespace CapstoneProject.Databases.Schemas.System.Employee
         [StringLength(255)]
         public string Email { get; set; }
 
+        public int? BranchId { get; set; }
+
         public DateTimeOffset CreatedAt { set; get; }
 
         public int CreatedBy { set; get; }
@@ -44,6 +47,8 @@ namespace CapstoneProject.Databases.Schemas.System.Employee
         public string? UpdatedIp { set; get; }
 
         public bool DelFlag { set; get; }
+
+        public virtual Branch? Branches { set; get; }
 
         public virtual User User { set; get; }
     }

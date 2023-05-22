@@ -36,6 +36,16 @@ namespace CapstoneProject.Databases.Schemas.System.Film
 		/// </summary>
 		public DateTime? DateEnd { get; set; }
 		/// <summary>
+		/// Số suất chiếu tối thiểu
+		/// </summary>
+		/// <value></value>
+		public int MinNumberOfScreen {get;set;}
+		/// <summary>
+		/// Số suất chiếu tối đa
+		/// </summary>
+		/// <value></value>
+		public int MaxNumberOfScreen {get;set;}
+		/// <summary>
 		/// Ngôn ngữ
 		/// </summary>
 		public string? Language { get; set; }

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CapstoneProject.Databases;
 using CapstoneProject.Databases.Schemas.System.Ticket;
+using CapstoneProject.Databases.Schemas.Setting;
 
 namespace CapstoneProject.Databases.Schemas.System.CinemaRoom
 {
@@ -15,6 +16,10 @@ namespace CapstoneProject.Databases.Schemas.System.CinemaRoom
             Showtimes = new HashSet<ShowTime>();
         }
         /// <summary>
+        /// Tên phòng chiếu
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
         /// Tổng số cột
         /// </summary>
         public int TotalColumn { get; set; }
@@ -26,6 +31,8 @@ namespace CapstoneProject.Databases.Schemas.System.CinemaRoom
         /// Tổng số ghế
         /// </summary>
         public int TotalSeat { get; set; }
+
+        public int? BranchId { get; set; }
 
         public DateTimeOffset CreatedAt { set; get; }
 
@@ -42,6 +49,8 @@ namespace CapstoneProject.Databases.Schemas.System.CinemaRoom
         public string? UpdatedIp { set; get; }
 
         public bool DelFlag { set; get; }
+
+        public virtual Branch? Branches { set; get; }
 
         public virtual ICollection<Seat> Seats { set; get; }
 
