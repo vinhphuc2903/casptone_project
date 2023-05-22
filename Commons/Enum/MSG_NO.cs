@@ -23,6 +23,18 @@ namespace CapstoneProject.Commons.Enum
         /// Giới tính không tồn tại
         /// </summary>
         public static string GENDER_NOT_EXIST = "E004";
+        /// <summary>
+        /// Xuất chiếu đã tồn tại
+        /// </summary>
+        public static string SHOWTIME_IS_EXIST = "E005";
+        /// <summary>
+        /// Film dài hơn so với thời gian chiếu
+        /// </summary>
+        public static string TIME_FILM_LONGER_THAN_SHOW = "E006";
+        /// <summary>
+        /// Độ dài của tên đăng nhập ít nhất 8 kí tự
+        /// </summary>
+        public static string LENGTH_USERNAME_NOT_OK = "E005";
     }
 }
 

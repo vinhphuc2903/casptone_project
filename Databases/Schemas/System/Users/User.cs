@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CapstoneProject.Databases.Schemas.System.Employee;
 using CapstoneProject.Databases;
+using CapstoneProject.Databases.Schemas.Setting;
 
 namespace CapstoneProject.Databases.Schemas.System.Users
 {
@@ -74,6 +75,17 @@ namespace CapstoneProject.Databases.Schemas.System.Users
         /// </summary>
         public DateTimeOffset? LastLogout { get; set; }
 
+        /// <summary>
+        /// Địa chỉ cụ thể
+        /// </summary>
+        public string? Address { get; set; }
+        [StringLength(3)]
+        public string? DistrictId { get; set; }
+
+        public string? ProvinceId { get; set; }
+        [StringLength(5)]
+        public string? CommuneId { get; set; }
+
         [AuditIgnore]
         [StringLength(10)]
         public string FirstSecurityString { get; set; }
@@ -101,6 +113,13 @@ namespace CapstoneProject.Databases.Schemas.System.Users
         public virtual Employees Employees { set; get; }
 
         public virtual UserPoint UserPoint { set; get; }
+
+        public virtual Districts Districts { set; get; }
+
+        public virtual Communes Communes { set; get; }
+
+        public virtual Provinces Provinces { set; get; }
+
 
         public virtual ICollection<UserToken> Tokens { set; get; }
 

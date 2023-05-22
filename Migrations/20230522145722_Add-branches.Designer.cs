@@ -4,6 +4,7 @@ using CapstoneProject.Databases;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapstoneProject.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230522145722_Add-branches")]
+    partial class Addbranches
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -938,9 +941,6 @@ namespace CapstoneProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("BranchId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CinemaRoomId")
                         .HasColumnType("int");
 
@@ -1004,8 +1004,6 @@ namespace CapstoneProject.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BranchId");
 
                     b.HasIndex("CinemaRoomId");
 
@@ -1532,11 +1530,6 @@ namespace CapstoneProject.Migrations
 
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Ticket.ShowTime", b =>
                 {
-                    b.HasOne("CapstoneProject.Databases.Schemas.Setting.Branch", "Branches")
-                        .WithMany("ShowTimes")
-                        .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
                     b.HasOne("CapstoneProject.Databases.Schemas.System.CinemaRoom.CinemaRooms", "CinemaRooms")
                         .WithMany("Showtimes")
                         .HasForeignKey("CinemaRoomId")
@@ -1548,8 +1541,6 @@ namespace CapstoneProject.Migrations
                         .HasForeignKey("FilmId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("Branches");
 
                     b.Navigation("CinemaRooms");
 
@@ -1634,8 +1625,6 @@ namespace CapstoneProject.Migrations
                     b.Navigation("Employee");
 
                     b.Navigation("Orders");
-
-                    b.Navigation("ShowTimes");
                 });
 
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.Setting.Communes", b =>

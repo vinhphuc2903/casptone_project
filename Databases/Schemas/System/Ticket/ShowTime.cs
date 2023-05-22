@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using CapstoneProject.Databases.Schemas.System.Film;
 using CapstoneProject.Databases.Schemas.System.CinemaRoom;
+using CapstoneProject.Databases.Schemas.Setting;
 
 namespace CapstoneProject.Databases.Schemas.System.Ticket
 {
@@ -27,7 +28,7 @@ namespace CapstoneProject.Databases.Schemas.System.Ticket
         /// </summary>
 		public int FilmId { get; set; }
         /// <summary>
-        /// Xuat chieu
+        /// Mã phòng chiếu
         /// </summary>
         public int CinemaRoomId { get; set; }
         /// <summary>
@@ -62,6 +63,10 @@ namespace CapstoneProject.Databases.Schemas.System.Ticket
         /// Đến phút
         /// </summary>
         public int ToMinus { get; set; }
+        /// <summary>
+        /// Mã chi nhánh
+        /// </summary>
+        public int? BranchId { get; set; }
 
         public DateTimeOffset CreatedAt { set; get; }
 
@@ -78,6 +83,8 @@ namespace CapstoneProject.Databases.Schemas.System.Ticket
         public string? UpdatedIp { set; get; }
 
         public bool DelFlag { set; get; }
+
+        public virtual Branch? Branches { set; get; }
 
         public virtual Films Film { get; set; }
 

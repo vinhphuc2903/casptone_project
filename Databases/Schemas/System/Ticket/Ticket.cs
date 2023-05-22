@@ -18,9 +18,9 @@ namespace CapstoneProject.Databases.Schemas.System.Ticket
             OrderTicketDetail = new HashSet<OrderTicketDetail>();
         }
         /// <summary>
-        /// Id Film
+        /// Ten
         /// </summary>
-        //public int FilmId { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// Gia ve
         /// </summary>

@@ -23,6 +23,9 @@ using CapstoneProject.Commons.Schemas;
 using CapstoneProject.Areas.Users.Models.LoginModel.Schemas;
 using System.Reflection;
 using CapstoneProject.Databases.Schemas.System.Users;
+using CapstoneProject.Areas.Users.Models.UserModel;
+using Microsoft.VisualStudio.TextManager.Interop;
+using static CapstoneProject.Commons.CodeMaster.R001;
 
 namespace CapstoneProject.Areas.Users.Models.LoginModel
 {
@@ -43,23 +46,31 @@ namespace CapstoneProject.Areas.Users.Models.LoginModel
         /// <returns>ResponseInfo</returns>
         Task<ResponseInfo> CreateUser(AccountInfo accountInfo);
 
-
+        /// <summary>
+        /// Cập nhật thông tin tài khoản
+        /// </summary>
+        /// <param name="accountInfo"></param>
+        /// <returns></returns>
+        Task<ResponseInfo> UpdateAccount(AccountInfo accountInfo);
     }
-	public class LoginModel : CapstoneProjectModels, ILoginModel
+    public class LoginModel : CapstoneProjectModels, ILoginModel
     {
         private readonly ILogger<LoginModel> _logger;
         private readonly IConfiguration _configuration;
         private string _className = "";
+        private readonly IUsersModel _usersModel;
 
         public LoginModel(
             IConfiguration configuration,
             ILogger<LoginModel> logger,
-            IServiceProvider provider
+            IServiceProvider provider,
+            IUsersModel usersModel
         ) : base(provider)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _className = GetType().Name;
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            _usersModel = usersModel ?? throw new ArgumentNullException(nameof(usersModel));
         }
 
         /// <summary>
@@ -161,9 +172,16 @@ namespace CapstoneProject.Areas.Users.Models.LoginModel
             {
                 _logger.LogInformation($"[{AppState.Instance.RequestId}][{_className}][{method}] Start");
                 string phone = Security.Base64Encode(accountInfo.Phone);
+                //Kiểm tra tên đăng nhập >= 8
+                if(accountInfo.Username.Length < 8)
+                {
+                    response.Code = CodeResponse.HAVE_ERROR;
+                    response.MsgNo = MSG_NO.LENGTH_USERNAME_NOT_OK;
+                    return response;
+                }
                 var userPhone = await _context.Users.Where(x => !x.DelFlag && x.Phone == phone).FirstOrDefaultAsync();
                 // Kiểm tra số điện thoại
-                if(userPhone != null)
+                if (userPhone != null)
                 {
                     response.Code = CodeResponse.HAVE_ERROR;
                     response.MsgNo = MSG_NO.PHONE_IS_USED;
@@ -171,14 +189,14 @@ namespace CapstoneProject.Areas.Users.Models.LoginModel
                 }
                 // Kiểm tra email
                 var userEmail = await _context.Users.Where(x => !x.DelFlag && x.Email == accountInfo.Email).FirstOrDefaultAsync();
-                if(userEmail != null)
+                if (userEmail != null)
                 {
                     response.Code = CodeResponse.HAVE_ERROR;
                     response.MsgNo = MSG_NO.EMAIL_IS_USED;
                     return response;
                 }
                 //Kiểm tra username
-                var userName = await _context.Users.Where(x => !x.DelFlag && x.Email == accountInfo.Username).FirstOrDefaultAsync();
+                var userName = await _context.Users.Where(x => !x.DelFlag && x.Username == accountInfo.Username).FirstOrDefaultAsync();
                 if (userEmail != null)
                 {
                     response.Code = CodeResponse.HAVE_ERROR;
@@ -186,7 +204,7 @@ namespace CapstoneProject.Areas.Users.Models.LoginModel
                     return response;
                 }
 
-                if(!String.IsNullOrEmpty(accountInfo.Gender))
+                if (!String.IsNullOrEmpty(accountInfo.Gender))
                 {
                     if (accountInfo.Gender != "M" && accountInfo.Gender != "O" && accountInfo.Gender != "F")
                     {
@@ -211,9 +229,7 @@ namespace CapstoneProject.Areas.Users.Models.LoginModel
                     Phone = phone,
                     Gender = accountInfo.Gender
                 };
-                // Lấy id lớn nhất tài khoản hiện tại
-                var idMax = await _context.Users.Where(x => !x.DelFlag).OrderByDescending( x => x.Id).Select(x => x.Id).FirstOrDefaultAsync();
-                
+
                 //Thêm user vào database
                 _context.Users.Add(userData);
                 transaction = await _context.Database.BeginTransactionAsync();
@@ -227,8 +243,7 @@ namespace CapstoneProject.Areas.Users.Models.LoginModel
                 };
                 _context.UserRoles.Add(userRole);
                 await _context.SaveChangesAsync();
-
-                await transaction?.CommitAsync();
+                await transaction.CommitAsync();
                 //Thêm token
                 response.Data.Add("Token", Security.Base64Encode(await GetTokenLogin(userData.Id.ToString())));
                 return response;
@@ -238,7 +253,107 @@ namespace CapstoneProject.Areas.Users.Models.LoginModel
                 await _context.RollBack(transaction);
                 throw e;
             }
+            
         }
+
+        public async Task<ResponseInfo> UpdateAccount(AccountInfo accountInfo)
+        {
+
+            IDbContextTransaction transaction = null;
+            string method = GetActualAsyncMethodName();
+            ResponseInfo response = new ResponseInfo();
+            try
+            {
+                // Lấy thông tin tài khoản đang login
+                var userLogin = await _usersModel.GetUserIsLogin();
+                var user = await _context.Users.Where(x => !x.DelFlag && x.Username == userLogin.Username).FirstOrDefaultAsync();
+                // Kiểm tra nhưng thông tin thay đổi
+                string phone = Security.Base64Encode(accountInfo.Phone);
+
+                // Kiểm tra số điện thoại
+                if (accountInfo.Phone != userLogin.Phone)
+                {
+                    var userPhone = await _context.Users.Where(x => !x.DelFlag && x.Phone == phone && x.Id == userLogin.Id).FirstOrDefaultAsync();
+                    // Kiểm tra số điện thoại
+                    if (userPhone != null)
+                    {
+                        response.Code = CodeResponse.HAVE_ERROR;
+                        response.MsgNo = MSG_NO.PHONE_IS_USED;
+                        return response;
+                    }
+                }
+                // Kiểm tra tên đăng nhập
+
+                //Kiểm tra username
+                if(accountInfo.Username != userLogin.Username)
+                {
+                    //Kiểm tra username tồn tại chưa
+                    var userName = await _context.Users.Where(x => !x.DelFlag && x.Username == accountInfo.Username && x.Id == userLogin.Id).FirstOrDefaultAsync();
+                    if (userName != null)
+                    {
+                        response.Code = CodeResponse.HAVE_ERROR;
+                        response.MsgNo = MSG_NO.USERNAME_IS_USED;
+                        return response;
+                    }
+                    //Kiểm tra tên đăng nhập
+                    if (accountInfo.Username.Length < 8)
+                    {
+                        response.Code = CodeResponse.HAVE_ERROR;
+                        response.MsgNo = MSG_NO.LENGTH_USERNAME_NOT_OK;
+                        return response;
+                    }
+                }
+                // Kiểm tra giới tính
+                if(accountInfo.Gender != userLogin.Gender)
+                {
+                    if (!String.IsNullOrEmpty(accountInfo.Gender))
+                    {
+                        if (accountInfo.Gender != "M" && accountInfo.Gender != "O" && accountInfo.Gender != "F")
+                        {
+                            response.Code = CodeResponse.HAVE_ERROR;
+                            response.MsgNo = MSG_NO.GENDER_NOT_EXIST;
+                            return response;
+                        }
+                    }
+                }
+                //string firstSecurityString = Helpers.RenderToken("", 10);
+                //string lastSecurityString = Helpers.RenderToken("", 20).Substring(10, 10);
+
+                // Cập nhật tài khoản
+                user.Username = accountInfo.Username;
+                //user.FirstSecurityString = firstSecurityString;
+                //user.LastSecurityString = lastSecurityString;
+                user.Email = accountInfo.Email;
+                user.Name = accountInfo.Name;
+                user.DateOfBirth = accountInfo.DateOfBirth;
+                user.Phone = phone;
+                user.Gender = accountInfo.Gender;
+                user.Address = accountInfo.Address;
+                user.DistrictId = accountInfo.DistrictId;
+                user.CommuneId = accountInfo.CommuneId;
+                user.ProvinceId = accountInfo.ProvinceId;
+
+                //Xóa các token cũ
+                UserTokenData userToken = await _context.UserTokens.FirstOrDefaultAsync(x => !x.DelFlag && x.UserId == userLogin.Id); // && x.Timeout != null && x.Timeout > now);
+                if (userToken != null)
+                {
+                    userToken.DelFlag = true;
+                }
+                await _context.SaveChangesAsync();
+                transaction = await _context.Database.BeginTransactionAsync();
+                await transaction.CommitAsync();
+                //Thêm token
+                response.Data.Add("Token", await GetTokenLogin(userLogin.Id.ToString()));
+                response.Data.Add("Username", userLogin.Name);
+                return response;
+            }
+            catch (Exception e)
+            {
+                await _context.RollBack(transaction);
+                throw e;
+            }
+        }
+
         private string GenerationJWTCode(int userId, string phone, string username)
         {
             string C_JWT = "Audience";

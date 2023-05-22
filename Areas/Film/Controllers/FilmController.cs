@@ -31,7 +31,7 @@ namespace CapstoneProject.Areas.Film.Controllers
         /// <response code="401">Chưa đăng nhập</response>
         /// <response code="500">Lỗi khi có exception</response>
         [HttpGet()]
-        public async Task<ActionResult> GetListFilm([FromQuery]SearchCondition searchCondition)
+        public async Task<ActionResult> GetListFilm([FromQuery] SearchCondition searchCondition)
         {
             try
             {
@@ -50,19 +50,39 @@ namespace CapstoneProject.Areas.Film.Controllers
         /// </summary>
         /// <response code="401">Chưa đăng nhập</response>
         /// <response code="500">Lỗi khi có exception</response>
-        //[HttpPost()]
-        //public async Task<ActionResult> AddNewFilmData([FromBody] NewFilmData newFilmData)
-        //{
-        //    try
-        //    {
-        //        return Ok(await _filmModel.AddNewFilmData(newFilmData));
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        //await _logService.SaveLogException(e);
-        //        return StatusCode(500);
-        //    }
-        //}
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetDetailFilm([FromRoute] int id)
+        {
+            try
+            {
+                return Ok(await _filmModel.GetDetailFilm(id));
+            }
+            catch (Exception e)
+            {
+                //await _logService.SaveLogException(e);
+                return StatusCode(500);
+            }
+        }
+        /// <summary>
+        /// Lấy chi tiết showtime theo điều kiện id
+        /// <para>Created at: 22/05/2023</para>
+        /// <para>Created by: VinhPhuc</para>
+        /// </summary>
+        /// <response code="401">Chưa đăng nhập</response>
+        /// <response code="500">Lỗi khi có exception</response>
+        [HttpGet("show-time-detail/{id}")]
+        public async Task<ActionResult> GetTicketByShowTime([FromRoute] int id)
+        {
+            try
+            {
+                return Ok(await _filmModel.GetTicketByShowTime(id));
+            }
+            catch (Exception e)
+            {
+                //await _logService.SaveLogException(e);
+                return StatusCode(500);
+            }
+        }
     }
 }
 

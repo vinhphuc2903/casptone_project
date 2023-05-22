@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using CapstoneProject.Databases;
 using CapstoneProject.Databases.Schemas.System.Users;
 using CapstoneProject.Databases.Schemas.System.Employee;
+using CapstoneProject.Databases.Schemas.Setting;
 
 namespace CapstoneProject.Databases.Schemas.System.Orders
 {
@@ -28,6 +29,10 @@ namespace CapstoneProject.Databases.Schemas.System.Orders
         /// Nhan vien ban
         /// </summary>
         public int ? EmployeeId { get; set; }
+        /// <summary>
+        /// Mã chi nhánh
+        /// </summary>
+        public int? BranchId { get; set; }
 
         public DateTimeOffset CreatedAt { set; get; }
 
@@ -48,6 +53,8 @@ namespace CapstoneProject.Databases.Schemas.System.Orders
         public virtual User User { set; get; }
 
         public virtual Employees ? Employee { get; set; }
+
+        public virtual Branch? Branches { set; get; }
 
         public virtual ICollection<OrderFoodDetail> OrderFoodDetails { get; set; }
 

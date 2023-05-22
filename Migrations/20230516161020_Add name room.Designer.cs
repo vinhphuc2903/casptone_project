@@ -4,6 +4,7 @@ using CapstoneProject.Databases;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapstoneProject.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230516161020_Add name room")]
+    partial class Addnameroom
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,265 +24,6 @@ namespace CapstoneProject.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.Setting.Branch", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("CommuneId")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedIp")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<bool>("DelFlag")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("DistrictId")
-                        .IsRequired()
-                        .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("ProvinceId")
-                        .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("nvarchar(2)");
-
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<int?>("UpdatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UpdatedIp")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommuneId");
-
-                    b.HasIndex("DistrictId");
-
-                    b.HasIndex("ProvinceId");
-
-                    b.ToTable("Branches");
-                });
-
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.Setting.Communes", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)")
-                        .HasColumnOrder(1);
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedIp")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<bool>("DelFlag")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("DistrictId")
-                        .IsRequired()
-                        .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)");
-
-                    b.Property<string>("EngName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Level")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<int?>("UpdatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UpdatedIp")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DistrictId");
-
-                    b.ToTable("Communes");
-                });
-
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.Setting.Districts", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)")
-                        .HasColumnOrder(1);
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedIp")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<bool>("DelFlag")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("EngName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Level")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("ProvinceId")
-                        .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("nvarchar(2)");
-
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<int?>("UpdatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UpdatedIp")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProvinceId");
-
-                    b.ToTable("Districts");
-                });
-
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.Setting.Provinces", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(2)
-                        .HasColumnType("nvarchar(2)")
-                        .HasColumnOrder(1);
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedIp")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<bool>("DelFlag")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("EngName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Level")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("RegionId")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
-
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<int?>("UpdatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UpdatedIp")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Provinces");
-                });
 
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.Setting.Role", b =>
                 {
@@ -374,9 +118,6 @@ namespace CapstoneProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("BranchId")
-                        .HasColumnType("int");
-
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("datetimeoffset");
 
@@ -414,8 +155,6 @@ namespace CapstoneProject.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BranchId");
 
                     b.ToTable("CinemaRooms");
                 });
@@ -478,9 +217,6 @@ namespace CapstoneProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("BranchId")
-                        .HasColumnType("int");
-
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("datetimeoffset");
 
@@ -532,8 +268,6 @@ namespace CapstoneProject.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BranchId");
 
                     b.HasIndex("UserId")
                         .IsUnique()
@@ -595,12 +329,6 @@ namespace CapstoneProject.Migrations
 
                     b.Property<string>("Language")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MaxNumberOfScreen")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MinNumberOfScreen")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -881,9 +609,6 @@ namespace CapstoneProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("BranchId")
-                        .HasColumnType("int");
-
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("datetimeoffset");
 
@@ -920,8 +645,6 @@ namespace CapstoneProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchId");
-
                     b.HasIndex("EmployeeId");
 
                     b.HasIndex("UserId");
@@ -937,9 +660,6 @@ namespace CapstoneProject.Migrations
                         .HasColumnOrder(1);
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("BranchId")
-                        .HasColumnType("int");
 
                     b.Property<int>("CinemaRoomId")
                         .HasColumnType("int");
@@ -1005,8 +725,6 @@ namespace CapstoneProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchId");
-
                     b.HasIndex("CinemaRoomId");
 
                     b.HasIndex("FilmId");
@@ -1036,10 +754,6 @@ namespace CapstoneProject.Migrations
 
                     b.Property<bool>("DelFlag")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
@@ -1076,13 +790,6 @@ namespace CapstoneProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CommuneId")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("datetimeoffset");
 
@@ -1099,10 +806,6 @@ namespace CapstoneProject.Migrations
 
                     b.Property<bool>("DelFlag")
                         .HasColumnType("bit");
-
-                    b.Property<string>("DistrictId")
-                        .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -1146,9 +849,6 @@ namespace CapstoneProject.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("ProvinceId")
-                        .HasColumnType("nvarchar(2)");
-
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("datetimeoffset");
 
@@ -1168,12 +868,6 @@ namespace CapstoneProject.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CommuneId");
-
-                    b.HasIndex("DistrictId");
-
-                    b.HasIndex("ProvinceId");
 
                     b.HasIndex("UserPointId")
                         .IsUnique()
@@ -1352,65 +1046,6 @@ namespace CapstoneProject.Migrations
                     b.ToTable("UserTokens");
                 });
 
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.Setting.Branch", b =>
-                {
-                    b.HasOne("CapstoneProject.Databases.Schemas.Setting.Communes", "Commune")
-                        .WithMany("Branches")
-                        .HasForeignKey("CommuneId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("CapstoneProject.Databases.Schemas.Setting.Districts", "District")
-                        .WithMany("Branches")
-                        .HasForeignKey("DistrictId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("CapstoneProject.Databases.Schemas.Setting.Provinces", "Province")
-                        .WithMany("Branches")
-                        .HasForeignKey("ProvinceId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Commune");
-
-                    b.Navigation("District");
-
-                    b.Navigation("Province");
-                });
-
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.Setting.Communes", b =>
-                {
-                    b.HasOne("CapstoneProject.Databases.Schemas.Setting.Districts", "Districts")
-                        .WithMany("Communes")
-                        .HasForeignKey("DistrictId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Districts");
-                });
-
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.Setting.Districts", b =>
-                {
-                    b.HasOne("CapstoneProject.Databases.Schemas.Setting.Provinces", "Provinces")
-                        .WithMany("Districts")
-                        .HasForeignKey("ProvinceId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Provinces");
-                });
-
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.CinemaRoom.CinemaRooms", b =>
-                {
-                    b.HasOne("CapstoneProject.Databases.Schemas.Setting.Branch", "Branches")
-                        .WithMany("CinemaRoom")
-                        .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("Branches");
-                });
-
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.CinemaRoom.Seat", b =>
                 {
                     b.HasOne("CapstoneProject.Databases.Schemas.System.CinemaRoom.CinemaRooms", "CinemaRoom")
@@ -1424,16 +1059,9 @@ namespace CapstoneProject.Migrations
 
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Employee.Employees", b =>
                 {
-                    b.HasOne("CapstoneProject.Databases.Schemas.Setting.Branch", "Branches")
-                        .WithMany("Employee")
-                        .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
                     b.HasOne("CapstoneProject.Databases.Schemas.System.Users.User", "User")
                         .WithOne("Employees")
                         .HasForeignKey("CapstoneProject.Databases.Schemas.System.Employee.Employees", "UserId");
-
-                    b.Navigation("Branches");
 
                     b.Navigation("User");
                 });
@@ -1508,11 +1136,6 @@ namespace CapstoneProject.Migrations
 
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Orders.Orders", b =>
                 {
-                    b.HasOne("CapstoneProject.Databases.Schemas.Setting.Branch", "Branches")
-                        .WithMany("Orders")
-                        .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
                     b.HasOne("CapstoneProject.Databases.Schemas.System.Employee.Employees", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId");
@@ -1523,8 +1146,6 @@ namespace CapstoneProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Branches");
-
                     b.Navigation("Employee");
 
                     b.Navigation("User");
@@ -1532,11 +1153,6 @@ namespace CapstoneProject.Migrations
 
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Ticket.ShowTime", b =>
                 {
-                    b.HasOne("CapstoneProject.Databases.Schemas.Setting.Branch", "Branches")
-                        .WithMany("ShowTimes")
-                        .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
                     b.HasOne("CapstoneProject.Databases.Schemas.System.CinemaRoom.CinemaRooms", "CinemaRooms")
                         .WithMany("Showtimes")
                         .HasForeignKey("CinemaRoomId")
@@ -1548,8 +1164,6 @@ namespace CapstoneProject.Migrations
                         .HasForeignKey("FilmId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("Branches");
 
                     b.Navigation("CinemaRooms");
 
@@ -1569,30 +1183,9 @@ namespace CapstoneProject.Migrations
 
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Users.User", b =>
                 {
-                    b.HasOne("CapstoneProject.Databases.Schemas.Setting.Communes", "Communes")
-                        .WithMany("User")
-                        .HasForeignKey("CommuneId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("CapstoneProject.Databases.Schemas.Setting.Districts", "Districts")
-                        .WithMany("User")
-                        .HasForeignKey("DistrictId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("CapstoneProject.Databases.Schemas.Setting.Provinces", "Provinces")
-                        .WithMany("User")
-                        .HasForeignKey("ProvinceId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
                     b.HasOne("CapstoneProject.Databases.Schemas.System.Users.UserPoint", "UserPoint")
                         .WithOne("User")
                         .HasForeignKey("CapstoneProject.Databases.Schemas.System.Users.User", "UserPointId");
-
-                    b.Navigation("Communes");
-
-                    b.Navigation("Districts");
-
-                    b.Navigation("Provinces");
 
                     b.Navigation("UserPoint");
                 });
@@ -1623,42 +1216,6 @@ namespace CapstoneProject.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.Setting.Branch", b =>
-                {
-                    b.Navigation("CinemaRoom");
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("Orders");
-
-                    b.Navigation("ShowTimes");
-                });
-
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.Setting.Communes", b =>
-                {
-                    b.Navigation("Branches");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.Setting.Districts", b =>
-                {
-                    b.Navigation("Branches");
-
-                    b.Navigation("Communes");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.Setting.Provinces", b =>
-                {
-                    b.Navigation("Branches");
-
-                    b.Navigation("Districts");
 
                     b.Navigation("User");
                 });

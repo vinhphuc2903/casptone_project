@@ -26,7 +26,7 @@ namespace CapstoneProject.Areas.Film.Controllers
             _filmAdminModel = filmAdminModels ?? throw new ArgumentNullException(nameof(filmAdminModels));
         }
        
-        /// <summary>
+        /// <summary>x
         /// Thêm film mới
         /// <para>Created at: 14/05/2023</para>
         /// <para>Created by: VinhPhuc</para>
