@@ -40,5 +40,15 @@ namespace CapstoneProject.Commons.CodeMaster
             public static readonly string CODE = "CSKH";
             public static readonly string NAME = "Chăm sóc khách hàng";
         }
+
+        /// <summary>
+        /// EMP : Role Employee<br/>
+        /// </summary>
+        public static class EMP
+        {
+            public static readonly string CODE = "EMP";
+            public static readonly string NAME = "Emp";
+        }
+
     }
 }

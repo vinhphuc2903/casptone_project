@@ -120,7 +120,6 @@ namespace CapstoneProject.Databases.Schemas.System.Users
 
         public virtual Provinces Provinces { set; get; }
 
-
         public virtual ICollection<UserToken> Tokens { set; get; }
 
         public virtual ICollection<UserRole> Roles { set; get; }

@@ -44,7 +44,7 @@ namespace CapstoneProject.Areas.Film.Controllers
             }
         }
         /// <summary>
-        /// Thêm film mới
+        /// Lấy chi tiết film
         /// <para>Created at: 14/05/2023</para>
         /// <para>Created by: VinhPhuc</para>
         /// </summary>
@@ -76,6 +76,26 @@ namespace CapstoneProject.Areas.Film.Controllers
             try
             {
                 return Ok(await _filmModel.GetTicketByShowTime(id));
+            }
+            catch (Exception e)
+            {
+                //await _logService.SaveLogException(e);
+                return StatusCode(500);
+            }
+        }
+        /// <summary>
+        /// Lấy chi tiết showtime theo điều kiện id
+        /// <para>Created at: 22/05/2023</para>
+        /// <para>Created by: VinhPhuc</para>
+        /// </summary>
+        /// <response code="401">Chưa đăng nhập</response>
+        /// <response code="500">Lỗi khi có exception</response>
+        [HttpGet("typefilms")]
+        public async Task<ActionResult> GetListTypeFilm()
+        {
+            try
+            {
+                return Ok(await _filmModel.GetListTypeFilm());
             }
             catch (Exception e)
             {

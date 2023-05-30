@@ -1,5 +1,4 @@
 ﻿using System;
-using CapstoneProject.Areas.Film.Models.FilmModels.Schemas;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using CapstoneProject.Areas.Employee.Models.Schemas;
@@ -14,31 +13,36 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using CapstoneProject.Areas.Employee.Models;
-using CapstoneProject.Databases.Schemas.System.Film;
 using CapstoneProject.Commons.Schemas;
-using ShowTimeData = CapstoneProject.Databases.Schemas.System.Ticket.ShowTime;
+using ShowTimeDb = CapstoneProject.Databases.Schemas.System.Ticket.ShowTime;
 using TicketData = CapstoneProject.Databases.Schemas.System.Ticket.Tickets;
 using TypeFilmData = CapstoneProject.Databases.Schemas.System.Film.TypeFilmDetail;
-using CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Drawing.Printing;
 using CapstoneProject.Commons;
 using CapstoneProject.Areas.ShowTime.Models.Schemas;
 using CapstoneProject.Commons.Enum;
 using CapstoneProject.Databases.Schemas.System.Ticket;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CapstoneProject.Areas.ShowTime.Models
 {
-	public interface IShowtimeModels
-	{
+    public interface IShowtimeModels
+    {
+        /// <summary>
+        /// Lấy danh sách phim theo điều kiện tìm kiếm
+        /// </summary>
+        /// <param name="searchCondition"></param>
+        /// <returns></returns>
+        Task<ListShowTime> GetListShowtime(SearchCondition searchCondition);
         /// <summary>
         /// Thêm film
         /// </summary>
         /// <param name="showTimeInput"></param>
         /// <returns></returns>
-		Task<ResponseInfo> AddShowTime(ShowTimeInput showTimeInput);
-	}
-	public class ShowtimeModels : CapstoneProjectModels, IShowtimeModels
+        Task<ResponseInfo> AddShowTime(ShowTimeInput showTimeInput);
+    }
+    public class ShowtimeModels : CapstoneProjectModels, IShowtimeModels
     {
         private readonly ILogger<ShowtimeModels> _logger;
         private readonly IConfiguration _configuration;
@@ -60,94 +64,127 @@ namespace CapstoneProject.Areas.ShowTime.Models
             ResponseInfo responseInfo = new ResponseInfo();
             try
             {
-                // Tạo đối tượng DateTime với giờ 0:00:00
-                DateTime startOfDay = new DateTime(showTimeInput.DateShow.Year, showTimeInput.DateShow.Month, showTimeInput.DateShow.Day, 0, 0, 0);
-                // Tạo đối tượng DateTime với giờ 23:59:59
-                DateTime endOfDay = new DateTime(showTimeInput.DateShow.Year, showTimeInput.DateShow.Month, showTimeInput.DateShow.Day, 23, 59, 59);
-                //Suất chiếu từ
-                int timeFrom = showTimeInput.TimeFrom.Minute + showTimeInput.TimeFrom.Hour * 60;
-                //Suất chiếu đến
-                int timeTo = showTimeInput.TimeTo.Minute + showTimeInput.TimeTo.Hour * 60;
-                //Kiểm tra có xuất chiếu chưa
-                var showTime = await _context.ShowTime
-                    .Where(x => !x.DelFlag
-                        && x.CinemaRoomId == showTimeInput.IdRoom
-                        && x.DateShow <= endOfDay
-                        && x.DateShow >= startOfDay
-                        && ((x.ToHour * 60 + x.ToMinus >= timeFrom && x.ToHour * 60 + x.ToMinus <= timeTo)
-                        || (x.FromHour * 60 + x.FromMinus >= timeFrom && x.FromHour * 60 + x.FromMinus <= timeFrom))).FirstOrDefaultAsync();
-                if(showTime != null)
-                {
-                    responseInfo.Code = CodeResponse.HAVE_ERROR;
-                    responseInfo.MsgNo = MSG_NO.SHOWTIME_IS_EXIST;
-                    responseInfo.Data.Add("Name", showTime.Name);
-                    responseInfo.Data.Add("Code", showTime.Code);
-                    return responseInfo;
-                }
-                // Kiểm tra film có dài hơn suất chiếu k
-                int totalTimeFilm = await _context.Films
-                    .Where(x => !x.DelFlag && x.Id == showTimeInput.IdFilm)
-                    .Select(x => x.Time)
-                    .FirstOrDefaultAsync();
-                if(totalTimeFilm > timeTo - timeFrom + 10)
-                {
-                    responseInfo.Code = CodeResponse.HAVE_ERROR;
-                    responseInfo.MsgNo = MSG_NO.TIME_FILM_LONGER_THAN_SHOW;
-                    return responseInfo;
-                }    
-                //Lấy tổng số ghế theo phòng
-                var listSeat = await _context.Seats
-                    .Where(x => !x.DelFlag && x.CinemaRoomId == showTimeInput.IdRoom)
-                    .ToListAsync();
                 
-                ShowTimeData showtimeData = new ShowTimeData()
+                for (DateTime dateInput = showTimeInput.DateFrom.Date; dateInput.Date <= showTimeInput.DateTo.Date; dateInput = dateInput.AddDays(1))
                 {
-                    Name = showTimeInput.Name,
-                    Code = showTimeInput.Code,
-                    FilmId = showTimeInput.IdFilm,
-                    CinemaRoomId = showTimeInput.IdRoom,
-                    Total = listSeat.Count(),
-                    TotalSold = 0,
-                    TotalRemain = listSeat.Count(),
-                    DateShow = showTimeInput.DateShow,
-                    FromHour = showTimeInput.TimeFrom.Hour,
-                    ToHour = showTimeInput.TimeTo.Hour,
-                    FromMinus = showTimeInput.TimeFrom.Minute,
-                    ToMinus = showTimeInput.TimeTo.Minute,
-                };
-                await _context.ShowTime.AddAsync(showtimeData);
-                await _context.SaveChangesAsync();
-                List<TicketData> listTicket = new List<TicketData>();
-                foreach(var seat in listSeat)
-                {
-                    int surcharge = 0;
-                    if (showTimeInput.DateShow.DayOfWeek == DayOfWeek.Friday || showTimeInput.DateShow.DayOfWeek == DayOfWeek.Saturday || showTimeInput.DateShow.DayOfWeek == DayOfWeek.Sunday)
+                    //Suất chiếu từ
+                    int timeFromShow = showTimeInput.TimeFrom.Minute + showTimeInput.TimeFrom.Hour * 60 + 420;
+                    //Tổng thời gian phim chiếu
+                    int totalTimeFilm = await _context.Films
+                        .Where(x => !x.DelFlag && x.Id == showTimeInput.IdFilm)
+                        .Select(x => x.Time)
+                        .FirstOrDefaultAsync();
+                    //Suất cuối cùng từ
+                    int timeToShow = timeFromShow + (showTimeInput.MinOff + totalTimeFilm) * (showTimeInput.CountShow - 1);
+                    //Kiểm tra thời gian bắt đầu chiếu > 8h < 1h ngày hôm sau
+                    if (timeFromShow >= 8 * 60 && timeToShow <= 25 * 60)
                     {
-                        surcharge = 15000;
-                    }
-                    switch (seat.Type)
-                    {
-                        case 20:
-                            surcharge += surcharge + 20000;
-                            break;
-                        case 30:
-                            surcharge += surcharge * 2 + 45000;
-                            break;
+                        responseInfo.Code = CodeResponse.HAVE_ERROR;
+                        responseInfo.MsgNo = MSG_NO.TIME_SHOW_ERROR;
+                        return responseInfo;    
                     }
 
-                    TicketData tickets = new TicketData()
+                    
+                    for (int count = 0; count < showTimeInput.CountShow; count++)
                     {
-                        Price = 45000 * surcharge,
-                        SeatId = seat.Id,
-                        ShowtimeId = showtimeData.Id,
-                        Name = seat.SeatCode
-                    };
-                    listTicket.Add(tickets);
+                        // Tạo đối tượng DateTime với giờ 0:00:00
+                        DateTime startOfDay = new DateTime(dateInput.Year, dateInput.Month, dateInput.Day, 0, 0, 0);
+                        // Tạo đối tượng DateTime với giờ 23:59:59
+                        DateTime endOfDay = new DateTime(dateInput.Year, dateInput.Month, dateInput.Day, 23, 59, 59);
+                       
+                        //Suất chiếu từ
+                        int timeFrom = timeFromShow + count*(totalTimeFilm + showTimeInput.MinOff);
+                        //Suất chiếu đến
+                        int timeTo = timeFrom + totalTimeFilm + showTimeInput.MinOff;
+                        //Kiểm tra có xuất chiếu chưa
+                        var showTime = await _context.ShowTime
+                            .Where(x => !x.DelFlag
+                                && x.CinemaRoomId == showTimeInput.IdRoom
+                                && x.DateShow <= endOfDay
+                                && x.FilmId == showTimeInput.IdFilm
+                                && x.DateShow >= startOfDay
+                                && ((x.FromHour * 60 + x.FromMinus <= timeFrom && x.ToHour * 60 + x.ToMinus > timeFrom)
+                                || (x.FromHour * 60 + x.FromMinus < timeTo && x.ToHour * 60 + x.ToMinus >= timeTo))).FirstOrDefaultAsync();
+                        if (showTime != null)
+                        {
+                            responseInfo.Code = CodeResponse.HAVE_ERROR;
+                            responseInfo.MsgNo = MSG_NO.SHOWTIME_IS_EXIST;
+                            responseInfo.Data.Add("Name", showTime.Name);
+                            responseInfo.Data.Add("Code", showTime.Code);
+                            return responseInfo;
+                        }
+                        //if (totalTimeFilm > timeTo - timeFrom + 10)
+                        //{
+                        //    responseInfo.Code = CodeResponse.HAVE_ERROR;
+                        //    responseInfo.MsgNo = MSG_NO.TIME_FILM_LONGER_THAN_SHOW;
+                        //    return responseInfo;
+                        //}
+                        //Lấy tổng số ghế theo phòng
+                        var listSeat = await _context.Seats
+                            .Where(x => !x.DelFlag && x.CinemaRoomId == showTimeInput.IdRoom)
+                            .ToListAsync();
+                        //Lay ten phong
+                        string nameRoom = await _context.CinemaRooms
+                            .Where(x => !x.DelFlag && x.Id == showTimeInput.IdRoom)
+                            .Select( x => x.Name)
+                            .FirstOrDefaultAsync();
+                        //Tên suất chiếu
+                        string showName = nameRoom + "/" + showTimeInput.IdFilm.ToString() + (timeFrom /60).ToString();
+                        //Mã xuất chiếu
+                        string showCode = nameRoom + "/" + showTimeInput.IdFilm.ToString() + "/" + timeFrom.ToString() + "/" + timeTo.ToString();
+                        ShowTimeDb showtimeData = new ShowTimeDb()
+                        {
+                            Name = showName,
+                            Code = showCode,
+                            FilmId = showTimeInput.IdFilm,
+                            CinemaRoomId = showTimeInput.IdRoom,
+                            Total = listSeat.Count(),
+                            TotalSold = 0,
+                            TotalRemain = listSeat.Count(),
+                            BranchId = showTimeInput.BranchId,
+                            DateShow = dateInput,
+                            FromHour = timeFrom / 60,
+                            ToHour = timeTo / 60,
+                            FromMinus = timeFrom % 60,
+                            ToMinus = timeTo % 60,
+                        };
+                        await _context.ShowTime.AddAsync(showtimeData);
+                        await _context.SaveChangesAsync();
+                        List<TicketData> listTicket = new List<TicketData>();
+                        foreach (var seat in listSeat)
+                        {
+                            int surcharge = 0;
+                            if (dateInput.DayOfWeek == DayOfWeek.Friday || dateInput.DayOfWeek == DayOfWeek.Saturday || dateInput.DayOfWeek == DayOfWeek.Sunday)
+                            {
+                                surcharge = 15000;
+                            }
+                            switch (seat.Type)
+                            {
+                                case 20:
+                                    surcharge += surcharge + 20000;
+                                    break;
+                                case 30:
+                                    surcharge += surcharge * 2 + 45000;
+                                    break;
+                            }
+
+                            TicketData tickets = new TicketData()
+                            {
+                                Price = 45000 * surcharge,
+                                SeatId = seat.Id,
+                                ShowtimeId = showtimeData.Id,
+                                Name = seat.SeatCode,
+                                Type = "10"
+                            };
+                            listTicket.Add(tickets);
+                        }
+                        await _context.Ticket.AddRangeAsync(listTicket);
+                        await _context.SaveChangesAsync();
+                        transaction = await _context.Database.BeginTransactionAsync();
+                        await transaction?.CommitAsync();
+                    }
                 }
-                await _context.Ticket.AddRangeAsync(listTicket);
-                await _context.SaveChangesAsync();
-                transaction = await _context.Database.BeginTransactionAsync();
-                await transaction?.CommitAsync();
+                
                 return responseInfo;
             }
             catch (Exception ex)
@@ -156,7 +193,58 @@ namespace CapstoneProject.Areas.ShowTime.Models
                 throw ex;
             }
         }
-
+        public async Task<ListShowTime> GetListShowtime(SearchCondition searchCondition)
+        {
+            string method = GetActualAsyncMethodName();
+            IDbContextTransaction transaction = null;
+            ResponseInfo responseInfo = new ResponseInfo();
+            try
+            {
+                ListShowTime listShowTime = new ListShowTime();
+                var showTimeDatas = _context.ShowTime
+                    .Include(x => x.CinemaRooms)
+                    .Where(x => !x.DelFlag
+                        && (String.IsNullOrEmpty(searchCondition.BranchId.ToString())
+                        || x.BranchId == searchCondition.BranchId)
+                        && (String.IsNullOrEmpty(searchCondition.FilmName)
+                        || EF.Functions.Collate(x.Film.Name.Replace(" ", ""), "Latin1_General_CI_AI").Contains(EF.Functions.Collate(searchCondition.FilmName.Replace(" ", ""), "Latin1_General_CI_AI")))
+                        && (searchCondition.DateFrom == null
+                        || x.DateShow >= searchCondition.DateFrom.Value.Date)
+                        && (searchCondition.DateTo == null
+                        || x.DateShow.Date <= searchCondition.DateTo.Value.Date)
+                        && (String.IsNullOrEmpty(searchCondition.CinemeRoomId.ToString())
+                        || x.CinemaRoomId == searchCondition.CinemeRoomId)
+                    )
+                    .Select(x => new ShowTimeData()
+                    {   
+                        DateShow = x.DateShow,
+                        BranchId = x.BranchId,
+                        BranchName = x.Branches.Name, 
+                        CinemeRoom = x.CinemaRooms.Name,
+                        FilmName = x.Film.Name,
+                        ShowtimeName = x.Name,
+                        ShowtimeCode = x.Code,
+                        FromHour = x.FromHour,
+                        ToHour = x.ToHour,
+                        FromMinus = x.FromMinus,
+                        ToMinus = x.ToMinus,
+                        TotalTicketSold = x.TotalSold,
+                        TotalTicketRemain = x.TotalRemain,
+                        TotalTicket = x.Total,
+                    });
+                var totalCount = showTimeDatas.Count();
+                listShowTime.Paging = new Paging(totalCount, searchCondition.CurrentPage, searchCondition.PageSize);
+                listShowTime.showTimeDatas = await showTimeDatas.Skip((searchCondition.CurrentPage - 1) * searchCondition.PageSize)
+                                                .Take(searchCondition.PageSize)
+                                                .ToListAsync();
+                return listShowTime;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"Get List Film Error: {ex}");
+                throw ex;
+            }
+        }
     }
 }
 

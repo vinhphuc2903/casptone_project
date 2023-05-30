@@ -130,6 +130,10 @@ namespace CapstoneProject.Databases
         /// Table Branches
         /// </summary>
         public virtual DbSet<Branch> Branches { get; set; }
+        /// <summary>
+        /// Table Branches
+        /// </summary>
+        public virtual DbSet<Position> Positions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -199,6 +203,8 @@ namespace CapstoneProject.Databases
             modelBuilder.Entity<Branch>()
                 .HasKey(e => e.Id);
 
+            modelBuilder.Entity<Position>()
+                .HasKey(e => e.Id);
 
             // Setting relationship
 
@@ -207,7 +213,6 @@ namespace CapstoneProject.Databases
                 .HasOne(e => e.User)
                 .WithOne(e => e.Employees)
                 .HasForeignKey<User>(c => c.EmployeeId);
-
             //User
             modelBuilder.Entity<User>()
                 .HasOne(e => e.Employees)
@@ -394,6 +399,12 @@ namespace CapstoneProject.Databases
                 .WithOne(e => e.Branches)
                 .HasForeignKey(e => e.BranchId)
                 .OnDelete(DeleteBehavior.NoAction);
+            //Position
+            modelBuilder.Entity<Position>()
+                .HasMany(e => e.Employees)
+                .WithOne(e => e.Positions)
+                .HasForeignKey(e => e.PositionId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
         public DbConnection GetConnection()
@@ -427,7 +438,7 @@ namespace CapstoneProject.Databases
         /// <summary>
         /// Ghi đè phương thức lưu vào DB để lưu thêm các dữ liệu mặc định cần thiết
         /// <para>Created at: 10/07/2023</para>
-        /// <para>Created by: QuyPN</para>
+        /// <para>Created by: VinhPhuc</para>
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns>

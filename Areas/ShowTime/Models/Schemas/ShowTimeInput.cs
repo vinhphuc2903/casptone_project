@@ -9,15 +9,19 @@ namespace CapstoneProject.Areas.ShowTime.Models.Schemas
         /// <summary>
         /// Ten xuat chieu
         /// </summary>
-        public string Name { get; set; }
+        //public string Name { get; set; }
         /// <summary>
         /// Ma xuat chieu
         /// </summary>
-        public string Code { get; set; }
+        //public string Code { get; set; }
         /// <summary>
         /// Từ ngày
         /// </summary>
-        public DateTime DateShow { get; set; }
+        public DateTime DateFrom { get; set; }
+		/// <summary>
+		/// Đến ngày
+		/// </summary>
+		public DateTime DateTo { get; set; }
 		/// <summary>
 		/// Thời gian bắt đầu
 		/// </summary>
@@ -27,6 +31,14 @@ namespace CapstoneProject.Areas.ShowTime.Models.Schemas
 		/// </summary>
 		public DateTime TimeTo { get; set; }
 		/// <summary>
+		/// Số xuất chiếu
+		/// </summary>
+		public int CountShow { get; set; }
+		/// <summary>
+		/// Số giờ nghỉ của xuất chiếu
+		/// </summary>
+		public int MinOff { get; set; }
+		/// <summary>
 		/// Film chiếu
 		/// </summary>
 		public int IdFilm { get; set; }
@@ -34,6 +46,7 @@ namespace CapstoneProject.Areas.ShowTime.Models.Schemas
 		/// Mã phòng chiếu
 		/// </summary>
 		public int IdRoom { get; set; }
-	}
+        public int BranchId { get; set; }
+    }
 }
 

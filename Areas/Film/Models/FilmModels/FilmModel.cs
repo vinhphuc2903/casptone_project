@@ -18,11 +18,11 @@ using CapstoneProject.Databases.Schemas.System.Film;
 using CapstoneProject.Commons.Schemas;
 using FilmData = CapstoneProject.Databases.Schemas.System.Film.Films;
 using TypeFilmData = CapstoneProject.Databases.Schemas.System.Film.TypeFilmDetail;
+using TypeFilm = CapstoneProject.Databases.Schemas.System.Film.TypeFilm;
 using CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Drawing.Printing;
 using CapstoneProject.Commons;
-using CapstoneProject.Areas.ShowTime.Models.Schemas;
 using CapstoneProject.Areas.Users.Models.UserModel.Schemas;
 using CapstoneProject.Databases.Schemas.System.Ticket;
 using CapstoneProject.Databases.Schemas.System.CinemaRoom;
@@ -31,6 +31,11 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
 {
     public interface IFilmModel
     {
+        /// <summary>
+        /// Lấy danh sách Film
+        /// </summary>
+        /// <returns></returns>
+        Task<List<TypeFilm>> GetListTypeFilm();
         /// <summary>
         /// Lấy danh sách film theo điều kiện tìm kiem
         /// </summary>
@@ -66,6 +71,21 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
             _className = GetType().Name;
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
+        public async Task<List<TypeFilm>> GetListTypeFilm()
+        {
+            string method = GetActualAsyncMethodName();
+            IDbContextTransaction transaction = null;
+            try
+            {
+                List<TypeFilm> list = await _context.TypeFilms.Where(x => !x.DelFlag).ToListAsync();
+                return list;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"Get List Film Error: {ex}");
+                throw ex;
+            }
+        }
         public async Task<ListFilms> GetListFilms(SearchCondition searchCondition)
         {
             string method = GetActualAsyncMethodName();
@@ -81,24 +101,32 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
                 var listFilm = _context.Films.Where(x => !x.DelFlag
                                                         && (String.IsNullOrEmpty(searchCondition.TypeFilm.ToString())
                                                         || x.TypeFilmDetail.Any(y => y.TypeFilmId == searchCondition.TypeFilm))
+                                                        && (String.IsNullOrEmpty(searchCondition.Name)
+                                                        || EF.Functions.Collate(x.Name.Replace(" ", ""), "Latin1_General_CI_AI").Contains(EF.Functions.Collate(searchCondition.Name.Replace(" ", ""), "Latin1_General_CI_AI")))
+                                                        && (searchCondition.DateStart == null
+                                                        || x.DateStart.Date >= searchCondition.DateStart.Value.Date)
+                                                        && (searchCondition.DateEnd == null
+                                                        || x.DateEnd.Value.Date <= searchCondition.DateEnd.Value.Date)
+                                                        && (String.IsNullOrEmpty(searchCondition.Status)
+                                                        || x.Status == searchCondition.Status)
                                                     )
-                                                        .Select(x => new FilmInfo()
-                                                        {
-                                                            Id = x.Id,
-                                                            Name = x.Name,
-                                                            Actor = x.Actor,
-                                                            Director = x.Director,
-                                                            AgeLimit = x.AgeLimit,
-                                                            Time = x.Time,
-                                                            Introduce = x.Introduce,
-                                                            TrailerLink = x.TrailerLink,
-                                                            Country = x.Country,
-                                                            BackgroundImage = x.BackgroundImage,
-                                                            DateStart = x.DateStart,
-                                                            DateEnd = x.DateEnd,
-                                                            Status = x.Status,
-                                                            Language = x.Language
-                                                        });
+                                                    .Select(x => new FilmInfo()
+                                                    {
+                                                        Id = x.Id,
+                                                        Name = x.Name,
+                                                        Actor = x.Actor,
+                                                        Director = x.Director,
+                                                        AgeLimit = x.AgeLimit,
+                                                        Time = x.Time,
+                                                        Introduce = x.Introduce,
+                                                        TrailerLink = x.TrailerLink,
+                                                        Country = x.Country,
+                                                        BackgroundImage = x.BackgroundImage,
+                                                        DateStart = x.DateStart,
+                                                        DateEnd = x.DateEnd,
+                                                        Status = x.Status,
+                                                        Language = x.Language
+                                                    });
                 if (listFilm == null)
                 {
                     return listFilms;
@@ -131,7 +159,7 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
             try
             {
                 DateTime startOfDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
-                DateTime endOfDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 3, 23, 59, 59);
+                DateTime endOfDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59).AddDays(3);
                 FilmDetail filmDetails = new FilmDetail();
                 int timeFrom = DateTime.Now.Minute + DateTime.Now.Hour * 60;
                 filmDetails.ListShowtimeInfo = await _context.Branches.Where(x => !x.DelFlag)
@@ -165,17 +193,16 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
                         .Select(g => g.First())
                         .ToListAsync();
                     // Lay chi tiet xuat chieu theo tung ngay
+                    int index = 0;
                     foreach (var showTime in showtimeBranch.ListShowTimeData)
                     {
                         DateTime startDateShow = new DateTime(showTime.DateShow.Year, showTime.DateShow.Month, showTime.DateShow.Day, 0, 0, 0);
-                        DateTime endDateShow = new DateTime(showTime.DateShow.Year, showTime.DateShow.Month, showTime.DateShow.Day + 3, 23, 59, 59);
                         int now = DateTime.Now.Hour * 60 + DateTime.Now.Minute;
                         showTime.ShowTimeDetailDatas = await _context.ShowTime
                             .Where(x => !x.DelFlag
                                 && x.FilmId == filmId
-                                && x.DateShow >= startDateShow
-                                && x.DateShow <= endDateShow
-                                && (x.FromHour * 60 + x.FromMinus) > now
+                                && x.DateShow.Date == startDateShow.Date
+                                && ((x.FromHour * 60 + x.FromMinus) > now || index != 0)
                             )
                             .OrderBy(g => g.DateShow) // Sắp xếp tăng dần theo ngày
                             .Select(x => new ShowTimeDetailData()
@@ -188,6 +215,7 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
                                 FromMinus = x.FromMinus,
                                 ToMinus = x.ToMinus,
                             }).ToListAsync();
+                        index++;
                     }
                 }
                 filmDetails.FilmInfos = await _context.Films
@@ -271,10 +299,12 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
                     {
                         Id =x.Id,
                         Name = x.Name,
+                        Type = x.Type,
                         Price = x.Price,
                         SeatId = x.SeatId,
                         ShowtimeId = x.ShowtimeId,
-                        SeatName = x.Seat.SeatCode
+                        SeatName = x.Seat.SeatCode,
+                        TypeSeat = x.Seat.Type
                     })
                     .ToListAsync();
                 showTimeDetail.RoomDetail = await _context.CinemaRooms

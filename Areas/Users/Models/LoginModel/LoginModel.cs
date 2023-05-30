@@ -9,6 +9,7 @@ using CapstoneProject.Areas.Users.Models.UserModel.Schemas;
 using UserData = CapstoneProject.Databases.Schemas.System.Users.User;
 using UserRoleData = CapstoneProject.Databases.Schemas.System.Users.UserRole;
 using UserTokenData = CapstoneProject.Databases.Schemas.System.Users.UserToken;
+using UserPointData = CapstoneProject.Databases.Schemas.System.Users.UserPoint;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -52,6 +53,8 @@ namespace CapstoneProject.Areas.Users.Models.LoginModel
         /// <param name="accountInfo"></param>
         /// <returns></returns>
         Task<ResponseInfo> UpdateAccount(AccountInfo accountInfo);
+
+        Task<string> GetTokenLogin(string userId);
     }
     public class LoginModel : CapstoneProjectModels, ILoginModel
     {
@@ -77,7 +80,7 @@ namespace CapstoneProject.Areas.Users.Models.LoginModel
         /// Lấy token của tài khoản đang đăng nhập
         /// </summary>
         /// <returns></returns>
-        private async Task<string> GetTokenLogin(string userId)
+        public async Task<string> GetTokenLogin(string userId)
         {
             IDbContextTransaction transaction = null;
             try
@@ -142,6 +145,7 @@ namespace CapstoneProject.Areas.Users.Models.LoginModel
                 UserData userDB = await _context.Users.Where(
                         x => !x.DelFlag
                         && x.Username == user.Username
+                        && (user.Type != 2 || x.Roles.Any(x => x.RoleId == R001.EMP.CODE || x.RoleId == R001.CSKH.CODE || x.RoleId == R001.ADMIN.CODE || x.RoleId == R001.DEVELOPER.CODE))
                         && x.Password == Security.GetMD5(user.Password, userNameDB.FirstSecurityString, userNameDB.LastSecurityString)
                     ).FirstOrDefaultAsync();
                 if (userDB == null)
@@ -242,6 +246,14 @@ namespace CapstoneProject.Areas.Users.Models.LoginModel
                     UserId = userData.Id
                 };
                 _context.UserRoles.Add(userRole);
+                //Them usepoint
+                UserPointData userPoint = new UserPointData
+                {
+                    UserId = userData.Id,
+                    RankName = "Thành viên mới",
+                    Point = 0,
+                };
+                _context.UserPoint.Add(userPoint);
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
                 //Thêm token

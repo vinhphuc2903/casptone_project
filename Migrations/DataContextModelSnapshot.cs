@@ -492,6 +492,9 @@ namespace CapstoneProject.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<DateTime>("DateStart")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("DelFlag")
                         .HasColumnType("bit");
 
@@ -504,15 +507,13 @@ namespace CapstoneProject.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("PositionId")
+                        .HasColumnType("int");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("datetimeoffset");
@@ -527,19 +528,69 @@ namespace CapstoneProject.Migrations
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Username")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BranchId");
+
+                    b.HasIndex("PositionId");
 
                     b.HasIndex("UserId")
                         .IsUnique()
                         .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Employee.Position", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedIp")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("DelFlag")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UpdatedIp")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Positions");
                 });
 
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Film.Films", b =>
@@ -735,14 +786,18 @@ namespace CapstoneProject.Migrations
                     b.Property<bool>("DelFlag")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("NameOption1")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameOption2")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int>("SizeId")
+                    b.Property<int?>("SizeId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
@@ -1049,6 +1104,9 @@ namespace CapstoneProject.Migrations
 
                     b.Property<int>("ShowtimeId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("datetimeoffset");
@@ -1429,11 +1487,18 @@ namespace CapstoneProject.Migrations
                         .HasForeignKey("BranchId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.HasOne("CapstoneProject.Databases.Schemas.System.Employee.Position", "Positions")
+                        .WithMany("Employees")
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("CapstoneProject.Databases.Schemas.System.Users.User", "User")
                         .WithOne("Employees")
                         .HasForeignKey("CapstoneProject.Databases.Schemas.System.Employee.Employees", "UserId");
 
                     b.Navigation("Branches");
+
+                    b.Navigation("Positions");
 
                     b.Navigation("User");
                 });
@@ -1683,6 +1748,11 @@ namespace CapstoneProject.Migrations
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.CinemaRoom.Seat", b =>
                 {
                     b.Navigation("Ticket");
+                });
+
+            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Employee.Position", b =>
+                {
+                    b.Navigation("Employees");
                 });
 
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Film.Films", b =>

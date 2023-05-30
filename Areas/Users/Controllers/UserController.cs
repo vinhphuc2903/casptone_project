@@ -133,5 +133,45 @@ namespace CapstoneProject.Areas.Users.Controllers
                 return StatusCode(500);
             }
         }
+        /// <summary>
+        /// Lấy danh sách các chi nhánh
+        /// <para>Created at: 19/05/2023</para>
+        /// <para>Created by: VinhPhuc</para>
+        /// </summary>
+        /// <response code="401">Chưa đăng nhập</response>
+        /// <response code="500">Lỗi khi có exception</response>
+        [HttpGet("branch")]
+        public async Task<ActionResult> GetBranches()
+        {
+            try
+            {
+                return Ok(await _userModel.GetBranches());
+            }
+            catch (Exception e)
+            {
+                //await _logService.SaveLogException(e);
+                return StatusCode(500);
+            }
+        }
+        /// <summary>
+        /// Lấy danh sách các 
+        /// <para>Created at: 19/05/2023</para>
+        /// <para>Created by: VinhPhuc</para>
+        /// </summary>
+        /// <response code="401">Chưa đăng nhập</response>
+        /// <response code="500">Lỗi khi có exception</response>
+        [HttpGet("position")]
+        public async Task<ActionResult> GetPositions()
+        {
+            try
+            {
+                return Ok(await _userModel.GetPositions());
+            }
+            catch (Exception e)
+            {
+                //await _logService.SaveLogException(e);
+                return StatusCode(500);
+            }
+        }
     }
 }

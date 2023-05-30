@@ -33,7 +33,12 @@ namespace CapstoneProject.Databases.Schemas.System.Ticket
         /// Id Suat chieu
         /// </summary>
         public int ShowtimeId { get; set; }
-
+        /// <summary>
+        /// Loại vé
+        /// 10: Chưa bán
+        /// 20: Đã bán
+        /// </summary>
+        public string? Type { get; set; }
         public DateTimeOffset CreatedAt { set; get; }
 
         public int CreatedBy { set; get; }

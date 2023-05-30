@@ -61,7 +61,7 @@ namespace CapstoneProject.Areas.Users.Controllers
             }
         }
         /// <summary>
-        /// Tạo tài khoản
+        /// Cập nhật tài khoản
         /// <para>Created at: 04/05/2023</para>
         /// <para>Created by: VinhPhuc</para>
         /// </summary>
