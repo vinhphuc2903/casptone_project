@@ -10,6 +10,8 @@ using UserToken = CapstoneProject.Databases.Schemas.System.Users.UserToken;
 using District = CapstoneProject.Databases.Schemas.Setting.Districts;
 using Commune = CapstoneProject.Databases.Schemas.Setting.Communes;
 using Province = CapstoneProject.Databases.Schemas.Setting.Provinces;
+using Branch = CapstoneProject.Databases.Schemas.Setting.Branch;
+using Position = CapstoneProject.Databases.Schemas.System.Employee.Position;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -54,6 +56,18 @@ namespace CapstoneProject.Areas.Users.Models.UserModel
         /// <param name="id"></param>
         /// <returns></returns>
         Task<List<Commune>> GetCommune(string districtId);
+        /// <summary>
+        /// Lấy danh sách các chi nhánh
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<List<Branch>> GetBranches();
+        /// <summary>
+        /// Lấy danh sách Position
+        /// </summary>
+        /// <returns></returns>
+        Task<List<Position>> GetPositions();
+
     }
     public class UserModel : CapstoneProjectModels, IUsersModel
     {
@@ -154,7 +168,8 @@ namespace CapstoneProject.Areas.Users.Models.UserModel
                                 ProvinceId = x.ProvinceId,
                                 CommuneId = x.CommuneId,
                                 FirstSecurityString = x.FirstSecurityString,
-                                LastSecurityString = x.LastSecurityString
+                                LastSecurityString = x.LastSecurityString,
+                                RoleId = x.Roles.Select(x => x.RoleId).ToList()
                             })
                             .FirstOrDefaultAsync();
                         if (userInfo == null)
@@ -235,6 +250,52 @@ namespace CapstoneProject.Areas.Users.Models.UserModel
                 communes = await _context.Communes.Where(x => !x.DelFlag && x.DistrictId == districtId).ToListAsync();
                 _logger.LogInformation($"[{AppState.Instance.RequestId}][{_className}][{method}] End");
                 return communes;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"Get detail user Error: {ex}");
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// Lấy danh sách các chi nhánh
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<List<Branch>> GetBranches()
+        {
+            string method = GetActualAsyncMethodName();
+            IDbContextTransaction transaction = null;
+            try
+            {
+                _logger.LogInformation($"[{AppState.Instance.RequestId}][{_className}][{method}] Start");
+                List<Branch> branches = new List<Branch>();
+                branches = await _context.Branches.Where(x => !x.DelFlag).ToListAsync();
+                _logger.LogInformation($"[{AppState.Instance.RequestId}][{_className}][{method}] End");
+                return branches;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"Get detail user Error: {ex}");
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// Lấy danh sách các chi nhánh
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<List<Position>> GetPositions()
+        {
+            string method = GetActualAsyncMethodName();
+            IDbContextTransaction transaction = null;
+            try
+            {
+                _logger.LogInformation($"[{AppState.Instance.RequestId}][{_className}][{method}] Start");
+                List<Position> positions = new List<Position>();
+                positions = await _context.Positions.Where(x => !x.DelFlag).ToListAsync();
+                _logger.LogInformation($"[{AppState.Instance.RequestId}][{_className}][{method}] End");
+                return positions;
             }
             catch (Exception ex)
             {

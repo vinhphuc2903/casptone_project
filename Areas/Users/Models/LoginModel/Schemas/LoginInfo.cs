@@ -5,7 +5,8 @@ namespace CapstoneProject.Areas.Users.Models.LoginModel.Schemas
 	{
 		public LoginInfo()
 		{
-		}
+			Type = 1;
+        }
 		/// <summary>
 		/// UserName login
 		/// </summary>
@@ -14,6 +15,7 @@ namespace CapstoneProject.Areas.Users.Models.LoginModel.Schemas
 		/// Password login
 		/// </summary>
 		public string Password { get; set; }
+		public int? Type { get; set; }
 	}
 }
 

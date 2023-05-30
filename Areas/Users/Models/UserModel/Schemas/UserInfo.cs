@@ -38,6 +38,7 @@ namespace CapstoneProject.Areas.Users.Models.UserModel.Schemas
         /// </summary>
         public string Gender { set; get; }
 
+        public List<string> RoleId { get; set; }
         /// <summary>
         /// Địa chỉ cụ thể
         /// </summary>

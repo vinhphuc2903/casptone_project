@@ -3,6 +3,7 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels.Schemas
 {
 	public class SearchCondition
 	{
+        public string? Name { get; set; }
         /// <summary>
         /// Thể loại film
         /// </summary>
@@ -18,6 +19,12 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels.Schemas
         /// </summary>
         /// <value>20</value>
         public int PageSize { set; get; }
+
+        public DateTime? DateStart { get; set; }
+
+        public DateTime? DateEnd { get; set; }
+
+        public string? Status { get; set; }
 
         public SearchCondition()
         {

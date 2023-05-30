@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using CapstoneProject.Services;
+using CapstoneProject.AutofacModules;
 
 namespace CapstoneProject
 {
@@ -169,6 +170,9 @@ namespace CapstoneProject
             builder.RegisterModule(new AutofacModules.UserModule());
             builder.RegisterModule(new AutofacModules.FilmModule());
             builder.RegisterModule(new AutofacModules.ShowTimeModule());
+            builder.RegisterModule(new AutofacModules.CustomerModule()); 
+            builder.RegisterModule(new AutofacModules.CinemaRoomModule());
+            builder.RegisterModule(new AutofacModules.OrderModule());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -18,12 +18,7 @@ namespace CapstoneProject.Databases.Schemas.System.Employee
         public int? UserId { set; get; }
         [StringLength(50)]
         public string? EmployeeCode { get; set; }
-        [StringLength(50)]
-        public string? Username { get; set; }
-
-        [StringLength(50)]
-        public string Password { get; set; }
-
+        
         [StringLength(50)]
         public string Phone { get; set; }
 
@@ -31,6 +26,13 @@ namespace CapstoneProject.Databases.Schemas.System.Employee
         public string Email { get; set; }
 
         public int? BranchId { get; set; }
+
+        public int? PositionId { set; get; }
+
+        /// <summary>
+        /// Ngay vao lam
+        /// </summary>
+        public DateTime DateStart { set; get; }
 
         public DateTimeOffset CreatedAt { set; get; }
 
@@ -51,6 +53,8 @@ namespace CapstoneProject.Databases.Schemas.System.Employee
         public virtual Branch? Branches { set; get; }
 
         public virtual User User { set; get; }
+
+        public virtual Position? Positions { get; set; }
     }
 }
 

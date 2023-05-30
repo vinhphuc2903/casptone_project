@@ -4,7 +4,90 @@
         <name>CapstoneProject</name>
     </assembly>
     <members>
-        <member name="M:CapstoneProject.Areas.Employee.Controllers.EmployesController.GetEmployee">
+        <member name="M:CapstoneProject.Areas.CinemeRoom.Controllers.CinemaRoomController.GetAllCinemaRoom(CapstoneProject.Areas.CinemaRoom.Models.Schemas.SearchCondition)">
+            <summary>
+            Lấy tất cả cinemaroom theo điều kiện tìm kiếm
+            <para>Created at: 25/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Customer.Controllers.CustomerController.GetEmployee(CapstoneProject.Areas.Customer.Models.Schemas.SearchCondition)">
+            <summary>
+            Lấy tất cả customer theo điều kiện tìm kiếm
+            <para>Created at: 25/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="P:CapstoneProject.Areas.Customer.Models.Schemas.CustomerInfo.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Customer.Models.Schemas.CustomerInfo.Name">
+            <summary>
+            Tên nhân viên
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Customer.Models.Schemas.CustomerInfo.Username">
+            <summary>
+            Tên dang nhap
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Customer.Models.Schemas.CustomerInfo.Password">
+            <summary>
+            Mat khau
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Customer.Models.Schemas.CustomerInfo.Role">
+            <summary>
+            Quyen
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Customer.Models.Schemas.CustomerInfo.Rank">
+            <summary>
+            Rank
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Customer.Models.Schemas.CustomerInfo.EmployeeCode">
+            <summary>
+            Mã nhân viên
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Customer.Models.Schemas.CustomerInfo.Phone">
+            <summary>
+            Điện thoại
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Customer.Models.Schemas.CustomerInfo.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Customer.Models.Schemas.CustomerInfo.DateOfBirth">
+            <summary>
+            Ngày sinh
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Customer.Models.Schemas.CustomerInfo.DateStart">
+            <summary>
+            Ngày sinh
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Customer.Models.Schemas.CustomerInfo.Gender">
+            <summary>
+            Giới tính
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Customer.Models.Schemas.CustomerInfo.Address">
+            <summary>
+            Địa chỉ cụ thể
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.Areas.Employee.Controllers.EmployesController.GetEmployee(CapstoneProject.Areas.Employee.Models.Schemas.SearchConditon)">
             <summary>
             Lấy tất cả nhân viên theo điều kiện tìm kiếm
             <para>Created at: 04/05/2023</para>
@@ -13,15 +96,86 @@
             <response code="401">Chưa đăng nhập</response>
             <response code="500">Lỗi khi có exception</response>
         </member>
-        <member name="M:CapstoneProject.Areas.Employee.Models.IEmployeesModel.GetEmployees">
+        <member name="M:CapstoneProject.Areas.Employee.Controllers.EmployesController.CreateEmployee(CapstoneProject.Areas.Employee.Models.Schemas.EmployeeData)">
+            <summary>
+            Tạo tài khoản
+            <para>Created at: 04/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Employee.Models.IEmployeesModel.GetEmployees(CapstoneProject.Areas.Employee.Models.Schemas.SearchConditon)">
             <summary>
             Lấy danh sách nhân viên
             </summary>
             <returns></returns>
         </member>
-        <member name="P:CapstoneProject.Areas.Employee.Models.Schemas.SearchConditon.Id">
+        <member name="M:CapstoneProject.Areas.Employee.Models.IEmployeesModel.CreateEmployee(CapstoneProject.Areas.Employee.Models.Schemas.EmployeeData)">
             <summary>
-            Id ngày cần tìm kiếm
+            Tạo nhân viên mới
+            </summary>
+            <param name="accountInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CapstoneProject.Areas.Employee.Models.Schemas.EmployeeData.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Employee.Models.Schemas.EmployeeData.Name">
+            <summary>
+            Tên nhân viên
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Employee.Models.Schemas.EmployeeData.Username">
+            <summary>
+            Tên dang nhap
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Employee.Models.Schemas.EmployeeData.Password">
+            <summary>
+            Mat khau
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Employee.Models.Schemas.EmployeeData.Role">
+            <summary>
+            Quyen
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Employee.Models.Schemas.EmployeeData.EmployeeCode">
+            <summary>
+            Mã nhân viên
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Employee.Models.Schemas.EmployeeData.Phone">
+            <summary>
+            Điện thoại
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Employee.Models.Schemas.EmployeeData.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Employee.Models.Schemas.EmployeeData.DateOfBirth">
+            <summary>
+            Ngày sinh
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Employee.Models.Schemas.EmployeeData.DateStart">
+            <summary>
+            Ngày sinh
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Employee.Models.Schemas.EmployeeData.Gender">
+            <summary>
+            Giới tính
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Employee.Models.Schemas.EmployeeData.Address">
+            <summary>
+            Địa chỉ cụ thể
             </summary>
         </member>
         <member name="M:CapstoneProject.Areas.Film.Controllers.FilmAdminController.AddNewFilmData(CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData)">
@@ -44,7 +198,7 @@
         </member>
         <member name="M:CapstoneProject.Areas.Film.Controllers.FilmController.GetDetailFilm(System.Int32)">
             <summary>
-            Thêm film mới
+            Lấy chi tiết film
             <para>Created at: 14/05/2023</para>
             <para>Created by: VinhPhuc</para>
             </summary>
@@ -52,6 +206,15 @@
             <response code="500">Lỗi khi có exception</response>
         </member>
         <member name="M:CapstoneProject.Areas.Film.Controllers.FilmController.GetTicketByShowTime(System.Int32)">
+            <summary>
+            Lấy chi tiết showtime theo điều kiện id
+            <para>Created at: 22/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Film.Controllers.FilmController.GetListTypeFilm">
             <summary>
             Lấy chi tiết showtime theo điều kiện id
             <para>Created at: 22/05/2023</para>
@@ -133,6 +296,12 @@
             <summary>
             Link trailer film Youtobe
             </summary>
+        </member>
+        <member name="M:CapstoneProject.Areas.Film.Models.FilmModels.IFilmModel.GetListTypeFilm">
+            <summary>
+            Lấy danh sách Film
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:CapstoneProject.Areas.Film.Models.FilmModels.IFilmModel.GetListFilms(CapstoneProject.Areas.Film.Models.FilmModels.Schemas.SearchCondition)">
             <summary>
@@ -401,12 +570,35 @@
             Id cho ngoi
             </summary>
         </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.TicketData.Type">
+            <summary>
+            Loại vé
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.TicketData.TypeSeat">
+            <summary>
+            Loại ghế:
+            - 10: ghế thường
+            - 20: ghế vip
+            - 30: ghế đôi
+            </summary>
+        </member>
         <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.TicketData.SeatName">
             <summary>
             Id Suat chieu
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.TicketData.ShowtimeId" -->
+        <!-- Badly formed XML comment ignored for member "M:CapstoneProject.Areas.Orders.Controllers.OrderController.GetListFood" -->
+        <member name="M:CapstoneProject.Areas.ShowTime.Controllers.ShowtimeController.GetListShowtime(CapstoneProject.Areas.ShowTime.Models.Schemas.SearchCondition)">
+            <summary>
+            Lấy tất cả customer theo điều kiện tìm kiếm
+            <para>Created at: 25/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
         <member name="M:CapstoneProject.Areas.ShowTime.Controllers.ShowtimeController.AddNewFilmData(CapstoneProject.Areas.ShowTime.Models.Schemas.ShowTimeInput)">
             <summary>
             Thêm showtime và ticket mới
@@ -416,19 +608,56 @@
             <response code="401">Chưa đăng nhập</response>
             <response code="500">Lỗi khi có exception</response>
         </member>
-        <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.ShowTimeInput.Name">
+        <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.SearchCondition.DateFrom">
             <summary>
-            Ten xuat chieu
+            Ngày từ
             </summary>
         </member>
-        <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.ShowTimeInput.Code">
+        <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.SearchCondition.DateTo">
             <summary>
-            Ma xuat chieu
+            Ngày đến
             </summary>
         </member>
-        <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.ShowTimeInput.DateShow">
+        <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.SearchCondition.FilmName">
+            <summary>
+            Tên film
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.SearchCondition.BranchId">
+            <summary>
+            Id chi nhánh
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.SearchCondition.CinemeRoomId">
+            <summary>
+            Id mã phong chieu
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.SearchCondition.CurrentPage">
+            <summary>
+            Trang hiện tại.
+            </summary>
+            <value>1</value>
+        </member>
+        <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.SearchCondition.PageSize">
+            <summary>
+            Số dòng trên một trang.
+            </summary>
+            <value>20</value>
+        </member>
+        <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.ShowTimeData.BranchName">
+            <summary>
+            Id chi nhánh
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.ShowTimeInput.DateFrom">
             <summary>
             Từ ngày
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.ShowTimeInput.DateTo">
+            <summary>
+            Đến ngày
             </summary>
         </member>
         <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.ShowTimeInput.TimeFrom">
@@ -441,6 +670,16 @@
             Thời gian kết thúc
             </summary>
         </member>
+        <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.ShowTimeInput.CountShow">
+            <summary>
+            Số xuất chiếu
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.ShowTimeInput.MinOff">
+            <summary>
+            Số giờ nghỉ của xuất chiếu
+            </summary>
+        </member>
         <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.ShowTimeInput.IdFilm">
             <summary>
             Film chiếu
@@ -450,6 +689,13 @@
             <summary>
             Mã phòng chiếu
             </summary>
+        </member>
+        <member name="M:CapstoneProject.Areas.ShowTime.Models.IShowtimeModels.GetListShowtime(CapstoneProject.Areas.ShowTime.Models.Schemas.SearchCondition)">
+            <summary>
+            Lấy danh sách phim theo điều kiện tìm kiếm
+            </summary>
+            <param name="searchCondition"></param>
+            <returns></returns>
         </member>
         <member name="M:CapstoneProject.Areas.ShowTime.Models.IShowtimeModels.AddShowTime(CapstoneProject.Areas.ShowTime.Models.Schemas.ShowTimeInput)">
             <summary>
@@ -478,7 +724,7 @@
         </member>
         <member name="M:CapstoneProject.Areas.Users.Controllers.LoginController.UpdateUser(CapstoneProject.Areas.Users.Models.UserModel.Schemas.AccountInfo)">
             <summary>
-            Tạo tài khoản
+            Cập nhật tài khoản
             <para>Created at: 04/05/2023</para>
             <para>Created by: VinhPhuc</para>
             </summary>
@@ -524,6 +770,24 @@
         <member name="M:CapstoneProject.Areas.Users.Controllers.UsersController.GetCommune(System.String)">
             <summary>
             Lấy danh sách các thị xã
+            <para>Created at: 19/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Users.Controllers.UsersController.GetBranches">
+            <summary>
+            Lấy danh sách các chi nhánh
+            <para>Created at: 19/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Users.Controllers.UsersController.GetPositions">
+            <summary>
+            Lấy danh sách các 
             <para>Created at: 19/05/2023</para>
             <para>Created by: VinhPhuc</para>
             </summary>
@@ -690,6 +954,19 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:CapstoneProject.Areas.Users.Models.UserModel.IUsersModel.GetBranches">
+            <summary>
+            Lấy danh sách các chi nhánh
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CapstoneProject.Areas.Users.Models.UserModel.IUsersModel.GetPositions">
+            <summary>
+            Lấy danh sách Position
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CapstoneProject.Areas.Users.Models.UserModel.UserModel.GetDetailUser(System.Int32)">
             <summary>
             Lấy thông tin cá nhân theo id
@@ -713,6 +990,20 @@
         </member>
         <!-- Badly formed XML comment ignored for member "M:CapstoneProject.Areas.Users.Models.UserModel.UserModel.GetDistrict(System.String)" -->
         <!-- Badly formed XML comment ignored for member "M:CapstoneProject.Areas.Users.Models.UserModel.UserModel.GetCommune(System.String)" -->
+        <member name="M:CapstoneProject.Areas.Users.Models.UserModel.UserModel.GetBranches">
+            <summary>
+            Lấy danh sách các chi nhánh
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CapstoneProject.Areas.Users.Models.UserModel.UserModel.GetPositions">
+            <summary>
+            Lấy danh sách các chi nhánh
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:CapstoneProject.Auths.Auth">
             <summary>
             Filter dùng để xác thực quyền truy caapf của user đối ới api.
@@ -743,6 +1034,32 @@
             </summary>
             <param name="builder">builder dùng để đăng ký dịch vụ</param>
         </member>
+        <member name="T:CapstoneProject.AutofacModules.CinemaRoomModule">
+            <summary>
+            Đăng ký các dịch vụ dùng cho việc tạo và xử lý sự kiện thông qua autofac
+            <para>Created at: </para>
+            <para>Created by: VP</para>
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.AutofacModules.CinemaRoomModule.Load(Autofac.ContainerBuilder)">
+            <summary>
+            Ghi đè phương thức load của autofac để đăng ký dịch vụ
+            </summary>
+            <param name="builder">builder dùng để đăng ký dịch vụ</param>
+        </member>
+        <member name="T:CapstoneProject.AutofacModules.CustomerModule">
+            <summary>
+            Đăng ký các dịch vụ dùng cho việc tạo và xử lý sự kiện thông qua autofac
+            <para>Created at: </para>
+            <para>Created by: VP</para>
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.AutofacModules.CustomerModule.Load(Autofac.ContainerBuilder)">
+            <summary>
+            Ghi đè phương thức load của autofac để đăng ký dịch vụ
+            </summary>
+            <param name="builder">builder dùng để đăng ký dịch vụ</param>
+        </member>
         <member name="T:CapstoneProject.AutofacModules.EmployeeModule">
             <summary>
             Đăng ký các dịch vụ dùng cho việc tạo và xử lý sự kiện thông qua autofac
@@ -764,6 +1081,19 @@
             </summary>
         </member>
         <member name="M:CapstoneProject.AutofacModules.FilmModule.Load(Autofac.ContainerBuilder)">
+            <summary>
+            Ghi đè phương thức load của autofac để đăng ký dịch vụ
+            </summary>
+            <param name="builder">builder dùng để đăng ký dịch vụ</param>
+        </member>
+        <member name="T:CapstoneProject.AutofacModules.OrderModule">
+            <summary>
+            Đăng ký các dịch vụ dùng cho việc tạo và xử lý sự kiện thông qua autofac
+            <para>Created at: </para>
+            <para>Created by: VP</para>
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.AutofacModules.OrderModule.Load(Autofac.ContainerBuilder)">
             <summary>
             Ghi đè phương thức load của autofac để đăng ký dịch vụ
             </summary>
@@ -813,6 +1143,11 @@
         <member name="T:CapstoneProject.Commons.CodeMaster.R001.CSKH">
             <summary>
             CSKH : Role Chăm sóc khách hàng<br/>
+            </summary>
+        </member>
+        <member name="T:CapstoneProject.Commons.CodeMaster.R001.EMP">
+            <summary>
+            EMP : Role Employee<br/>
             </summary>
         </member>
         <member name="T:CapstoneProject.Commons.Enum.CodeResponse">
@@ -895,6 +1230,21 @@
         <member name="F:CapstoneProject.Commons.Enum.MSG_NO.LENGTH_USERNAME_NOT_OK">
             <summary>
             Độ dài của tên đăng nhập ít nhất 8 kí tự
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.LENGTH_USERNAME_NOT_OK_6">
+            <summary>
+            Độ dài của tên đăng nhập ít nhất 6 kí tự
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.ACCOUNT_NOT_HAVE_PERMISSION">
+            <summary>
+            Tài khoản của bạn không có quyền thực hiện chức năng này
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.TIME_SHOW_ERROR">
+            <summary>
+            Suất chiếu phải nằm trong từ 8h => 25h hôm qua
             </summary>
         </member>
         <member name="T:CapstoneProject.Commons.Helpers">
@@ -1316,6 +1666,11 @@
             Table Branches
             </summary>
         </member>
+        <member name="P:CapstoneProject.Databases.DataContext.Positions">
+            <summary>
+            Table Branches
+            </summary>
+        </member>
         <member name="M:CapstoneProject.Databases.DataContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{CapstoneProject.Databases.DataContext},Microsoft.AspNetCore.Http.IHttpContextAccessor)">
             <param name="options">Các cài đặt ban đầu</param>
         </member>
@@ -1323,7 +1678,7 @@
             <summary>
             Ghi đè phương thức lưu vào DB để lưu thêm các dữ liệu mặc định cần thiết
             <para>Created at: 10/07/2023</para>
-            <para>Created by: QuyPN</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
             <param name="cancellationToken"></param>
             <returns>
@@ -1607,6 +1962,16 @@
             Id user nhân viên
             </summary>
         </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Employee.Employees.DateStart">
+            <summary>
+            Ngay vao lam
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Employee.Position.Code">
+            <summary>
+            Mã chức vụ
+            </summary>
+        </member>
         <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.Name">
             <summary>
             Tên loại phim
@@ -1849,6 +2214,13 @@
         <member name="P:CapstoneProject.Databases.Schemas.System.Ticket.Tickets.ShowtimeId">
             <summary>
             Id Suat chieu
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Ticket.Tickets.Type">
+            <summary>
+            Loại vé
+            10: Chưa bán
+            20: Đã bán
             </summary>
         </member>
         <member name="P:CapstoneProject.Databases.Schemas.System.Users.User.Username">
@@ -2303,6 +2675,66 @@
             <inheritdoc />
         </member>
         <member name="M:CapstoneProject.Migrations.Addbranchshowtime.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.addposition">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.addposition.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.addposition.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.addposition.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.adddatestart">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.adddatestart.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.adddatestart.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.adddatestart.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.updatedatetime">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatedatetime.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatedatetime.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatedatetime.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.addtypeticket">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.addtypeticket.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.addtypeticket.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.addtypeticket.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.updatefood">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatefood.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatefood.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatefood.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="F:CapstoneProject.Program.ServiceName">

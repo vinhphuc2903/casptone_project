@@ -14,11 +14,13 @@ namespace CapstoneProject.Databases.Schemas.System.Food
         {
             OrderFoodDetails = new HashSet<OrderFoodDetail>();
         }
-        public string Name { get; set; }
+        public string NameOption1 { get; set; }
+
+        public string? NameOption2 { get; set; }
 
         public int Price { get; set; }
 
-        public int SizeId { get; set; }
+        public int? SizeId { get; set; }
         /// <summary>
         /// Type:
         /// - 10: Bắp
