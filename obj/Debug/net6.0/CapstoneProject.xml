@@ -1347,22 +1347,6 @@
             Trả về "" nếu upload sảy ra lỗi.
             </returns>
         </member>
-        <member name="M:CapstoneProject.Commons.Helpers.SaveListFileUpload(System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile},System.String,System.String,System.Int32,System.Collections.Generic.List{System.String},System.Int32)">
-            <summary>
-            Upload nhiều hình ảnh 1 lúc đồng thời tạo thumb cho các hình ảnh đó.
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
-            </summary>
-            <param name="files">Các file hình ảnh được gửi lên từ client</param>
-            <param name="folder">Thư mục sẽ lưu ảnh chính (mặc định là /public/images/upload/)</param>
-            <param name="folderThumb">Thư mục sẽ lưu Thumb của nahr chính (mặc định là /public/images/upload/thumb/)</param>
-            <param name="maxSize">Kích thước theo chiều nagng của Thumb, tính theo pixcel</param>
-            <param name="typeFiles">Loại file được phé tải lêm (mặc định là không check)</param>
-            <param name="sizeFile">Dung lượng tối đa mỗi file (mặc định là 10MB)</param>
-            <returns>
-            Trả về list đối tượng chưa link đến hình ảnh chính và thumb tương ứng
-            </returns>
-        </member>
         <member name="M:CapstoneProject.Commons.Helpers.SqlServerEscapeString(System.String)">
             <summary>
             Thay thế các ký tự trong chuỗi search để có thể dùng được ở Store procedure.
@@ -1580,7 +1564,7 @@
             Table UserPoint (UserPoint)
             </summary>
         </member>
-        <member name="P:CapstoneProject.Databases.DataContext.Size">
+        <member name="P:CapstoneProject.Databases.DataContext.Sizes">
             <summary>
             Table Size
             </summary>
@@ -2221,6 +2205,7 @@
             Loại vé
             10: Chưa bán
             20: Đã bán
+            30: Đang có người chọn
             </summary>
         </member>
         <member name="P:CapstoneProject.Databases.Schemas.System.Users.User.Username">
@@ -2735,6 +2720,18 @@
             <inheritdoc />
         </member>
         <member name="M:CapstoneProject.Migrations.updatefood.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.updatedbname">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatedbname.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatedbname.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatedbname.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="F:CapstoneProject.Program.ServiceName">

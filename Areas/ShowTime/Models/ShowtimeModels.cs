@@ -77,7 +77,7 @@ namespace CapstoneProject.Areas.ShowTime.Models
                     //Suất cuối cùng từ
                     int timeToShow = timeFromShow + (showTimeInput.MinOff + totalTimeFilm) * (showTimeInput.CountShow - 1);
                     //Kiểm tra thời gian bắt đầu chiếu > 8h < 1h ngày hôm sau
-                    if (timeFromShow >= 8 * 60 && timeToShow <= 25 * 60)
+                    if (timeFromShow < 8 * 60 && timeToShow > 25 * 60)
                     {
                         responseInfo.Code = CodeResponse.HAVE_ERROR;
                         responseInfo.MsgNo = MSG_NO.TIME_SHOW_ERROR;
@@ -216,10 +216,10 @@ namespace CapstoneProject.Areas.ShowTime.Models
                         || x.CinemaRoomId == searchCondition.CinemeRoomId)
                     )
                     .Select(x => new ShowTimeData()
-                    {   
+                    {
                         DateShow = x.DateShow,
                         BranchId = x.BranchId,
-                        BranchName = x.Branches.Name, 
+                        BranchName = x.Branches.Name,
                         CinemeRoom = x.CinemaRooms.Name,
                         FilmName = x.Film.Name,
                         ShowtimeName = x.Name,
@@ -231,7 +231,12 @@ namespace CapstoneProject.Areas.ShowTime.Models
                         TotalTicketSold = x.TotalSold,
                         TotalTicketRemain = x.TotalRemain,
                         TotalTicket = x.Total,
-                    });
+                    })
+                    .OrderByDescending(x => x.DateShow)
+                    .ThenByDescending(x => x.BranchId)
+                    .ThenByDescending(x => x.CinemeRoom)
+                    .ThenByDescending(x => x.FilmName)
+                    .ThenBy(x => x.FromHour);
                 var totalCount = showTimeDatas.Count();
                 listShowTime.Paging = new Paging(totalCount, searchCondition.CurrentPage, searchCondition.PageSize);
                 listShowTime.showTimeDatas = await showTimeDatas.Skip((searchCondition.CurrentPage - 1) * searchCondition.PageSize)

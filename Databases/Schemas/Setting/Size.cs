@@ -6,10 +6,10 @@ using CapstoneProject.Databases.Schemas.System.Food;
 
 namespace CapstoneProject.Databases.Schemas.Setting
 {
-    [Table("Size")]
-    public partial class Size : TableHaveIdInt, ITable
+    [Table("Sizes")]
+    public partial class Sizes : TableHaveIdInt, ITable
     {
-        public Size()
+        public Sizes()
         {
             Foods = new HashSet<Foods>();
         }

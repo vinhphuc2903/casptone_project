@@ -130,14 +130,11 @@
 /Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll
 /Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll
 /Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll
-/Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll
 /Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/runtimes/win-arm64/native/sni.dll
 /Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/runtimes/win-x64/native/sni.dll
 /Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/runtimes/win-x86/native/sni.dll
 /Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/runtimes/unix/lib/netcoreapp2.1/System.Data.SqlClient.dll
 /Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/runtimes/win/lib/netcoreapp2.1/System.Data.SqlClient.dll
-/Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll
-/Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll
 /Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/runtimes/win/lib/netstandard2.0/System.Runtime.Caching.dll
 /Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll
 /Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/runtimes/browser/lib/net6.0/System.Text.Encodings.Web.dll
@@ -147,3 +144,8 @@
 /Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.SqlServer.Design.dll
 /Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/Dapper.dll
+/Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/AWSSDK.Core.dll
+/Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/AWSSDK.S3.dll
+/Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/SixLabors.ImageSharp.dll
+/Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll
+/Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/bin/Debug/net6.0/runtimes/win/lib/net6.0/System.Drawing.Common.dll

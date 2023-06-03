@@ -46,7 +46,7 @@ namespace CapstoneProject.Commons.Enum
         /// <summary>
         /// Suất chiếu phải nằm trong từ 8h => 25h hôm qua
         /// </summary>
-        public static string TIME_SHOW_ERROR = "E010";
+        public static string TIME_SHOW_ERROR = "E011";
     }
 }
 

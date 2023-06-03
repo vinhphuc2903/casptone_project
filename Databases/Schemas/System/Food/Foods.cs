@@ -47,7 +47,7 @@ namespace CapstoneProject.Databases.Schemas.System.Food
 
         public bool DelFlag { set; get; }
 
-        public virtual Size Size { get; set; }
+        public virtual Sizes Sizes { get; set; }
 
         public virtual ICollection<OrderFoodDetail> ? OrderFoodDetails { get; set; }
     }

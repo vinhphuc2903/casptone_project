@@ -370,112 +370,112 @@ namespace CapstoneProject.Commons
         /// <returns>
         /// Trả về list đối tượng chưa link đến hình ảnh chính và thumb tương ứng
         /// </returns>
-        public static List<ImgUploadWithThumb> SaveListFileUpload(List<IFormFile> files, string folder = "/public/images/upload/", string folderThumb = "/public/images/upload/thumb/", int maxSize = 200, List<string> typeFiles = null, int sizeFile = 10)
-        {
-            try
-            {
-                List<ImgUploadWithThumb> result = new List<ImgUploadWithThumb>();
-                string rootPath = StartupState.Instance.WebHostEnvironment.WebRootPath;
-                if (files.Count > 0)
-                {
-                    int idx = 1;
-                    // upload từng file, nếu bị lỗi ngang nào thì dừng upload và trả về các file đã upload trước đó
-                    foreach (IFormFile file in files)
-                    {
-                        // Lấy đuôi file để check
-                        string mimeType = Path.GetExtension(file.FileName).ToLower();
-                        ImgUploadWithThumb imgAfterUpload = new ImgUploadWithThumb();
-                        // Rename theo thời gian upload và thứ tự upload
-                        string fileName = DateTimeOffset.Now.ToString("yyyyMMddHHmmssffff") + idx.ToString() + mimeType;
-                        idx++;
-                        // Lấy đường dẫn vật lý của máy chủ
-                        string path = rootPath + folder + fileName;
-                        long fileSize = file.Length;
-                        // Kiểm tra loại file
-                        if (typeFiles != null && typeFiles.FirstOrDefault(x => x == mimeType) == null)
-                        {
-                            imgAfterUpload.LinkImg = "1";
-                        }
-                        // Kiểm tra dung lượng file
-                        if (fileSize / 1024 / 1024 > 10)
-                        {
-                            imgAfterUpload.LinkImg = "2";
-                        }
-                        if (imgAfterUpload.LinkImg != "1" && imgAfterUpload.LinkImg != "2")
-                        {
-                            // Tạo thư mục lưu file nếu chưa có
-                            Directory.CreateDirectory(rootPath + folder);
-                            // Nếu file đã tồn tại thì xóa file trước
-                            if (File.Exists(path))
-                            {
-                                File.Delete(path);
-                            }
-                            // Lưu file và lưu lại thông tin đường dẫn
-                            FileStream fileStream = new FileStream(path, FileMode.Create);
-                            file.CopyTo(fileStream);
-                            imgAfterUpload.LinkImg = folder + fileName;
-                        }
-                        else
-                        {
-                            // Nếu lỗi thì trả về các file đã lưu trước đó
-                            result.Add(imgAfterUpload);
-                            return result;
-                        }
-                        // Nếu upload file chính thành công thiftieeps tục tao Thumb
-                        if (imgAfterUpload.LinkImg != "")
-                        {
-                            // Tính toán lại các kích thước của hình ảnh
-                            Image sourceImage = Image.FromStream(file.OpenReadStream());
-                            int originalWidth = sourceImage.Width;
-                            int originalHeight = sourceImage.Height;
+        //public static List<ImgUploadWithThumb> SaveListFileUpload(List<IFormFile> files, string folder = "/public/images/upload/", string folderThumb = "/public/images/upload/thumb/", int maxSize = 200, List<string> typeFiles = null, int sizeFile = 10)
+        //{
+        //    try
+        //    {
+        //        List<ImgUploadWithThumb> result = new List<ImgUploadWithThumb>();
+        //        string rootPath = StartupState.Instance.WebHostEnvironment.WebRootPath;
+        //        if (files.Count > 0)
+        //        {
+        //            int idx = 1;
+        //            // upload từng file, nếu bị lỗi ngang nào thì dừng upload và trả về các file đã upload trước đó
+        //            foreach (IFormFile file in files)
+        //            {
+        //                // Lấy đuôi file để check
+        //                string mimeType = Path.GetExtension(file.FileName).ToLower();
+        //                ImgUploadWithThumb imgAfterUpload = new ImgUploadWithThumb();
+        //                // Rename theo thời gian upload và thứ tự upload
+        //                string fileName = DateTimeOffset.Now.ToString("yyyyMMddHHmmssffff") + idx.ToString() + mimeType;
+        //                idx++;
+        //                // Lấy đường dẫn vật lý của máy chủ
+        //                string path = rootPath + folder + fileName;
+        //                long fileSize = file.Length;
+        //                // Kiểm tra loại file
+        //                if (typeFiles != null && typeFiles.FirstOrDefault(x => x == mimeType) == null)
+        //                {
+        //                    imgAfterUpload.LinkImg = "1";
+        //                }
+        //                // Kiểm tra dung lượng file
+        //                if (fileSize / 1024 / 1024 > 10)
+        //                {
+        //                    imgAfterUpload.LinkImg = "2";
+        //                }
+        //                if (imgAfterUpload.LinkImg != "1" && imgAfterUpload.LinkImg != "2")
+        //                {
+        //                    // Tạo thư mục lưu file nếu chưa có
+        //                    Directory.CreateDirectory(rootPath + folder);
+        //                    // Nếu file đã tồn tại thì xóa file trước
+        //                    if (File.Exists(path))
+        //                    {
+        //                        File.Delete(path);
+        //                    }
+        //                    // Lưu file và lưu lại thông tin đường dẫn
+        //                    FileStream fileStream = new FileStream(path, FileMode.Create);
+        //                    file.CopyTo(fileStream);
+        //                    imgAfterUpload.LinkImg = folder + fileName;
+        //                }
+        //                else
+        //                {
+        //                    // Nếu lỗi thì trả về các file đã lưu trước đó
+        //                    result.Add(imgAfterUpload);
+        //                    return result;
+        //                }
+        //                // Nếu upload file chính thành công thiftieeps tục tao Thumb
+        //                if (imgAfterUpload.LinkImg != "")
+        //                {
+        //                    // Tính toán lại các kích thước của hình ảnh
+        //                    Image sourceImage = Image.FromStream(file.OpenReadStream());
+        //                    int originalWidth = sourceImage.Width;
+        //                    int originalHeight = sourceImage.Height;
 
-                            float ratioX = (float)maxSize / (float)originalWidth;
-                            float ratioY = (float)maxSize / (float)originalHeight;
-                            float ratio = Math.Min(ratioX, ratioY);
+        //                    float ratioX = (float)maxSize / (float)originalWidth;
+        //                    float ratioY = (float)maxSize / (float)originalHeight;
+        //                    float ratio = Math.Min(ratioX, ratioY);
 
-                            int newWidth = (int)(originalWidth * ratio);
-                            int newHeight = (int)(originalHeight * ratio);
+        //                    int newWidth = (int)(originalWidth * ratio);
+        //                    int newHeight = (int)(originalHeight * ratio);
 
-                            // Resize hình ảnh
-                            Bitmap newImage = new Bitmap(newWidth, newHeight, PixelFormat.Format24bppRgb);
-                            using (Graphics graphics = Graphics.FromImage(newImage))
-                            {
-                                graphics.CompositingQuality = CompositingQuality.HighQuality;
-                                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                                graphics.CompositingMode = CompositingMode.SourceCopy;
-                                graphics.SmoothingMode = SmoothingMode.HighQuality;
-                                graphics.DrawImage(sourceImage, 0, 0, newWidth, newHeight);
-                            }
+        //                    // Resize hình ảnh
+        //                    Bitmap newImage = new Bitmap(newWidth, newHeight, PixelFormat.Format24bppRgb);
+        //                    using (Graphics graphics = Graphics.FromImage(newImage))
+        //                    {
+        //                        graphics.CompositingQuality = CompositingQuality.HighQuality;
+        //                        graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+        //                        graphics.CompositingMode = CompositingMode.SourceCopy;
+        //                        graphics.SmoothingMode = SmoothingMode.HighQuality;
+        //                        graphics.DrawImage(sourceImage, 0, 0, newWidth, newHeight);
+        //                    }
 
-                            EncoderParameters encoderParams = new EncoderParameters(1);
-                            long[] quality = new long[1];
-                            quality[0] = 80;
-                            encoderParams.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
-                            ImageCodecInfo[] encoders = ImageCodecInfo.GetImageEncoders();
+        //                    EncoderParameters encoderParams = new EncoderParameters(1);
+        //                    long[] quality = new long[1];
+        //                    quality[0] = 80;
+        //                    encoderParams.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
+        //                    ImageCodecInfo[] encoders = ImageCodecInfo.GetImageEncoders();
 
-                            // Tạo thư mục lưu Thumb
-                            Directory.CreateDirectory(rootPath + folderThumb);
-                            string pathThumb = rootPath + folderThumb + fileName;
-                            // Lưu file Thumb và thông tin đường dẫn
-                            newImage.Save(pathThumb, encoders[1], encoderParams);
-                            imgAfterUpload.Thumb = folderThumb + fileName;
-                        }
-                        else
-                        {
-                            // Nếu lỗi thì trả về các file đã lưu trước đó
-                            result.Add(imgAfterUpload);
-                            return result;
-                        }
-                        result.Add(imgAfterUpload);
-                    }
-                }
-                return result;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
+        //                    // Tạo thư mục lưu Thumb
+        //                    Directory.CreateDirectory(rootPath + folderThumb);
+        //                    string pathThumb = rootPath + folderThumb + fileName;
+        //                    // Lưu file Thumb và thông tin đường dẫn
+        //                    newImage.Save(pathThumb, encoders[1], encoderParams);
+        //                    imgAfterUpload.Thumb = folderThumb + fileName;
+        //                }
+        //                else
+        //                {
+        //                    // Nếu lỗi thì trả về các file đã lưu trước đó
+        //                    result.Add(imgAfterUpload);
+        //                    return result;
+        //                }
+        //                result.Add(imgAfterUpload);
+        //            }
+        //        }
+        //        return result;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw e;
+        //    }
+        //}
 
         /// <summary>
         /// Thay thế các ký tự trong chuỗi search để có thể dùng được ở Store procedure.

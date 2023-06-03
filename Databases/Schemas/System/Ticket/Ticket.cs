@@ -37,8 +37,10 @@ namespace CapstoneProject.Databases.Schemas.System.Ticket
         /// Loại vé
         /// 10: Chưa bán
         /// 20: Đã bán
+        /// 30: Đang có người chọn
         /// </summary>
         public string? Type { get; set; }
+
         public DateTimeOffset CreatedAt { set; get; }
 
         public int CreatedBy { set; get; }

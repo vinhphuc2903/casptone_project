@@ -64,7 +64,7 @@ namespace CapstoneProject.Databases
         /// Table Size
         /// </summary>
         /// <value></value>
-        public virtual DbSet<Size> Size { get; set; }
+        public virtual DbSet<Sizes> Sizes { get; set; }
         /// <summary>
         /// Table Order Food Detail
         /// </summary>
@@ -177,7 +177,7 @@ namespace CapstoneProject.Databases
             modelBuilder.Entity<OrderFoodDetail>()
                 .HasKey(e => e.Id);
 
-            modelBuilder.Entity<Size>()
+            modelBuilder.Entity<Sizes>()
                 .HasKey(e => e.Id);
 
             modelBuilder.Entity<Foods>()
@@ -273,7 +273,7 @@ namespace CapstoneProject.Databases
 
             //Foods
             modelBuilder.Entity<Foods>()
-                .HasOne(u => u.Size)
+                .HasOne(u => u.Sizes)
                 .WithMany(t => t.Foods)
                 .HasForeignKey(t => t.SizeId);
 

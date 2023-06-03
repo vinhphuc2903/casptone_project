@@ -42,6 +42,26 @@ namespace CapstoneProject.Areas.Orders.Controllers
                 return StatusCode(500);
             }
         }
+        //// <summary>
+        ///// Lấy danh sách đồ ăn
+        ///// <para>Created at: 14/05/2023</para>
+        ///// <para>Created by: VinhPhuc</para>
+        ///// </summary>
+        ///// <response code="401">Chưa đăng nhập</response>
+        ///// <response code="500">Lỗi khi có exception</response>
+        //[HttpPost("upload-file")]
+        //public async Task<ActionResult> GetListFood([FromForm] IFormFile fromFile)
+        //{
+        //    try
+        //    {
+        //        return Ok(await _orderModels.UploadImageToS3(fromFile));
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        //await _logService.SaveLogException(e);
+        //        return StatusCode(500);
+        //    }
+        //}
     }
 }
 

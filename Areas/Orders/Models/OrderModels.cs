@@ -1,19 +1,32 @@
 ﻿
-using System;
+//using System;
 using CapstoneProject.Models;
-using CapstoneProject.Models.Schemas;
 using CapstoneProject.Areas.Orders.Models.Schemas;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using System.Linq;
+using CapstoneProject.Commons.Schemas;
+using ShowTimeDb = CapstoneProject.Databases.Schemas.System.Ticket.ShowTime;
+using OrderDb = CapstoneProject.Databases.Schemas.System.Orders.Orders;
+using OrderFoodDetailDb = CapstoneProject.Databases.Schemas.System.Orders.OrderFoodDetail;
+using OrderTicketDetailDb = CapstoneProject.Databases.Schemas.System.Orders.OrderTicketDetail;
+using Amazon;
+using Amazon.S3;
+using Amazon.S3.Model;
+using CapstoneProject.Commons.Enum;
+//using System.Drawing;
+using System.Drawing.Imaging;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using CapstoneProject.Models.Schemas;
 
 namespace CapstoneProject.Areas.Orders.Models
 {
     public interface IOrderModels
     {
         Task<List<FoodData>> GetListFood();
+        //Task<ResponseInfo> CreateOrder(OrderData orderData);
+        //Task<string> UploadImageToS3(IFormFile imageFile);
     }
     public class OrderModels : CapstoneProjectModels, IOrderModels
     {
@@ -54,6 +67,28 @@ namespace CapstoneProject.Areas.Orders.Models
                 throw ex;
             }
         }
+
+        //public async Task<ResponseInfo> CreateOrder(OrderData orderData)
+        //{
+        //    string method = GetActualAsyncMethodName();
+        //    ResponseInfo response = new ResponseInfo();
+        //    IDbContextTransaction transaction = null;
+        //    try
+        //    {
+        //        ShowTimeDb showTime = await _context.ShowTime
+        //            .Where(x => !x.DelFlag && x.Id == orderData.ShowTimeId)
+        //            .FirstOrDefaultAsync();
+
+        //        foreach(Order)
+        //        return response;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogInformation($"Get List Film Error: {ex}");
+        //        throw ex;
+        //    }
+        //}
+  
     }
 }
 
