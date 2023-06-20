@@ -43,7 +43,6 @@ namespace CapstoneProject
                         loggingbuilder.AddConsole();
                         loggingbuilder.AddDebug();
                     });
-
             }
             catch { }
             return builder;

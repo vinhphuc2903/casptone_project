@@ -25,7 +25,26 @@ namespace CapstoneProject.Areas.Film.Controllers
         {
             _filmAdminModel = filmAdminModels ?? throw new ArgumentNullException(nameof(filmAdminModels));
         }
-       
+        /// <summary>x
+        /// Lấy chi tiết film
+        /// <para>Created at: 14/06/2023</para>
+        /// <para>Created by: VinhPhuc</para>
+        /// </summary>
+        /// <response code="401">Chưa đăng nhập</response>
+        /// <response code="500">Lỗi khi có exception</response>
+        [HttpGet("admin-detail-film")]
+        public async Task<ActionResult> GetDetailFilm([FromQuery] int id)
+        {
+            try
+            {
+                return Ok(await _filmAdminModel.GetDetailFilm(id));
+            }
+            catch (Exception e)
+            {
+                //await _logService.SaveLogException(e);
+                return StatusCode(500);
+            }
+        }
         /// <summary>x
         /// Thêm film mới
         /// <para>Created at: 14/05/2023</para>
@@ -34,11 +53,31 @@ namespace CapstoneProject.Areas.Film.Controllers
         /// <response code="401">Chưa đăng nhập</response>
         /// <response code="500">Lỗi khi có exception</response>
         [HttpPost()]
-        public async Task<ActionResult> AddNewFilmData([FromBody] NewFilmData newFilmData)
+        public async Task<ActionResult> AddNewFilmData([FromForm] NewFilmData newFilmData)
         {
             try
             {
                 return Ok(await _filmAdminModel.AddNewFilmData(newFilmData));
+            }
+            catch (Exception e)
+            {
+                //await _logService.SaveLogException(e);
+                return StatusCode(500);
+            }
+        }
+        /// <summary>x
+        /// Cập nhật phim cũ
+        /// <para>Created at: 14/05/2023</para>
+        /// <para>Created by: VinhPhuc</para>
+        /// </summary>
+        /// <response code="401">Chưa đăng nhập</response>
+        /// <response code="500">Lỗi khi có exception</response>
+        [HttpPut("update-film")]
+        public async Task<ActionResult> UpdateFilmData([FromForm] NewFilmData newFilmData)
+        {
+            try
+            {
+                return Ok(await _filmAdminModel.UpdateFilmData(newFilmData));
             }
             catch (Exception e)
             {

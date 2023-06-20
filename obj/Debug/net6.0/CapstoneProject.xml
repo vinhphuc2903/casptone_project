@@ -13,6 +13,15 @@
             <response code="401">Chưa đăng nhập</response>
             <response code="500">Lỗi khi có exception</response>
         </member>
+        <member name="M:CapstoneProject.Areas.CinemeRoom.Controllers.CinemaRoomController.GetAllBranches(CapstoneProject.Areas.CinemaRoom.Models.Schemas.SearchCondition)">
+            <summary>
+            Lấy tất cả branch theo điều kiện tìm kiếm
+            <para>Created at: 25/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
         <member name="M:CapstoneProject.Areas.Customer.Controllers.CustomerController.GetEmployee(CapstoneProject.Areas.Customer.Models.Schemas.SearchCondition)">
             <summary>
             Lấy tất cả customer theo điều kiện tìm kiếm
@@ -178,9 +187,27 @@
             Địa chỉ cụ thể
             </summary>
         </member>
+        <member name="M:CapstoneProject.Areas.Film.Controllers.FilmAdminController.GetDetailFilm(System.Int32)">
+            <summary>x
+            Lấy chi tiết film
+            <para>Created at: 14/06/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
         <member name="M:CapstoneProject.Areas.Film.Controllers.FilmAdminController.AddNewFilmData(CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData)">
             <summary>x
             Thêm film mới
+            <para>Created at: 14/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Film.Controllers.FilmAdminController.UpdateFilmData(CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData)">
+            <summary>x
+            Cập nhật phim cũ
             <para>Created at: 14/05/2023</para>
             <para>Created by: VinhPhuc</para>
             </summary>
@@ -208,6 +235,15 @@
         <member name="M:CapstoneProject.Areas.Film.Controllers.FilmController.GetTicketByShowTime(System.Int32)">
             <summary>
             Lấy chi tiết showtime theo điều kiện id
+            <para>Created at: 22/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Film.Controllers.FilmController.GetShowTimeByDateByBranch(CapstoneProject.Areas.Film.Models.FilmModels.Schemas.SearchCondition)">
+            <summary>
+            Lấy danh sách phim và lịch chiếu theo chi nhánh theo điều kiện tìm kiếm
             <para>Created at: 22/05/2023</para>
             <para>Created by: VinhPhuc</para>
             </summary>
@@ -292,6 +328,7 @@
             Link ảnh backGround
             </summary>
         </member>
+        <!-- Badly formed XML comment ignored for member "P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.BackgroundImageLink" -->
         <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.TrailerLink">
             <summary>
             Link trailer film Youtobe
@@ -322,6 +359,13 @@
             Lấy danh sách vé xem phim theo showtime
             </summary>
             <param name="ShowTimeId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CapstoneProject.Areas.Film.Models.FilmModels.IFilmModel.GetShowTimeByDateByBranch(CapstoneProject.Areas.Film.Models.FilmModels.Schemas.SearchCondition)">
+            <summary>
+            Lấy danh sách phim và lịch chiếu phim đó theo từng ngày
+            </summary>
+            <param name="searchCondition"></param>
             <returns></returns>
         </member>
         <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.FilmInfo.Name">
@@ -448,6 +492,16 @@
             Thị xã
             </summary>
         </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.SearchCondition.BranchId">
+            <summary>
+            Mã chi nhánh
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.SearchCondition.Name">
+            <summary>
+            Tên Film
+            </summary>
+        </member>
         <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.SearchCondition.TypeFilm">
             <summary>
             Thể loại film
@@ -464,6 +518,26 @@
             Số dòng trên một trang.
             </summary>
             <value>20</value>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.ShowTimeDetailByDate.FromHour">
+            <summary>
+            Từ giờ
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.ShowTimeDetailByDate.ToHour">
+            <summary>
+            Đến giờ
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.ShowTimeDetailByDate.FromMinus">
+            <summary>
+            Từ phút
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.ShowTimeDetailByDate.ToMinus">
+            <summary>
+            Đến phút
+            </summary>
         </member>
         <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.ShowTimeDetail.ShowtimeData">
             <summary>
@@ -590,6 +664,151 @@
         </member>
         <!-- Badly formed XML comment ignored for member "P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.TicketData.ShowtimeId" -->
         <!-- Badly formed XML comment ignored for member "M:CapstoneProject.Areas.Orders.Controllers.OrderController.GetListFood" -->
+        <!-- Badly formed XML comment ignored for member "M:CapstoneProject.Areas.Orders.Controllers.OrderController.CreateOrder(CapstoneProject.Areas.Orders.Models.Schemas.OrderData)" -->
+        <member name="M:CapstoneProject.Areas.Orders.Controllers.OrderController.GetListOrderData(CapstoneProject.Areas.Orders.Models.Schemas.SearchCondition)">
+            <summary>
+            Lấy danh sách đơn hàng
+            <para>Created at: 01/06/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Orders.Controllers.OrderController.GetDetailOrderData(System.Int32)">
+            <summary>
+            Lấy chi tiết đơn hàng theo id
+            <para>Created at: 01/06/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Orders.Controllers.OrderController.GetLinkPaymentOrder(System.Int32)">
+            <summary>
+            Lấy link payment theo order Id
+            <para>Created at: 01/06/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Orders.Controllers.OrderController.PaymentOrder(CapstoneProject.Areas.Orders.Models.Schemas.PaymentInfo)">
+            <summary>
+            Cập nhật lại đơn hàng đã thanh toán
+            <para>Created at: 01/06/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Orders.Models.IOrderModels.GetListOrderData(CapstoneProject.Areas.Orders.Models.Schemas.SearchCondition)">
+            <summary>
+            Lấy danh sách đơn hàng
+            </summary>
+            <param name="ShowTimeId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CapstoneProject.Areas.Orders.Models.IOrderModels.GetOrderDetail(System.Int32)">
+            <summary>
+            Lấy chi tiết đơn hàng
+            </summary>
+            <param name="ShowTimeId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CapstoneProject.Areas.Orders.Models.IOrderModels.GetLinkPaymentOrder(System.Int32)">
+            <summary>
+            Lấy đường dẫn thanh toán cho đơn hàng
+            </summary>
+            <param name="OrderId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CapstoneProject.Areas.Orders.Models.IOrderModels.PaymentOrder(CapstoneProject.Areas.Orders.Models.Schemas.PaymentInfo)">
+            <summary>
+            Cập nhật lại đơn hàng đã thanh toán
+            </summary>
+            <param name="OrderId"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CapstoneProject.Areas.Orders.Models.Schemas.SearchCondition.CurrentPage">
+            <summary>
+            Trang hiện tại.
+            </summary>
+            <value>1</value>
+        </member>
+        <member name="P:CapstoneProject.Areas.Orders.Models.Schemas.SearchCondition.PageSize">
+            <summary>
+            Số dòng trên một trang.
+            </summary>
+            <value>20</value>
+        </member>
+        <member name="M:CapstoneProject.Areas.Report.Controllers.ReportController.GetRevenueByBranch(CapstoneProject.Areas.Report.Models.Schemas.SearchCondition)">
+            <summary>
+            Báo cáo doanh thu theo chi nhánh
+            <para>Created at: 14/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Report.Controllers.ReportController.GetRevenueByDate(CapstoneProject.Areas.Report.Models.Schemas.SearchCondition)">
+            <summary>
+            Báo cáo doanh thu theo ngày tháng năm 
+            <para>Created at: 14/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Report.Controllers.ReportController.GetRevenueByOrder(CapstoneProject.Areas.Report.Models.Schemas.SearchCondition)">
+            <summary>
+            Báo cáo doanh thu theo ngày tháng năm 
+            <para>Created at: 14/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Report.Controllers.ReportController.GetRevenueByFilm(CapstoneProject.Areas.Report.Models.Schemas.SearchCondition)">
+            <summary>
+            Báo cáo doanh thu theo film
+            <para>Created at: 14/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="P:CapstoneProject.Areas.Report.Models.Schemas.SearchCondition.BranchId">
+            <summary>
+            Mã chi nhánh
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Report.Models.Schemas.SearchCondition.Name">
+            <summary>
+            Tên Film
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Report.Models.Schemas.SearchCondition.TypeFilm">
+            <summary>
+            Thể loại film
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Report.Models.Schemas.SearchCondition.FilmId">
+            <summary>
+            Thể loại film
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Report.Models.Schemas.SearchCondition.CurrentPage">
+            <summary>
+            Trang hiện tại.
+            </summary>
+            <value>1</value>
+        </member>
+        <member name="P:CapstoneProject.Areas.Report.Models.Schemas.SearchCondition.PageSize">
+            <summary>
+            Số dòng trên một trang.
+            </summary>
+            <value>20</value>
+        </member>
         <member name="M:CapstoneProject.Areas.ShowTime.Controllers.ShowtimeController.GetListShowtime(CapstoneProject.Areas.ShowTime.Models.Schemas.SearchCondition)">
             <summary>
             Lấy tất cả customer theo điều kiện tìm kiếm
@@ -607,6 +826,24 @@
             </summary>
             <response code="401">Chưa đăng nhập</response>
             <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.ShowTime.Controllers.ShowtimeController.CreateFood(CapstoneProject.Areas.ShowTime.Models.Schemas.FoodData)">
+            <summary>
+            Thêm loại đồ ăn mới
+            <para>Created at: 04/06/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.FoodData.Type">
+            <summary>
+            Type:
+            - 10: Bắp
+            - 20: Oshi  -Bimbim
+            - 30: Nước ngọt
+            - 40: Combo
+            </summary>
         </member>
         <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.SearchCondition.DateFrom">
             <summary>
@@ -665,11 +902,6 @@
             Thời gian bắt đầu
             </summary>
         </member>
-        <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.ShowTimeInput.TimeTo">
-            <summary>
-            Thời gian kết thúc
-            </summary>
-        </member>
         <member name="P:CapstoneProject.Areas.ShowTime.Models.Schemas.ShowTimeInput.CountShow">
             <summary>
             Số xuất chiếu
@@ -702,6 +934,13 @@
             Thêm film
             </summary>
             <param name="showTimeInput"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CapstoneProject.Areas.ShowTime.Models.IShowtimeModels.CreateFood(CapstoneProject.Areas.ShowTime.Models.Schemas.FoodData)">
+            <summary>
+            
+            </summary>
+            <param name="orderData"></param>
             <returns></returns>
         </member>
         <member name="M:CapstoneProject.Areas.Users.Controllers.LoginController.CheckAccount(CapstoneProject.Areas.Users.Models.LoginModel.Schemas.LoginInfo)">
@@ -1099,6 +1338,19 @@
             </summary>
             <param name="builder">builder dùng để đăng ký dịch vụ</param>
         </member>
+        <member name="T:CapstoneProject.AutofacModules.ReportModule">
+            <summary>
+            Đăng ký các dịch vụ dùng cho việc tạo và xử lý sự kiện thông qua autofac
+            <para>Created at: </para>
+            <para>Created by: VP</para>
+            </summary>
+        </member>
+        <member name="M:CapstoneProject.AutofacModules.ReportModule.Load(Autofac.ContainerBuilder)">
+            <summary>
+            Ghi đè phương thức load của autofac để đăng ký dịch vụ
+            </summary>
+            <param name="builder">builder dùng để đăng ký dịch vụ</param>
+        </member>
         <member name="T:CapstoneProject.AutofacModules.ShowTimeModule">
             <summary>
             Đăng ký các dịch vụ dùng cho việc tạo và xử lý sự kiện thông qua autofac
@@ -1247,6 +1499,36 @@
             Suất chiếu phải nằm trong từ 8h => 25h hôm qua
             </summary>
         </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.TICKET_NOT_DEFINE">
+            <summary>
+            Chỗ ngồi đã được chọn hoặc thanh toán, vui lòng chọn lại chỗ ngồi
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.SHOWTIME_NOT_EXITED">
+            <summary>
+            Xuất chiếu không tồn tại, vui lòng kiểm tra lại
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.FOOD_IS_PAUSE">
+            <summary>
+            Đồ ăn đang tạm ngưng bán hoặc đã hết
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.LOGIN_IS_FALSE">
+            <summary>
+            Vui lòng đăng nhập để thực hiện chức năng này
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.CHOSE_TICKET">
+            <summary>
+            Vui lòng chọn vé để tiếp tục
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.OVERDUE_PAYMENT_TIME">
+            <summary>
+            Đã quá hạn thời gian thanh toán, vui lòng tạo đơn hàng mới
+            </summary>
+        </member>
         <member name="T:CapstoneProject.Commons.Helpers">
             <summary>
             Các xử lý chung thường xuyên sử dụng trong hệ thống.
@@ -1345,22 +1627,6 @@
             Trả về "1" nếu file upload không đúng định dạng.
             Trả về "2" nếu file upload quá dung lượng quy định.
             Trả về "" nếu upload sảy ra lỗi.
-            </returns>
-        </member>
-        <member name="M:CapstoneProject.Commons.Helpers.SaveListFileUpload(System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile},System.String,System.String,System.Int32,System.Collections.Generic.List{System.String},System.Int32)">
-            <summary>
-            Upload nhiều hình ảnh 1 lúc đồng thời tạo thumb cho các hình ảnh đó.
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
-            </summary>
-            <param name="files">Các file hình ảnh được gửi lên từ client</param>
-            <param name="folder">Thư mục sẽ lưu ảnh chính (mặc định là /public/images/upload/)</param>
-            <param name="folderThumb">Thư mục sẽ lưu Thumb của nahr chính (mặc định là /public/images/upload/thumb/)</param>
-            <param name="maxSize">Kích thước theo chiều nagng của Thumb, tính theo pixcel</param>
-            <param name="typeFiles">Loại file được phé tải lêm (mặc định là không check)</param>
-            <param name="sizeFile">Dung lượng tối đa mỗi file (mặc định là 10MB)</param>
-            <returns>
-            Trả về list đối tượng chưa link đến hình ảnh chính và thumb tương ứng
             </returns>
         </member>
         <member name="M:CapstoneProject.Commons.Helpers.SqlServerEscapeString(System.String)">
@@ -1580,7 +1846,7 @@
             Table UserPoint (UserPoint)
             </summary>
         </member>
-        <member name="P:CapstoneProject.Databases.DataContext.Size">
+        <member name="P:CapstoneProject.Databases.DataContext.Sizes">
             <summary>
             Table Size
             </summary>
@@ -1667,6 +1933,11 @@
             </summary>
         </member>
         <member name="P:CapstoneProject.Databases.DataContext.Positions">
+            <summary>
+            Table Branches
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.DataContext.Payments">
             <summary>
             Table Branches
             </summary>
@@ -2079,56 +2350,126 @@
             - 10: Bắp
             - 20: Oshi  -Bimbim
             - 30: Nước ngọt
+            - 40: Combo
             </summary>
         </member>
-        <member name="P:CapstoneProject.Databases.Schemas.System.Orders.OrderFoodDetail.OrderId">
+        <member name="P:CapstoneProject.Databases.Schemas.System.Food.Foods.Status">
+            <summary>
+            Typee:
+            - 10: Đang bán
+            - 20: Tạm ngưng
+            - 30: Đã hết
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Food.Foods.ImageLink">
+            <summary>
+            Link anh
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.OrderFoodDetail.OrderId">
             <summary>
             Id đơn hàng
             </summary>
         </member>
-        <member name="P:CapstoneProject.Databases.Schemas.System.Orders.OrderFoodDetail.FoodId">
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.OrderFoodDetail.FoodId">
             <summary>
             Id đồ ăn
             </summary>
         </member>
-        <member name="P:CapstoneProject.Databases.Schemas.System.Orders.OrderFoodDetail.Status">
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.Orders.OrderCode">
             <summary>
-            Trạng thái đơn hàng
+            Mã đơn hàng
             </summary>
         </member>
-        <member name="P:CapstoneProject.Databases.Schemas.System.Orders.Orders.UserId">
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.Orders.UserId">
             <summary>
             Id khách hàng
             </summary>
         </member>
-        <member name="P:CapstoneProject.Databases.Schemas.System.Orders.Orders.Status">
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.Orders.Status">
             <summary>
             Trạng thái đơn hàng
+            10: Chưa thanh toán
+            20: Thah toán thất bại
+            30: Đã thanh toán
             </summary>
         </member>
-        <member name="P:CapstoneProject.Databases.Schemas.System.Orders.Orders.EmployeeId">
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.Orders.EmployeeId">
             <summary>
             Nhan vien ban
             </summary>
         </member>
-        <member name="P:CapstoneProject.Databases.Schemas.System.Orders.Orders.BranchId">
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.Orders.BranchId">
             <summary>
             Mã chi nhánh
             </summary>
         </member>
-        <member name="P:CapstoneProject.Databases.Schemas.System.Orders.OrderTicketDetail.OrderId">
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.Orders.ShowTimeId">
+            <summary>
+            Mã xuất chiếu
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.Orders.ConfirmAt">
+            <summary>
+            Ngày xác nhận
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.OrderTicketDetail.OrderId">
             <summary>
             Id đơn hàng
             </summary>
         </member>
-        <member name="P:CapstoneProject.Databases.Schemas.System.Orders.OrderTicketDetail.TicketId">
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.OrderTicketDetail.TicketId">
             <summary>
             Id vé đơn hàng
             </summary>
         </member>
-        <member name="P:CapstoneProject.Databases.Schemas.System.Orders.OrderTicketDetail.Status">
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.OrderTicketDetail.Price">
             <summary>
-            Trạng thái đơn hàng
+            Giá vé
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.OrderTicketDetail.DiscountPrice">
+            <summary>
+            Khuyến mãi
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.OrderTicketDetail.SalePrice">
+            <summary>
+            Giá sale
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.OrderTicketDetail.PaymentPrice">
+            <summary>
+            Giá thanh toán
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.Payment.OriginPrice">
+            <summary>
+            Tổng giá niêm yết của các order detail
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.Payment.Price">
+            <summary>
+            Tổng giá bán của các order detail
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.Payment.SalePrice">
+            <summary>
+            Tổng PaymentPrice của các order detail
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.Payment.Status">
+            <summary>
+            Trạng thái thanh toán
+            10 chua thanh toan
+            20 thanh toan that bai
+            30 da thanh toan
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Order.Payment.PaymentAt">
+            <summary>
+            Ngày thanh toán
             </summary>
         </member>
         <member name="P:CapstoneProject.Databases.Schemas.System.Ticket.ShowTime.Name">
@@ -2221,6 +2562,7 @@
             Loại vé
             10: Chưa bán
             20: Đã bán
+            30: Đang có người chọn
             </summary>
         </member>
         <member name="P:CapstoneProject.Databases.Schemas.System.Users.User.Username">
@@ -2737,10 +3079,144 @@
         <member name="M:CapstoneProject.Migrations.updatefood.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:CapstoneProject.Migrations.updatedbname">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatedbname.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatedbname.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatedbname.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.addpayment">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.addpayment.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.addpayment.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.addpayment.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.Imagelink">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.Imagelink.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.Imagelink.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.Imagelink.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.Imagelinkim">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.Imagelinkim.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.Imagelinkim.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.Imagelinkim.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.createorder">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.createorder.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.createorder.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.createorder.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.updaterelationshiporderpm">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updaterelationshiporderpm.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updaterelationshiporderpm.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updaterelationshiporderpm.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.updatelinkimgbranch">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatelinkimgbranch.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatelinkimgbranch.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatelinkimgbranch.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.updatedborderTicketDetail">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatedborderTicketDetail.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatedborderTicketDetail.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatedborderTicketDetail.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.updatedborderTicketDetails">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatedborderTicketDetails.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatedborderTicketDetails.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.updatedborderTicketDetails.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CapstoneProject.Migrations.orderedaT">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.orderedaT.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.orderedaT.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CapstoneProject.Migrations.orderedaT.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="F:CapstoneProject.Program.ServiceName">
             <summary>
             Tên của microservice hiện tại
             </summary>
+        </member>
+        <member name="M:CapstoneProject.Services.IdentityService.GetUserIsLogin">
+            <summary>
+            Lấy thông tin tài khoản đang đăng nhập
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CapstoneProject.Services.IdentityService.CheckIndentifyUser(System.String)">
+            <summary>
+            Kiểm tra tài khoản đang đăng nhập có quyền không
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
         </member>
         <member name="P:FMStyle.RPT.Models.Schemas.BaseListOfData`1.Data">
             <summary>

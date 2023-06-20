@@ -20,6 +20,7 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels.Schemas
         /// Chi tiết phòng chiếu
         /// </summary>
         public RoomDetail RoomDetail { get; set; }
+
     }
 }
 

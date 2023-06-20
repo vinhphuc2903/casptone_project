@@ -84,6 +84,26 @@ namespace CapstoneProject.Areas.Film.Controllers
             }
         }
         /// <summary>
+        /// Lấy danh sách phim và lịch chiếu theo chi nhánh theo điều kiện tìm kiếm
+        /// <para>Created at: 22/05/2023</para>
+        /// <para>Created by: VinhPhuc</para>
+        /// </summary>
+        /// <response code="401">Chưa đăng nhập</response>
+        /// <response code="500">Lỗi khi có exception</response>
+        [HttpGet("show-time-by-branch")]
+        public async Task<ActionResult> GetShowTimeByDateByBranch([FromQuery] SearchCondition searchCondition)
+        {
+            try
+            {
+                return Ok(await _filmModel.GetShowTimeByDateByBranch(searchCondition));
+            }
+            catch (Exception e)
+            {
+                //await _logService.SaveLogException(e);
+                return StatusCode(500);
+            }
+        }
+        /// <summary>
         /// Lấy chi tiết showtime theo điều kiện id
         /// <para>Created at: 22/05/2023</para>
         /// <para>Created by: VinhPhuc</para>

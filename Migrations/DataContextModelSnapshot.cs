@@ -36,6 +36,9 @@ namespace CapstoneProject.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("BrackgroundImageLink")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -324,7 +327,7 @@ namespace CapstoneProject.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.Setting.Size", b =>
+            modelBuilder.Entity("CapstoneProject.Databases.Schemas.Setting.Sizes", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -362,7 +365,7 @@ namespace CapstoneProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Size");
+                    b.ToTable("Sizes");
                 });
 
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.CinemaRoom.CinemaRooms", b =>
@@ -786,6 +789,10 @@ namespace CapstoneProject.Migrations
                     b.Property<bool>("DelFlag")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ImageLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NameOption1")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -793,11 +800,16 @@ namespace CapstoneProject.Migrations
                     b.Property<string>("NameOption2")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("OriginPrice")
+                        .HasColumnType("int");
+
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
+                    b.Property<int?>("SalePrice")
+                        .HasColumnType("int");
+
                     b.Property<int?>("SizeId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
@@ -823,7 +835,7 @@ namespace CapstoneProject.Migrations
                     b.ToTable("Foods");
                 });
 
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Orders.OrderFoodDetail", b =>
+            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Order.OrderFoodDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -846,15 +858,29 @@ namespace CapstoneProject.Migrations
                     b.Property<bool>("DelFlag")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("DiscountPrice")
+                        .HasColumnType("int");
+
                     b.Property<int>("FoodId")
                         .HasColumnType("int");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("OriginPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PaymentPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SalePrice")
+                        .HasColumnType("int");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("datetimeoffset");
@@ -875,7 +901,7 @@ namespace CapstoneProject.Migrations
                     b.ToTable("OrderFoodDetail");
                 });
 
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Orders.OrderTicketDetail", b =>
+            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Order.OrderTicketDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -898,12 +924,20 @@ namespace CapstoneProject.Migrations
                     b.Property<bool>("DelFlag")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("DiscountPrice")
+                        .HasColumnType("int");
+
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("PaymentPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SalePrice")
+                        .HasColumnType("int");
 
                     b.Property<int>("TicketId")
                         .HasColumnType("int");
@@ -927,7 +961,7 @@ namespace CapstoneProject.Migrations
                     b.ToTable("OrderTicketDetail");
                 });
 
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Orders.Orders", b =>
+            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Order.Orders", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -938,6 +972,9 @@ namespace CapstoneProject.Migrations
 
                     b.Property<int?>("BranchId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("ConfirmAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("datetimeoffset");
@@ -954,6 +991,17 @@ namespace CapstoneProject.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int?>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OrderCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PaymentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ShowTimeId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
@@ -979,9 +1027,83 @@ namespace CapstoneProject.Migrations
 
                     b.HasIndex("EmployeeId");
 
+                    b.HasIndex("ShowTimeId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Order.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedIp")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("DelFlag")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("DiscountPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OriginPrice")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("PaymentAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SalePrice")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Total")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UpdatedIp")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId")
+                        .IsUnique()
+                        .HasFilter("[OrderId] IS NOT NULL");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Ticket.ShowTime", b =>
@@ -1095,6 +1217,9 @@ namespace CapstoneProject.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("OrderAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
@@ -1524,16 +1649,14 @@ namespace CapstoneProject.Migrations
 
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Food.Foods", b =>
                 {
-                    b.HasOne("CapstoneProject.Databases.Schemas.Setting.Size", "Size")
+                    b.HasOne("CapstoneProject.Databases.Schemas.Setting.Sizes", "Sizes")
                         .WithMany("Foods")
-                        .HasForeignKey("SizeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SizeId");
 
-                    b.Navigation("Size");
+                    b.Navigation("Sizes");
                 });
 
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Orders.OrderFoodDetail", b =>
+            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Order.OrderFoodDetail", b =>
                 {
                     b.HasOne("CapstoneProject.Databases.Schemas.System.Food.Foods", "Foods")
                         .WithMany("OrderFoodDetails")
@@ -1541,7 +1664,7 @@ namespace CapstoneProject.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("CapstoneProject.Databases.Schemas.System.Orders.Orders", "Orders")
+                    b.HasOne("CapstoneProject.Databases.Schemas.System.Order.Orders", "Orders")
                         .WithMany("OrderFoodDetails")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1552,9 +1675,9 @@ namespace CapstoneProject.Migrations
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Orders.OrderTicketDetail", b =>
+            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Order.OrderTicketDetail", b =>
                 {
-                    b.HasOne("CapstoneProject.Databases.Schemas.System.Orders.Orders", "Orders")
+                    b.HasOne("CapstoneProject.Databases.Schemas.System.Order.Orders", "Orders")
                         .WithMany("OrderTicketDetails")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1571,7 +1694,7 @@ namespace CapstoneProject.Migrations
                     b.Navigation("Ticket");
                 });
 
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Orders.Orders", b =>
+            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Order.Orders", b =>
                 {
                     b.HasOne("CapstoneProject.Databases.Schemas.Setting.Branch", "Branches")
                         .WithMany("Orders")
@@ -1582,6 +1705,12 @@ namespace CapstoneProject.Migrations
                         .WithMany()
                         .HasForeignKey("EmployeeId");
 
+                    b.HasOne("CapstoneProject.Databases.Schemas.System.Ticket.ShowTime", "ShowTime")
+                        .WithMany("Orders")
+                        .HasForeignKey("ShowTimeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("CapstoneProject.Databases.Schemas.System.Users.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -1591,6 +1720,25 @@ namespace CapstoneProject.Migrations
                     b.Navigation("Branches");
 
                     b.Navigation("Employee");
+
+                    b.Navigation("ShowTime");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Order.Payment", b =>
+                {
+                    b.HasOne("CapstoneProject.Databases.Schemas.System.Order.Orders", "Orders")
+                        .WithOne("Payments")
+                        .HasForeignKey("CapstoneProject.Databases.Schemas.System.Order.Payment", "OrderId");
+
+                    b.HasOne("CapstoneProject.Databases.Schemas.System.Users.User", "User")
+                        .WithMany("Payments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Orders");
 
                     b.Navigation("User");
                 });
@@ -1733,7 +1881,7 @@ namespace CapstoneProject.Migrations
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.Setting.Size", b =>
+            modelBuilder.Entity("CapstoneProject.Databases.Schemas.Setting.Sizes", b =>
                 {
                     b.Navigation("Foods");
                 });
@@ -1772,11 +1920,18 @@ namespace CapstoneProject.Migrations
                     b.Navigation("OrderFoodDetails");
                 });
 
-            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Orders.Orders", b =>
+            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Order.Orders", b =>
                 {
                     b.Navigation("OrderFoodDetails");
 
                     b.Navigation("OrderTicketDetails");
+
+                    b.Navigation("Payments");
+                });
+
+            modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Ticket.ShowTime", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("CapstoneProject.Databases.Schemas.System.Ticket.Tickets", b =>
@@ -1788,6 +1943,8 @@ namespace CapstoneProject.Migrations
                 {
                     b.Navigation("Employees")
                         .IsRequired();
+
+                    b.Navigation("Payments");
 
                     b.Navigation("Roles");
 

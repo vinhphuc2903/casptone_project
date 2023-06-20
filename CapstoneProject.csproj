@@ -45,6 +45,9 @@
     <PackageReference Include="System.Security.Cryptography.Cng" Version="5.0.0" />
     <PackageReference Include="System.Security.Claims" Version="4.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+    <PackageReference Include="AWSSDK.S3" Version="3.7.104.24" />
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -123,6 +126,10 @@
     <None Remove="Areas\Orders\Controllers\" />
     <None Remove="Areas\Orders\Models\" />
     <None Remove="Areas\Orders\Models\Schemas\" />
+    <None Remove="Areas\Report\" />
+    <None Remove="Areas\Report\Controllers\" />
+    <None Remove="Areas\Report\Models\" />
+    <None Remove="Areas\Report\Models\Schemas\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\" />
@@ -145,7 +152,7 @@
     <Folder Include="Areas\Users\Models\LoginModel\Schemas\" />
     <Folder Include="Databases\Schemas\Setting\" />
     <Folder Include="Commons\CodeMaster\" />
-    <Folder Include="Databases\Schemas\System\Orders\" />
+    <Folder Include="Databases\Schemas\System\Order\" />
     <Folder Include="Databases\Schemas\System\Ticket\" />
     <Folder Include="Databases\Schemas\System\Film\" />
     <Folder Include="Databases\Schemas\System\CinemaRoom\" />
@@ -173,5 +180,9 @@
     <Folder Include="Areas\Orders\Controllers\" />
     <Folder Include="Areas\Orders\Models\" />
     <Folder Include="Areas\Orders\Models\Schemas\" />
+    <Folder Include="Areas\Report\" />
+    <Folder Include="Areas\Report\Controllers\" />
+    <Folder Include="Areas\Report\Models\" />
+    <Folder Include="Areas\Report\Models\Schemas\" />
   </ItemGroup>
 </Project>

@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using CapstoneProject.Databases;
 using CapstoneProject.Databases.Schemas.System.CinemaRoom;
 using CapstoneProject.Databases.Schemas.System.Film;
-using CapstoneProject.Databases.Schemas.System.Orders;
+using CapstoneProject.Databases.Schemas.System.Order;
 
 namespace CapstoneProject.Databases.Schemas.System.Ticket
 {
@@ -37,8 +37,12 @@ namespace CapstoneProject.Databases.Schemas.System.Ticket
         /// Loại vé
         /// 10: Chưa bán
         /// 20: Đã bán
+        /// 30: Đang có người chọn
         /// </summary>
         public string? Type { get; set; }
+
+        public DateTime? OrderAt { get; set; }
+
         public DateTimeOffset CreatedAt { set; get; }
 
         public int CreatedBy { set; get; }

@@ -19,6 +19,10 @@ using CapstoneProject.Commons.Schemas;
 using FilmData = CapstoneProject.Databases.Schemas.System.Film.Films;
 using TypeFilmData = CapstoneProject.Databases.Schemas.System.Film.TypeFilmDetail;
 using CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas;
+using CapstoneProject.Services;
+using CapstoneProject.Commons.CodeMaster;
+using Azure;
+using CapstoneProject.Commons.Enum;
 
 namespace CapstoneProject.Areas.Film.Models.FilmAdminModels
 {
@@ -26,56 +30,64 @@ namespace CapstoneProject.Areas.Film.Models.FilmAdminModels
     {
         //Task<ListFilms> GetListFilms(SearchCondition searchCondition);
         Task<ResponseInfo> AddNewFilmData(NewFilmData newFilmData);
+        Task<ResponseInfo> UpdateFilmData(NewFilmData newFilmData);
+        Task<NewFilmData> GetDetailFilm(int id);
     }
     public class FilmAdminModel : CapstoneProjectModels, IFilmAdminModels
     {
         private readonly ILogger<FilmAdminModel> _logger;
         private readonly IConfiguration _configuration;
         private string _className = "";
+        private readonly IIdentityService _indentityService;
+        private readonly IMediaService _iIMediaService;
 
         public FilmAdminModel(
             IConfiguration configuration,
             ILogger<FilmAdminModel> logger,
-            IServiceProvider provider
+            IServiceProvider provider,
+            IIdentityService identityService,
+            IMediaService mediaService
         ) : base(provider)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _className = GetType().Name;
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            _indentityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
+            _iIMediaService = mediaService ?? throw new ArgumentNullException(nameof(mediaService));
         }
-        //public async Task<ListFilms> GetListFilms(SearchCondition searchCondition)
-        //{
-        //    string method = GetActualAsyncMethodName();
-        //    IDbContextTransaction transaction = null;
-        //    try
-        //    {
-        //        ListFilms listFilms = new ListFilms();
-        //        listFilms.ListFilmInfos = await _context.Films.Where(x => !x.DelFlag)
-        //                                                .Select(x => new FilmInfo()
-        //                                                {
-        //                                                    Id = x.Id,
-        //                                                    Name = x.Name,
-        //                                                    Actor = x.Actor,
-        //                                                    Director = x.Director,
-        //                                                    Age = x.AgeLimit,
-        //                                                    Time = x.Time,
-        //                                                }
-        //                                                ).ToListAsync();
-        //        foreach (var film in listFilms.ListFilmInfos)
-        //        {
-        //            film.ListTypeFilm = await _context.TypeFilmDetails
-        //                                            .Where(x => !x.DelFlag && x.FilmId == film.Id)
-        //                                            .Include(x => x.TypeFilms)
-        //                                            .Select(x => x.TypeFilms.Name).ToListAsync();
-        //        }
-        //        return listFilms;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogInformation($"Get List Film Error: {ex}");
-        //        throw ex;
-        //    }
-        //}
+        public async Task<NewFilmData> GetDetailFilm(int id)
+        {
+            string method = GetActualAsyncMethodName();
+            IDbContextTransaction transaction = null;
+            try
+            {
+                FilmData film = await _context.Films.Include(x => x.TypeFilmDetail).Where(x => !x.DelFlag && x.Id == id).FirstOrDefaultAsync();
+                NewFilmData typefilm = new NewFilmData()
+                {
+                    Id = film.Id,
+                    Name = film.Name,
+                    Actor = film.Actor,
+                    Director = film.Director,
+                    AgeLimit = film.AgeLimit,
+                    Time = film.Time,
+                    Introduce = film.Introduce,
+                    TrailerLink = film.TrailerLink.Replace("watch?v=", "embed/"),
+                    Country = film.Country,
+                    BackgroundImageLink = film.BackgroundImage,
+                    DateStart = film.DateStart,
+                    DateEnd = film.DateEnd,
+                    Status = film.Status,
+                    Language = film.Language,
+                    ListTypeFilmData = film.TypeFilmDetail.Select(x => x.TypeFilmId).ToList()
+            };
+                return typefilm;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"Get List Film Error: {ex}");
+                throw ex;
+            }
+        }
         public async Task<ResponseInfo> AddNewFilmData(NewFilmData newFilmData)
         {
             string method = GetActualAsyncMethodName();
@@ -83,6 +95,14 @@ namespace CapstoneProject.Areas.Film.Models.FilmAdminModels
             ResponseInfo responseInfo = new ResponseInfo();
             try
             {
+                if(!await _indentityService.CheckIndentifyUser(R001.ADMIN.CODE))
+                {
+                    responseInfo.Code = CodeResponse.HAVE_ERROR;
+                    responseInfo.MsgNo = MSG_NO.ACCOUNT_NOT_HAVE_PERMISSION;
+                    return responseInfo;
+                }
+                //Upload ảnh lên s3
+                string linkImage = await _iIMediaService.UploadImageToS3(newFilmData.BackgroundImage, true, 254, 381);
                 var film = await _context.Films.Where(x => !x.DelFlag && x.Name.Contains(newFilmData.Name)).FirstOrDefaultAsync();
                 FilmData typefilm = new FilmData()
                 {
@@ -94,7 +114,7 @@ namespace CapstoneProject.Areas.Film.Models.FilmAdminModels
                    Introduce = newFilmData.Introduce,
                    TrailerLink = newFilmData.TrailerLink.Replace("watch?v=", "embed/"),
                    Country = newFilmData.Country,
-                   BackgroundImage = newFilmData.BackgroundImage,
+                   BackgroundImage = linkImage,
                    DateStart = newFilmData.DateStart,
                    DateEnd = newFilmData.DateEnd,
                    Status = newFilmData.Status,
@@ -112,6 +132,70 @@ namespace CapstoneProject.Areas.Film.Models.FilmAdminModels
                    };
                    await _context.TypeFilmDetails.AddAsync(typeFilm);
                    await _context.SaveChangesAsync();
+                }
+                await _context.SaveChangesAsync();
+                transaction = await _context.Database.BeginTransactionAsync();
+                transaction?.CommitAsync();
+                return responseInfo;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"Get List Film Error: {ex}");
+                throw ex;
+            }
+        }
+        public async Task<ResponseInfo> UpdateFilmData(NewFilmData filmdataUpdate)
+        {
+            string method = GetActualAsyncMethodName();
+            IDbContextTransaction transaction = null;
+            ResponseInfo responseInfo = new ResponseInfo();
+            try
+            {
+                if (!await _indentityService.CheckIndentifyUser(R001.ADMIN.CODE))
+                {
+                    responseInfo.Code = CodeResponse.HAVE_ERROR;
+                    responseInfo.MsgNo = MSG_NO.ACCOUNT_NOT_HAVE_PERMISSION;
+                    return responseInfo;
+                }
+                //Upload ảnh lên s3
+                string linkImage = await _iIMediaService.UploadImageToS3(filmdataUpdate.BackgroundImage, true, 254, 381);
+                var film = await _context.Films.Where(x => !x.DelFlag && x.Name.Contains(filmdataUpdate.Name)).FirstOrDefaultAsync();
+                FilmData filmUpdate = await _context.Films.Where(x => !x.DelFlag && x.Id == filmdataUpdate.Id).FirstOrDefaultAsync();
+                //Cap nhat lai film
+                filmUpdate = new FilmData()
+                {
+                    Name = filmdataUpdate.Name,
+                    Actor = filmdataUpdate.Actor,
+                    Director = filmdataUpdate.Director,
+                    AgeLimit = filmdataUpdate.AgeLimit,
+                    Time = filmdataUpdate.Time,
+                    Introduce = filmdataUpdate.Introduce,
+                    TrailerLink = filmdataUpdate.TrailerLink.Replace("watch?v=", "embed/"),
+                    Country = filmdataUpdate.Country,
+                    BackgroundImage = linkImage,
+                    DateStart = filmdataUpdate.DateStart,
+                    DateEnd = filmdataUpdate.DateEnd,
+                    Status = filmdataUpdate.Status,
+                    Language = filmdataUpdate.Language
+                };
+                await _context.SaveChangesAsync();
+                var listType = filmdataUpdate.ListTypeFilm.Trim().Replace(" ", "").Split(',');
+                //Cap nhat lai typeFilm
+                foreach (var type in listType)
+                {
+                    TypeFilmData typeFilm = new TypeFilmData()
+                    {
+                        FilmId = filmUpdate.Id,
+                        TypeFilmId = Int32.Parse(type)
+                    };
+                    await _context.TypeFilmDetails.AddAsync(typeFilm);
+                    await _context.SaveChangesAsync();
+                }
+                // Xoa typeFilmDetail cu
+                var listTypeFilmOld = await _context.TypeFilmDetails.Where(x => !x.DelFlag && x.FilmId == filmUpdate.Id).ToListAsync();
+                foreach(var typeFilm in listTypeFilmOld)
+                {
+                    typeFilm.DelFlag = true;
                 }
                 await _context.SaveChangesAsync();
                 transaction = await _context.Database.BeginTransactionAsync();

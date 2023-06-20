@@ -10,7 +10,6 @@ using CapstoneProject.Areas.ShowTime.Models.Schemas;
 
 namespace CapstoneProject.Areas.ShowTime.Controllers
 {
-    [Auth]
     [Route(("api/{api_version:apiVersion}/showtime"))]
     public class ShowtimeController : ShowtimeAreaController
     {
@@ -50,12 +49,33 @@ namespace CapstoneProject.Areas.ShowTime.Controllers
         /// </summary>
         /// <response code="401">Chưa đăng nhập</response>
         /// <response code="500">Lỗi khi có exception</response>
+        [Auth]
         [HttpPost()]
         public async Task<ActionResult> AddNewFilmData([FromBody] ShowTimeInput showTimeInput)
         {
             try
             {
                 return Ok(await _showtimeModels.AddShowTime(showTimeInput));
+            }
+            catch (Exception e)
+            {
+                //await _logService.SaveLogException(e);
+                return StatusCode(500);
+            }
+        }
+        /// <summary>
+        /// Thêm loại đồ ăn mới
+        /// <para>Created at: 04/06/2023</para>
+        /// <para>Created by: VinhPhuc</para>
+        /// </summary>
+        /// <response code="401">Chưa đăng nhập</response>
+        /// <response code="500">Lỗi khi có exception</response>
+        [HttpPost("create-food")]
+        public async Task<ActionResult> CreateFood([FromForm] FoodData foodData)
+        {
+            try
+            {
+                return Ok(await _showtimeModels.CreateFood(foodData));
             }
             catch (Exception e)
             {

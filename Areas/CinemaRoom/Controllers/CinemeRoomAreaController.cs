@@ -6,7 +6,6 @@ using CapstoneProject.Auths;
 
 namespace CapstoneProject.Areas.CinemeRoom.Controllers
 {
-    [Auth]
     [Area("CinemaRoom")]
     public class CinemeRoomAreaController : BaseController
     {

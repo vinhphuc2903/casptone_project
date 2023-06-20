@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using CapstoneProject.Databases.Schemas.System.Employee;
 using CapstoneProject.Databases.Schemas.System.Users;
 using CapstoneProject.Databases.Schemas.System.Food;
-using CapstoneProject.Databases.Schemas.System.Orders;
+using CapstoneProject.Databases.Schemas.System.Order;
 using CapstoneProject.Databases.Schemas.System.Ticket;
 using CapstoneProject.Databases.Schemas.System.Film;
 using CapstoneProject.Databases.Schemas.System.CinemaRoom;
@@ -64,7 +64,7 @@ namespace CapstoneProject.Databases
         /// Table Size
         /// </summary>
         /// <value></value>
-        public virtual DbSet<Size> Size { get; set; }
+        public virtual DbSet<Sizes> Sizes { get; set; }
         /// <summary>
         /// Table Order Food Detail
         /// </summary>
@@ -134,6 +134,10 @@ namespace CapstoneProject.Databases
         /// Table Branches
         /// </summary>
         public virtual DbSet<Position> Positions { get; set; }
+        /// <summary>
+        /// Table Branches
+        /// </summary>
+        public virtual DbSet<Payment> Payments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -177,7 +181,7 @@ namespace CapstoneProject.Databases
             modelBuilder.Entity<OrderFoodDetail>()
                 .HasKey(e => e.Id);
 
-            modelBuilder.Entity<Size>()
+            modelBuilder.Entity<Sizes>()
                 .HasKey(e => e.Id);
 
             modelBuilder.Entity<Foods>()
@@ -204,6 +208,9 @@ namespace CapstoneProject.Databases
                 .HasKey(e => e.Id);
 
             modelBuilder.Entity<Position>()
+                .HasKey(e => e.Id);
+
+            modelBuilder.Entity<Payment>()
                 .HasKey(e => e.Id);
 
             // Setting relationship
@@ -273,7 +280,7 @@ namespace CapstoneProject.Databases
 
             //Foods
             modelBuilder.Entity<Foods>()
-                .HasOne(u => u.Size)
+                .HasOne(u => u.Sizes)
                 .WithMany(t => t.Foods)
                 .HasForeignKey(t => t.SizeId);
 
@@ -302,7 +309,6 @@ namespace CapstoneProject.Databases
                 .WithMany(t => t.OrderTicketDetail)
                 .HasForeignKey(t => t.TicketId)
                 .OnDelete(DeleteBehavior.NoAction);
-
             //Show time
             modelBuilder.Entity<ShowTime>()
                 .HasOne(u => u.Film)
@@ -405,6 +411,26 @@ namespace CapstoneProject.Databases
                 .WithOne(e => e.Positions)
                 .HasForeignKey(e => e.PositionId)
                 .OnDelete(DeleteBehavior.NoAction);
+            //Payment
+            modelBuilder.Entity<Payment>()
+                .HasOne(e => e.Orders)
+                .WithOne(e => e.Payments)
+                .HasForeignKey<Orders>(c => c.PaymentId);
+            modelBuilder.Entity<Payment>()
+                .HasOne(e => e.User)
+                .WithMany(e => e.Payments)
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+            //Order
+            modelBuilder.Entity<Orders>()
+                .HasOne(e => e.ShowTime)
+                .WithMany(e => e.Orders)
+                .HasForeignKey(c => c.ShowTimeId)
+                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Orders>()
+                .HasOne(e => e.Payments)
+                .WithOne(e => e.Orders)
+                .HasForeignKey<Payment>(c => c.OrderId);
         }
 
         public DbConnection GetConnection()

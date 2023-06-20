@@ -5,6 +5,7 @@ using System.Data;
 using CapstoneProject.Databases.Schemas.System.Film;
 using CapstoneProject.Databases.Schemas.System.CinemaRoom;
 using CapstoneProject.Databases.Schemas.Setting;
+using CapstoneProject.Databases.Schemas.System.Order;
 
 namespace CapstoneProject.Databases.Schemas.System.Ticket
 {
@@ -14,6 +15,7 @@ namespace CapstoneProject.Databases.Schemas.System.Ticket
         public ShowTime()
         {
             //Tickets = new HashSet<Tickets>();
+            Orders = new HashSet<Orders>();
         }
         /// <summary>
         /// Ten xuat chieu
@@ -90,6 +92,7 @@ namespace CapstoneProject.Databases.Schemas.System.Ticket
 
         public virtual CinemaRooms CinemaRooms { get; set; }
 
+        public virtual ICollection<Orders> Orders { get; set; }
         //public virtual ICollection<Tickets> Tickets { get; set; }
     }
 }

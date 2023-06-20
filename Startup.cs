@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Routing;
 using CapstoneProject.Extensions;
 using Microsoft.OpenApi.Models;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using CapstoneProject.Databases;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore;
@@ -155,7 +154,7 @@ namespace CapstoneProject
             //    //c.OperationFilter<SecurityRequirementsOperationFilter>();
             //});
             services.AddTransient<IIdentityService, IdentityService>();
-
+            services.AddTransient<IMediaService, MediaService>();
             // Add db
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer("Server=localhost;Database=CasptonePrjDB;User Id=sa;Password=123456aA@$;TrustServerCertificate=true;"));
@@ -173,6 +172,7 @@ namespace CapstoneProject
             builder.RegisterModule(new AutofacModules.CustomerModule()); 
             builder.RegisterModule(new AutofacModules.CinemaRoomModule());
             builder.RegisterModule(new AutofacModules.OrderModule());
+            builder.RegisterModule(new AutofacModules.ReportModule());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
