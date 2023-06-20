@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using CapstoneProject.Databases;
 using CapstoneProject.Databases.Schemas.System.Food;
 
-namespace CapstoneProject.Databases.Schemas.System.Orders
+namespace CapstoneProject.Databases.Schemas.System.Order
 {
     [Table("OrderFoodDetail")]
     public partial class OrderFoodDetail : TableHaveIdInt, ITable
@@ -22,10 +22,18 @@ namespace CapstoneProject.Databases.Schemas.System.Orders
         /// </summary>
         [AuditIgnore]
         public int FoodId { get; set; }
-        /// <summary>
-        /// Trạng thái đơn hàng
-        /// </summary>
-        public string Status { get; set; }
+
+        public int Quantity { get; set; }
+
+        public int Price { get; set; }
+
+        public int? SalePrice { get; set; }
+
+        public int? OriginPrice { get; set; }
+
+        public int? DiscountPrice { get; set; }
+
+        public int? PaymentPrice { get; set; }
 
         public DateTimeOffset CreatedAt { set; get; }
 

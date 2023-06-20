@@ -25,6 +25,7 @@ using UserTokenData = CapstoneProject.Databases.Schemas.System.Users.UserToken;
 using EmployeeDb = CapstoneProject.Databases.Schemas.System.Employee.Employees;
 using CapstoneProject.Areas.Users.Models.LoginModel;
 using CapstoneProject.Areas.Users.Models.UserModel;
+using CapstoneProject.Services;
 
 namespace CapstoneProject.Areas.Employee.Models
 {
@@ -49,6 +50,7 @@ namespace CapstoneProject.Areas.Employee.Models
         private readonly IConfiguration _configuration;
         private readonly ILoginModel _loginModel;
         private readonly IUsersModel _usersModel;
+        private readonly IIdentityService _indentityService;
         private string _className = "";
         private static readonly string[] Summaries = new[]
         {
@@ -60,7 +62,8 @@ namespace CapstoneProject.Areas.Employee.Models
             ILogger<EmployeesModel> logger,
             IServiceProvider provider,
             ILoginModel loginModel,
-            IUsersModel usersModel
+            IUsersModel usersModel,
+            IIdentityService identityService
         ) : base(provider)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -68,6 +71,7 @@ namespace CapstoneProject.Areas.Employee.Models
             _loginModel = loginModel ?? throw new ArgumentNullException(nameof(loginModel));
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             _usersModel = usersModel ?? throw new ArgumentNullException(nameof(usersModel));
+            _indentityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
         }
 
         public async Task<IEnumerable<EmployeeData>> GetEmployees(Schemas.SearchConditon searchCondition)

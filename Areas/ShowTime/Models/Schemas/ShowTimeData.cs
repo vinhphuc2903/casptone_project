@@ -6,6 +6,7 @@ namespace CapstoneProject.Areas.ShowTime.Models.Schemas
 		public ShowTimeData()
 		{
 		}
+		public int Id { get; set; }
 		public DateTime? DateShow { get; set; }
 		public int? BranchId { get; set; }
         /// <summary>

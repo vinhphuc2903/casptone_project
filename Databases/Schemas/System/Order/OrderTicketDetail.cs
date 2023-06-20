@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using CapstoneProject.Databases;
 using CapstoneProject.Databases.Schemas.System.Ticket;
 
-namespace CapstoneProject.Databases.Schemas.System.Orders
+namespace CapstoneProject.Databases.Schemas.System.Order
 {
     [Table("OrderTicketDetail")]
     public partial class OrderTicketDetail : TableHaveIdInt, ITable
@@ -23,9 +23,21 @@ namespace CapstoneProject.Databases.Schemas.System.Orders
         [AuditIgnore]
         public int TicketId { get; set; }
         /// <summary>
-        /// Trạng thái đơn hàng
+        /// Giá vé
         /// </summary>
-        public string Status { get; set; }
+        public int? Price { get; set; }
+        /// <summary>
+        /// Khuyến mãi
+        /// </summary>
+        public int? DiscountPrice { get; set; }
+        /// <summary>
+        /// Giá sale
+        /// </summary>
+        public int? SalePrice { get; set; }
+        /// <summary>
+        /// Giá thanh toán
+        /// </summary>
+        public int? PaymentPrice { get; set; }
 
         public DateTimeOffset CreatedAt { set; get; }
 

@@ -6,6 +6,7 @@ namespace CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas
 {
     public class NewFilmData
     {
+        public int? Id { get; set; }
         /// <summary>
         /// Tên loại phim
         /// </summary>
@@ -62,7 +63,12 @@ namespace CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas
         /// <summary>
         /// Link ảnh backGround
         /// </summary>
-        public string BackgroundImage { get; set; }
+        public IFormFile BackgroundImage { get; set; }
+
+        // <summary>
+        /// Link ảnh backGround
+        /// </summary>
+        public string? BackgroundImageLink { get; set; }
 
         /// <summary>
         /// Link trailer film Youtobe
@@ -70,6 +76,7 @@ namespace CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas
         public string TrailerLink { get; set; }
         [Required]
         public string ListTypeFilm { get; set; }
-	}
+        public List<int>? ListTypeFilmData { get; set; }
+    }
 }
 

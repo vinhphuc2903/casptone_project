@@ -17,6 +17,7 @@ using CapstoneProject.Commons.Schemas;
 using ShowTimeDb = CapstoneProject.Databases.Schemas.System.Ticket.ShowTime;
 using TicketData = CapstoneProject.Databases.Schemas.System.Ticket.Tickets;
 using TypeFilmData = CapstoneProject.Databases.Schemas.System.Film.TypeFilmDetail;
+using FoodDb = CapstoneProject.Databases.Schemas.System.Food.Foods;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Drawing.Printing;
 using CapstoneProject.Commons;
@@ -24,6 +25,8 @@ using CapstoneProject.Areas.ShowTime.Models.Schemas;
 using CapstoneProject.Commons.Enum;
 using CapstoneProject.Databases.Schemas.System.Ticket;
 using Microsoft.IdentityModel.Tokens;
+using CapstoneProject.Services;
+using CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas;
 
 namespace CapstoneProject.Areas.ShowTime.Models
 {
@@ -41,21 +44,32 @@ namespace CapstoneProject.Areas.ShowTime.Models
         /// <param name="showTimeInput"></param>
         /// <returns></returns>
         Task<ResponseInfo> AddShowTime(ShowTimeInput showTimeInput);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="orderData"></param>
+        /// <returns></returns>
+        Task<ResponseInfo> CreateFood(FoodData foodData);
+
     }
     public class ShowtimeModels : CapstoneProjectModels, IShowtimeModels
     {
         private readonly ILogger<ShowtimeModels> _logger;
         private readonly IConfiguration _configuration;
         private string _className = "";
+        private readonly IMediaService _iIMediaService;
+
         public ShowtimeModels(
             IConfiguration configuration,
             ILogger<ShowtimeModels> logger,
-            IServiceProvider provider
+            IServiceProvider provider,
+            IMediaService mediaService
         ) : base(provider)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _className = GetType().Name;
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            _iIMediaService = mediaService ?? throw new ArgumentNullException(nameof(mediaService));
         }
         public async Task<ResponseInfo> AddShowTime(ShowTimeInput showTimeInput)
         {
@@ -77,7 +91,7 @@ namespace CapstoneProject.Areas.ShowTime.Models
                     //Suất cuối cùng từ
                     int timeToShow = timeFromShow + (showTimeInput.MinOff + totalTimeFilm) * (showTimeInput.CountShow - 1);
                     //Kiểm tra thời gian bắt đầu chiếu > 8h < 1h ngày hôm sau
-                    if (timeFromShow < 8 * 60 && timeToShow > 25 * 60)
+                    if (timeFromShow < 8 * 60 || timeToShow > 25 * 60)
                     {
                         responseInfo.Code = CodeResponse.HAVE_ERROR;
                         responseInfo.MsgNo = MSG_NO.TIME_SHOW_ERROR;
@@ -170,7 +184,7 @@ namespace CapstoneProject.Areas.ShowTime.Models
 
                             TicketData tickets = new TicketData()
                             {
-                                Price = 45000 * surcharge,
+                                Price = 45000 + surcharge,
                                 SeatId = seat.Id,
                                 ShowtimeId = showtimeData.Id,
                                 Name = seat.SeatCode,
@@ -204,6 +218,8 @@ namespace CapstoneProject.Areas.ShowTime.Models
                 var showTimeDatas = _context.ShowTime
                     .Include(x => x.CinemaRooms)
                     .Where(x => !x.DelFlag
+                        && (String.IsNullOrEmpty(searchCondition.Id.ToString())
+                        || x.Id == searchCondition.Id)
                         && (String.IsNullOrEmpty(searchCondition.BranchId.ToString())
                         || x.BranchId == searchCondition.BranchId)
                         && (String.IsNullOrEmpty(searchCondition.FilmName)
@@ -217,6 +233,7 @@ namespace CapstoneProject.Areas.ShowTime.Models
                     )
                     .Select(x => new ShowTimeData()
                     {
+                        Id = x.Id,
                         DateShow = x.DateShow,
                         BranchId = x.BranchId,
                         BranchName = x.Branches.Name,
@@ -243,6 +260,39 @@ namespace CapstoneProject.Areas.ShowTime.Models
                                                 .Take(searchCondition.PageSize)
                                                 .ToListAsync();
                 return listShowTime;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"Get List Film Error: {ex}");
+                throw ex;
+            }
+        }
+
+        public async Task<ResponseInfo> CreateFood(FoodData foodData)
+        {
+            string method = GetActualAsyncMethodName();
+            IDbContextTransaction transaction = null;
+            ResponseInfo responseInfo = new ResponseInfo();
+            try
+            {
+                //Upload ảnh lên s3
+                string linkImage = await _iIMediaService.UploadImageToS3(foodData.ImageLink, true, 254, 381);
+
+                FoodDb foods = new FoodDb()
+                {
+                    NameOption1 = foodData.NameOption1,
+                    NameOption2 = foodData.NameOption2,
+                    Price = foodData.Price,
+                    SalePrice = foodData.SalePrice,
+                    OriginPrice = foodData.OriginPrice,
+                    Type = foodData.Type,
+                    Status = foodData.Status,
+                    ImageLink = linkImage,
+                    SizeId = foodData.SizeId,
+                };
+                await _context.Foods.AddAsync(foods);
+                await _context.SaveChangesAsync();
+                return responseInfo;
             }
             catch (Exception ex)
             {

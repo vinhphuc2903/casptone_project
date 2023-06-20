@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EnvDTE;
 using CapstoneProject.Databases.Schemas.System.CinemaRoom;
-using CapstoneProject.Databases.Schemas.System.Orders;
+using CapstoneProject.Databases.Schemas.System.Order;
 using CapstoneProject.Databases.Schemas.System.Employee;
 using CapstoneProject.Databases.Schemas.System.Ticket;
 
@@ -48,6 +48,7 @@ namespace CapstoneProject.Databases.Schemas.Setting
         [StringLength(255)]
         public string Email { set; get; }
 
+        public string? BrackgroundImageLink { get; set; }
         public DateTimeOffset CreatedAt { set; get; }
 
         public int CreatedBy { set; get; }

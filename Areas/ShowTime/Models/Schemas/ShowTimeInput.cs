@@ -29,7 +29,7 @@ namespace CapstoneProject.Areas.ShowTime.Models.Schemas
 		/// <summary>
 		/// Thời gian kết thúc
 		/// </summary>
-		public DateTime TimeTo { get; set; }
+		//public DateTime TimeTo { get; set; }
 		/// <summary>
 		/// Số xuất chiếu
 		/// </summary>

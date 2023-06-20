@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore;
 using CapstoneProject.Commons.Schemas;
 using ShowTimeDb = CapstoneProject.Databases.Schemas.System.Ticket.ShowTime;
-using OrderDb = CapstoneProject.Databases.Schemas.System.Orders.Orders;
-using OrderFoodDetailDb = CapstoneProject.Databases.Schemas.System.Orders.OrderFoodDetail;
-using OrderTicketDetailDb = CapstoneProject.Databases.Schemas.System.Orders.OrderTicketDetail;
+using OrderDb = CapstoneProject.Databases.Schemas.System.Order.Orders;
+using OrderFoodDetailDb = CapstoneProject.Databases.Schemas.System.Order.OrderFoodDetail;
+using OrderTicketDetailDb = CapstoneProject.Databases.Schemas.System.Order.OrderTicketDetail;
 using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
@@ -18,6 +18,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using CapstoneProject.Models.Schemas;
+using Azure.Core;
 
 namespace CapstoneProject.Services
 {
@@ -122,16 +123,23 @@ namespace CapstoneProject.Services
                         {
                             //return objectKey;
                             // Lấy đường dẫn URL của file đã tải lên
-                            var url = client.GetPreSignedURL(new GetPreSignedUrlRequest
-                            {
-                                BucketName = bucketName,
-                                Key = objectKey,
-                                Expires = DateTime.UtcNow.AddMinutes(5) // Thời gian hết hạn của URL
-                            });
+                            //var url = client.GetPreSignedURL(new GetPreSignedUrlRequest
+                            //{
+                            //    BucketName = bucketName,
+                            //    Key = objectKey,
+                            //    Expires = DateTime.UtcNow.AddMinutes(5) // Thời gian hết hạn của URL
+                            //});
+                            //var request = new GetPreSignedUrlRequest
+                            //{
+                            //    BucketName = bucketName,
+                            //    Key = objectKey,
+                            //    Verb = HttpVerb.GET, // Định nghĩa phương thức HTTP là GET
+                            //};
 
+                            //var url = client.GetPreSignedURL(request);
                             //return url;
-                            string cdn = AppState.Instance.Setting.Cdn;
-                            return fileName;
+                            //string cdn = AppState.Instance.Setting.Cdn;
+                            return "https://phucawsbucketcsp1.s3.ap-southeast-1.amazonaws.com/" + objectKey;
                         }
                         else
                         {

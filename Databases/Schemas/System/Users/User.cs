@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using CapstoneProject.Databases.Schemas.System.Employee;
 using CapstoneProject.Databases;
 using CapstoneProject.Databases.Schemas.Setting;
+using CapstoneProject.Databases.Schemas.System.Order;
 
 namespace CapstoneProject.Databases.Schemas.System.Users
 {
@@ -14,6 +15,7 @@ namespace CapstoneProject.Databases.Schemas.System.Users
         {
             Tokens = new HashSet<UserToken>();
             Roles = new HashSet<UserRole>();
+            Payments = new HashSet<Payment>();
         }
         /// <summary>
         /// Tên đăng nhập
@@ -123,6 +125,8 @@ namespace CapstoneProject.Databases.Schemas.System.Users
         public virtual ICollection<UserToken> Tokens { set; get; }
 
         public virtual ICollection<UserRole> Roles { set; get; }
+
+        public virtual ICollection<Payment> Payments { set; get; }
 
     }
 }

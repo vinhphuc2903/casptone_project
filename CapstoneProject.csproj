@@ -126,6 +126,10 @@
     <None Remove="Areas\Orders\Controllers\" />
     <None Remove="Areas\Orders\Models\" />
     <None Remove="Areas\Orders\Models\Schemas\" />
+    <None Remove="Areas\Report\" />
+    <None Remove="Areas\Report\Controllers\" />
+    <None Remove="Areas\Report\Models\" />
+    <None Remove="Areas\Report\Models\Schemas\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\" />
@@ -148,7 +152,7 @@
     <Folder Include="Areas\Users\Models\LoginModel\Schemas\" />
     <Folder Include="Databases\Schemas\Setting\" />
     <Folder Include="Commons\CodeMaster\" />
-    <Folder Include="Databases\Schemas\System\Orders\" />
+    <Folder Include="Databases\Schemas\System\Order\" />
     <Folder Include="Databases\Schemas\System\Ticket\" />
     <Folder Include="Databases\Schemas\System\Film\" />
     <Folder Include="Databases\Schemas\System\CinemaRoom\" />
@@ -176,5 +180,9 @@
     <Folder Include="Areas\Orders\Controllers\" />
     <Folder Include="Areas\Orders\Models\" />
     <Folder Include="Areas\Orders\Models\Schemas\" />
+    <Folder Include="Areas\Report\" />
+    <Folder Include="Areas\Report\Controllers\" />
+    <Folder Include="Areas\Report\Models\" />
+    <Folder Include="Areas\Report\Models\Schemas\" />
   </ItemGroup>
 </Project>

@@ -47,6 +47,30 @@ namespace CapstoneProject.Commons.Enum
         /// Suất chiếu phải nằm trong từ 8h => 25h hôm qua
         /// </summary>
         public static string TIME_SHOW_ERROR = "E011";
+        /// <summary>
+        /// Chỗ ngồi đã được chọn hoặc thanh toán, vui lòng chọn lại chỗ ngồi
+        /// </summary>
+        public static string TICKET_NOT_DEFINE = "E012";
+        /// <summary>
+        /// Xuất chiếu không tồn tại, vui lòng kiểm tra lại
+        /// </summary>
+        public static string SHOWTIME_NOT_EXITED = "E013";
+        /// <summary>
+        /// Đồ ăn đang tạm ngưng bán hoặc đã hết
+        /// </summary>
+        public static string FOOD_IS_PAUSE = "E014";
+        /// <summary>
+        /// Vui lòng đăng nhập để thực hiện chức năng này
+        /// </summary>
+        public static string LOGIN_IS_FALSE = "E015";
+        /// <summary>
+        /// Vui lòng chọn vé để tiếp tục
+        /// </summary>
+        public static string CHOSE_TICKET = "E016";
+        /// <summary>
+        /// Đã quá hạn thời gian thanh toán, vui lòng tạo đơn hàng mới
+        /// </summary>
+        public static string OVERDUE_PAYMENT_TIME = "E017";
     }
 }
 

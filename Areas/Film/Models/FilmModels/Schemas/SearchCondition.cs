@@ -3,6 +3,13 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels.Schemas
 {
 	public class SearchCondition
 	{
+        /// <summary>
+        /// Mã chi nhánh
+        /// </summary>
+        public int? BranchId { get; set; }
+        /// <summary>
+        /// Tên Film
+        /// </summary>
         public string? Name { get; set; }
         /// <summary>
         /// Thể loại film
@@ -13,7 +20,6 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels.Schemas
         /// </summary>
         /// <value>1</value>
         public int CurrentPage { set; get; }
-
         /// <summary>
         /// Số dòng trên một trang.
         /// </summary>
@@ -23,6 +29,8 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels.Schemas
         public DateTime? DateStart { get; set; }
 
         public DateTime? DateEnd { get; set; }
+
+        public DateTimeOffset? DateRecord { get; set; }
 
         public string? Status { get; set; }
 

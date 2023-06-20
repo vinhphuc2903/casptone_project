@@ -8,13 +8,14 @@ using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
-
+using BranchData = CapstoneProject.Databases.Schemas.Setting.Branch;
 namespace CapstoneProject.Areas.CinemaRoom.Models
 {
 	public interface ICinemaRoomModel
 	{
 		Task<List<CinemaRoomData>> GetAllCinemaRoom(SearchCondition searchCondition);
-	}
+        Task<List<BranchData>> GetAllBranches(SearchCondition searchCondition);
+    }
 
     public class CinemaRoomModel : CapstoneProjectModels, ICinemaRoomModel
     {
@@ -47,6 +48,27 @@ namespace CapstoneProject.Areas.CinemaRoom.Models
                         Name = x.Name,
                         Id = x.Id
                     })
+                    .ToList();
+                return list;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"Get List Film Error: {ex}");
+                throw ex;
+            }
+        }
+        public async Task<List<BranchData>> GetAllBranches(SearchCondition searchCondition)
+        {
+            string method = GetActualAsyncMethodName();
+            IDbContextTransaction transaction = null;
+            try
+            {
+                List<BranchData> list = _context.Branches
+                    .Where(x => !x.DelFlag
+                        && (searchCondition.BranchId == null
+                            || x.Id == searchCondition.BranchId
+                        )
+                    )
                     .ToList();
                 return list;
             }

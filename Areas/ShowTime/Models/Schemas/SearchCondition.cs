@@ -3,6 +3,7 @@ namespace CapstoneProject.Areas.ShowTime.Models.Schemas
 {
 	public class SearchCondition
     {
+        public int? Id { get; set; }
 		/// <summary>
 		/// Ngày từ
 		/// </summary>
