@@ -123,10 +123,10 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
                                                         && (String.IsNullOrEmpty(searchCondition.Status)
                                                         || x.Status == searchCondition.Status
                                                         || searchCondition.Status == "50")
-                                                        && (String.IsNullOrEmpty(searchCondition.Status)
-                                                            || searchCondition.Status != "40"
-                                                            || (x.DateEnd >= DateTimeOffset.Now)
-                                                        )
+                                                        //&& (String.IsNullOrEmpty(searchCondition.Status)
+                                                        //    || searchCondition.Status != "40"
+                                                        //    || (x.DateEnd >= DateTimeOffset.Now)
+                                                        //)
                                                         && (String.IsNullOrEmpty(searchCondition.Status)
                                                             || searchCondition.Status != "50"
                                                             || (x.DateEnd < DateTimeOffset.Now && x.Status != "40")

@@ -157,29 +157,38 @@ namespace CapstoneProject.Areas.Film.Models.FilmAdminModels
                     responseInfo.MsgNo = MSG_NO.ACCOUNT_NOT_HAVE_PERMISSION;
                     return responseInfo;
                 }
-                //Upload ảnh lên s3
-                string linkImage = await _iIMediaService.UploadImageToS3(filmdataUpdate.BackgroundImage, true, 254, 381);
-                var film = await _context.Films.Where(x => !x.DelFlag && x.Name.Contains(filmdataUpdate.Name)).FirstOrDefaultAsync();
+                //var film = await _context.Films.Where(x => !x.DelFlag && x.Name.Contains(filmdataUpdate.Name)).FirstOrDefaultAsync();
+
                 FilmData filmUpdate = await _context.Films.Where(x => !x.DelFlag && x.Id == filmdataUpdate.Id).FirstOrDefaultAsync();
-                //Cap nhat lai film
-                filmUpdate = new FilmData()
+                //Upload ảnh lên s3
+                if (filmdataUpdate.BackgroundImage != null)
                 {
-                    Name = filmdataUpdate.Name,
-                    Actor = filmdataUpdate.Actor,
-                    Director = filmdataUpdate.Director,
-                    AgeLimit = filmdataUpdate.AgeLimit,
-                    Time = filmdataUpdate.Time,
-                    Introduce = filmdataUpdate.Introduce,
-                    TrailerLink = filmdataUpdate.TrailerLink.Replace("watch?v=", "embed/"),
-                    Country = filmdataUpdate.Country,
-                    BackgroundImage = linkImage,
-                    DateStart = filmdataUpdate.DateStart,
-                    DateEnd = filmdataUpdate.DateEnd,
-                    Status = filmdataUpdate.Status,
-                    Language = filmdataUpdate.Language
-                };
-                await _context.SaveChangesAsync();
+                    string linkImage = await _iIMediaService.UploadImageToS3(filmdataUpdate.BackgroundImage, true, 254, 381);
+                    filmUpdate.BackgroundImage = linkImage;
+                }
+
+
+                //Cap nhat lai film
+                filmUpdate.Name = filmdataUpdate.Name;
+                filmUpdate.Actor = filmdataUpdate.Actor;
+                filmUpdate.Director = filmdataUpdate.Director;
+                filmUpdate.AgeLimit = filmdataUpdate.AgeLimit;
+                filmUpdate.Time = filmdataUpdate.Time;
+                filmUpdate.Introduce = filmdataUpdate.Introduce;
+                filmUpdate.TrailerLink = filmdataUpdate.TrailerLink.Replace("watch?v=", "embed/");
+                filmUpdate.Country = filmdataUpdate.Country;
+                filmUpdate.DateStart = filmdataUpdate.DateStart;
+                filmUpdate.DateEnd = filmdataUpdate.DateEnd;
+                filmUpdate.Status = filmdataUpdate.Status;
+                filmUpdate.Language = filmdataUpdate.Language;
+                var listTypeFilmOld = await _context.TypeFilmDetails.Where(x => !x.DelFlag && x.FilmId == filmUpdate.Id).ToListAsync();
                 var listType = filmdataUpdate.ListTypeFilm.Trim().Replace(" ", "").Split(',');
+                // Xoa typeFilmDetail cu
+                foreach (var typeFilm in listTypeFilmOld)
+                {
+                    _context.TypeFilmDetails.Remove(typeFilm);
+                }
+                await _context.SaveChangesAsync();
                 //Cap nhat lai typeFilm
                 foreach (var type in listType)
                 {
@@ -191,12 +200,7 @@ namespace CapstoneProject.Areas.Film.Models.FilmAdminModels
                     await _context.TypeFilmDetails.AddAsync(typeFilm);
                     await _context.SaveChangesAsync();
                 }
-                // Xoa typeFilmDetail cu
-                var listTypeFilmOld = await _context.TypeFilmDetails.Where(x => !x.DelFlag && x.FilmId == filmUpdate.Id).ToListAsync();
-                foreach(var typeFilm in listTypeFilmOld)
-                {
-                    typeFilm.DelFlag = true;
-                }
+                
                 await _context.SaveChangesAsync();
                 transaction = await _context.Database.BeginTransactionAsync();
                 transaction?.CommitAsync();

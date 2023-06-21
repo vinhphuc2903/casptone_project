@@ -63,7 +63,7 @@ namespace CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas
         /// <summary>
         /// Link ảnh backGround
         /// </summary>
-        public IFormFile BackgroundImage { get; set; }
+        public IFormFile? BackgroundImage { get; set; }
 
         // <summary>
         /// Link ảnh backGround
