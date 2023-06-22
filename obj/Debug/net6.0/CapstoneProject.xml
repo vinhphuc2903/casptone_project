@@ -22,6 +22,44 @@
             <response code="401">Chưa đăng nhập</response>
             <response code="500">Lỗi khi có exception</response>
         </member>
+        <member name="M:CapstoneProject.Areas.CinemeRoom.Controllers.CinemaRoomController.AddNewFilmData(CapstoneProject.Areas.CinemaRoom.Models.Schemas.CinemaRoomDataInput)">
+            <summary>
+            Thêm cinemaroom mới
+            <para>Created at: 14/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.CinemeRoom.Controllers.CinemaRoomController.DeleteCinema(System.Int32)">
+            <summary>
+            Xóa cinemaroom
+            <para>Created at: 14/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="P:CapstoneProject.Areas.CinemaRoom.Models.Schemas.CinemaRoomDataInput.Name">
+            <summary>
+            Tên phòng chiếu
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.CinemaRoom.Models.Schemas.CinemaRoomDataInput.TotalColumn">
+            <summary>
+            Tổng số cột
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.CinemaRoom.Models.Schemas.CinemaRoomDataInput.TotalRow">
+            <summary>
+            Tổng số hàng
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.CinemaRoom.Models.Schemas.CinemaRoomDataInput.TotalSeat">
+            <summary>
+            Tổng số ghế
+            </summary>
+        </member>
         <member name="M:CapstoneProject.Areas.Customer.Controllers.CustomerController.GetEmployee(CapstoneProject.Areas.Customer.Models.Schemas.SearchCondition)">
             <summary>
             Lấy tất cả customer theo điều kiện tìm kiếm
@@ -188,7 +226,7 @@
             </summary>
         </member>
         <member name="M:CapstoneProject.Areas.Film.Controllers.FilmAdminController.GetDetailFilm(System.Int32)">
-            <summary>x
+            <summary>
             Lấy chi tiết film
             <para>Created at: 14/06/2023</para>
             <para>Created by: VinhPhuc</para>
@@ -197,7 +235,7 @@
             <response code="500">Lỗi khi có exception</response>
         </member>
         <member name="M:CapstoneProject.Areas.Film.Controllers.FilmAdminController.AddNewFilmData(CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData)">
-            <summary>x
+            <summary>
             Thêm film mới
             <para>Created at: 14/05/2023</para>
             <para>Created by: VinhPhuc</para>
@@ -206,7 +244,7 @@
             <response code="500">Lỗi khi có exception</response>
         </member>
         <member name="M:CapstoneProject.Areas.Film.Controllers.FilmAdminController.UpdateFilmData(CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData)">
-            <summary>x
+            <summary>
             Cập nhật phim cũ
             <para>Created at: 14/05/2023</para>
             <para>Created by: VinhPhuc</para>
@@ -1015,7 +1053,7 @@
             <response code="401">Chưa đăng nhập</response>
             <response code="500">Lỗi khi có exception</response>
         </member>
-        <member name="M:CapstoneProject.Areas.Users.Controllers.UsersController.GetBranches">
+        <member name="M:CapstoneProject.Areas.Users.Controllers.UsersController.GetBranches(System.Nullable{System.Int32})">
             <summary>
             Lấy danh sách các chi nhánh
             <para>Created at: 19/05/2023</para>
@@ -1193,7 +1231,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:CapstoneProject.Areas.Users.Models.UserModel.IUsersModel.GetBranches">
+        <member name="M:CapstoneProject.Areas.Users.Models.UserModel.IUsersModel.GetBranches(System.Nullable{System.Int32})">
             <summary>
             Lấy danh sách các chi nhánh
             </summary>
@@ -1229,7 +1267,7 @@
         </member>
         <!-- Badly formed XML comment ignored for member "M:CapstoneProject.Areas.Users.Models.UserModel.UserModel.GetDistrict(System.String)" -->
         <!-- Badly formed XML comment ignored for member "M:CapstoneProject.Areas.Users.Models.UserModel.UserModel.GetCommune(System.String)" -->
-        <member name="M:CapstoneProject.Areas.Users.Models.UserModel.UserModel.GetBranches">
+        <member name="M:CapstoneProject.Areas.Users.Models.UserModel.UserModel.GetBranches(System.Nullable{System.Int32})">
             <summary>
             Lấy danh sách các chi nhánh
             </summary>
@@ -1529,6 +1567,18 @@
             Đã quá hạn thời gian thanh toán, vui lòng tạo đơn hàng mới
             </summary>
         </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.NAME_IS_EXITED">
+            <summary>
+            Tên đã tồn tại
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.ROOM_IS_NOT_EXITED">
+            <summary>
+            Phòng chiếu không tồn tại
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:CapstoneProject.Commons.Enum.MSG_NO.DATE_CREATE_IS_7_DAY" -->
+        <!-- Badly formed XML comment ignored for member "F:CapstoneProject.Commons.Enum.MSG_NO.DATE_TO_MUST_BE_LAGER_DATE_FROM" -->
         <member name="T:CapstoneProject.Commons.Helpers">
             <summary>
             Các xử lý chung thường xuyên sử dụng trong hệ thống.

@@ -71,6 +71,22 @@ namespace CapstoneProject.Commons.Enum
         /// Đã quá hạn thời gian thanh toán, vui lòng tạo đơn hàng mới
         /// </summary>
         public static string OVERDUE_PAYMENT_TIME = "E017";
+        /// <summary>
+        /// Tên đã tồn tại
+        /// </summary>
+        public static string NAME_IS_EXITED = "E018";
+        /// <summary>
+        /// Phòng chiếu không tồn tại
+        /// </summary>
+        public static string ROOM_IS_NOT_EXITED = "E019";
+        // <summary>
+        /// Vui lòng tạo tối đa 7 ngày
+        /// </summary>
+        public static string DATE_CREATE_IS_7_DAY = "E020";
+        // <summary>
+        /// Ngày chiếu từ phải lớn ngày ngày chiếu đến
+        /// </summary>
+        public static string DATE_TO_MUST_BE_LAGER_DATE_FROM = "E021";
     }
 }
 

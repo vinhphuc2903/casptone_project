@@ -25,7 +25,7 @@ namespace CapstoneProject.Areas.Film.Controllers
         {
             _filmAdminModel = filmAdminModels ?? throw new ArgumentNullException(nameof(filmAdminModels));
         }
-        /// <summary>x
+        /// <summary>
         /// Lấy chi tiết film
         /// <para>Created at: 14/06/2023</para>
         /// <para>Created by: VinhPhuc</para>
@@ -45,7 +45,7 @@ namespace CapstoneProject.Areas.Film.Controllers
                 return StatusCode(500);
             }
         }
-        /// <summary>x
+        /// <summary>
         /// Thêm film mới
         /// <para>Created at: 14/05/2023</para>
         /// <para>Created by: VinhPhuc</para>
@@ -65,7 +65,7 @@ namespace CapstoneProject.Areas.Film.Controllers
                 return StatusCode(500);
             }
         }
-        /// <summary>x
+        /// <summary>
         /// Cập nhật phim cũ
         /// <para>Created at: 14/05/2023</para>
         /// <para>Created by: VinhPhuc</para>

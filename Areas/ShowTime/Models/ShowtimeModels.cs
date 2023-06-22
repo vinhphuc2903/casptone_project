@@ -78,7 +78,20 @@ namespace CapstoneProject.Areas.ShowTime.Models
             ResponseInfo responseInfo = new ResponseInfo();
             try
             {
-                
+                //Kiểm tra số ngày tạo <= 7
+                if ((showTimeInput.DateTo.Date.Subtract(showTimeInput.DateFrom.Date).Days) <= 0)
+                {
+                    responseInfo.Code = CodeResponse.HAVE_ERROR;
+                    responseInfo.MsgNo = MSG_NO.DATE_TO_MUST_BE_LAGER_DATE_FROM;
+                    return responseInfo;
+                }
+                //Kiểm tra số ngày tạo <= 7
+                if ((showTimeInput.DateTo.Date.Subtract(showTimeInput.DateFrom.Date).Days) > 7)
+                {
+                    responseInfo.Code = CodeResponse.HAVE_ERROR;
+                    responseInfo.MsgNo = MSG_NO.DATE_CREATE_IS_7_DAY;
+                    return responseInfo;
+                }
                 for (DateTime dateInput = showTimeInput.DateFrom.Date; dateInput.Date <= showTimeInput.DateTo.Date; dateInput = dateInput.AddDays(1))
                 {
                     //Suất chiếu từ
@@ -97,8 +110,6 @@ namespace CapstoneProject.Areas.ShowTime.Models
                         responseInfo.MsgNo = MSG_NO.TIME_SHOW_ERROR;
                         return responseInfo;    
                     }
-
-                    
                     for (int count = 0; count < showTimeInput.CountShow; count++)
                     {
                         // Tạo đối tượng DateTime với giờ 0:00:00
@@ -218,6 +229,7 @@ namespace CapstoneProject.Areas.ShowTime.Models
                 var showTimeDatas = _context.ShowTime
                     .Include(x => x.CinemaRooms)
                     .Where(x => !x.DelFlag
+                        && !x.CinemaRooms.DelFlag
                         && (String.IsNullOrEmpty(searchCondition.Id.ToString())
                         || x.Id == searchCondition.Id)
                         && (String.IsNullOrEmpty(searchCondition.BranchId.ToString())

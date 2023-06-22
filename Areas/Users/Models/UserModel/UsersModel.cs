@@ -61,7 +61,7 @@ namespace CapstoneProject.Areas.Users.Models.UserModel
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<List<Branch>> GetBranches();
+        Task<List<Branch>> GetBranches(int? id);
         /// <summary>
         /// Lấy danh sách Position
         /// </summary>
@@ -262,7 +262,7 @@ namespace CapstoneProject.Areas.Users.Models.UserModel
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<List<Branch>> GetBranches()
+        public async Task<List<Branch>> GetBranches(int? id)
         {
             string method = GetActualAsyncMethodName();
             IDbContextTransaction transaction = null;
@@ -270,7 +270,7 @@ namespace CapstoneProject.Areas.Users.Models.UserModel
             {
                 _logger.LogInformation($"[{AppState.Instance.RequestId}][{_className}][{method}] Start");
                 List<Branch> branches = new List<Branch>();
-                branches = await _context.Branches.Where(x => !x.DelFlag).ToListAsync();
+                branches = await _context.Branches.Where(x => !x.DelFlag && (id == null || id == x.Id)).ToListAsync();
                 _logger.LogInformation($"[{AppState.Instance.RequestId}][{_className}][{method}] End");
                 return branches;
             }

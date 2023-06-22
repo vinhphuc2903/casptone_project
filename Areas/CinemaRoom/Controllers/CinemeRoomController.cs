@@ -8,6 +8,7 @@ using CapstoneProject.Areas.CinemaRoom.Models;
 using CapstoneProject.Commons.Schemas;
 using CapstoneProject.Areas.Customer.Models;
 using CapstoneProject.Auths;
+using CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas;
 
 namespace CapstoneProject.Areas.CinemeRoom.Controllers
 {
@@ -36,7 +37,7 @@ namespace CapstoneProject.Areas.CinemeRoom.Controllers
         {
             try
             {
-                return Ok(await _cinemaRoomModel.GetAllCinemaRoom(searchConditon));
+                return Ok(await _cinemaRoomModel.GetAllCinemaRoomData(searchConditon));
             }
             catch (Exception e)
             {
@@ -57,6 +58,46 @@ namespace CapstoneProject.Areas.CinemeRoom.Controllers
             try
             {
                 return Ok(await _cinemaRoomModel.GetAllBranches(searchConditon));
+            }
+            catch (Exception e)
+            {
+                //await _logService.SaveLogException(e);
+                return StatusCode(500);
+            }
+        }
+        /// <summary>
+        /// Thêm cinemaroom mới
+        /// <para>Created at: 14/05/2023</para>
+        /// <para>Created by: VinhPhuc</para>
+        /// </summary>
+        /// <response code="401">Chưa đăng nhập</response>
+        /// <response code="500">Lỗi khi có exception</response>
+        [HttpPost()]
+        public async Task<ActionResult> AddNewFilmData([FromBody] CinemaRoomDataInput cinemaRoomData)
+        {
+            try
+            {
+                return Ok(await _cinemaRoomModel.CreateCinemaRoomData(cinemaRoomData));
+            }
+            catch (Exception e)
+            {
+                //await _logService.SaveLogException(e);
+                return StatusCode(500);
+            }
+        }
+        /// <summary>
+        /// Xóa cinemaroom
+        /// <para>Created at: 14/05/2023</para>
+        /// <para>Created by: VinhPhuc</para>
+        /// </summary>
+        /// <response code="401">Chưa đăng nhập</response>
+        /// <response code="500">Lỗi khi có exception</response>
+        [HttpDelete()]
+        public async Task<ActionResult> DeleteCinema([FromQuery] int id)
+        {
+            try
+            {
+                return Ok(await _cinemaRoomModel.DeleteCinemaRoomData(id));
             }
             catch (Exception e)
             {

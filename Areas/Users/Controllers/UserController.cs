@@ -141,11 +141,11 @@ namespace CapstoneProject.Areas.Users.Controllers
         /// <response code="401">Chưa đăng nhập</response>
         /// <response code="500">Lỗi khi có exception</response>
         [HttpGet("branch")]
-        public async Task<ActionResult> GetBranches()
+        public async Task<ActionResult> GetBranches([FromQuery]int? id)
         {
             try
             {
-                return Ok(await _userModel.GetBranches());
+                return Ok(await _userModel.GetBranches(id));
             }
             catch (Exception e)
             {

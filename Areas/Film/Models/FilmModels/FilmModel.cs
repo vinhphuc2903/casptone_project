@@ -201,7 +201,9 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
                 {
                     // Lay danh sach ngay co xuat chieu
                     showtimeBranch.ListShowTimeData = await _context.ShowTime
+                        .Include(x => x.CinemaRooms)
                         .Where(x => !x.DelFlag
+                            && !x.CinemaRooms.DelFlag
                             && x.FilmId == filmId
                             && x.DateShow >= startOfDay
                             && x.DateShow <= endOfDay
@@ -222,8 +224,10 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
                         DateTime startDateShow = new DateTime(showTime.DateShow.Year, showTime.DateShow.Month, showTime.DateShow.Day, 0, 0, 0);
                         int now = DateTime.Now.Hour * 60 + DateTime.Now.Minute;
                         showTime.ShowTimeDetailDatas = await _context.ShowTime
+                            .Include(x => x.CinemaRooms)
                             .Where(x => !x.DelFlag
                                 && x.FilmId == filmId
+                                && !x.CinemaRooms.DelFlag
                                 && x.DateShow.Date == startDateShow.Date
                                 && ((x.FromHour * 60 + x.FromMinus) > now || index != 0)
                             )
@@ -282,8 +286,10 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
             {
                 ShowTimeDetail showTimeDetail = new ShowTimeDetail();
                 showTimeDetail.ShowtimeData = await _context.ShowTime
+                    .Include(x => x.CinemaRooms)
                     .Where(x => !x.DelFlag
                         && x.Id == ShowTimeId
+                        && !x.CinemaRooms.DelFlag
                     )
                     .OrderBy(g => g.DateShow) // Sắp xếp tăng dần theo ngày
                     .Select(x => new ShowTimeDetailData()
@@ -377,6 +383,7 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
                 int now = DateTime.Now.Hour * 60 + DateTime.Now.Minute;
                 var showTimeByDates = _context.Films
                     .Include(x => x.ShowTime)
+                    .ThenInclude(x => x.CinemaRooms)
                     .Where(x => !x.DelFlag && x.DateEnd >= DateTimeOffset.Now && x.Status == "20")
                     .Select(
                         x => new ShowTimeByDate()
@@ -403,6 +410,7 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
                                     && x.DateShow >= startOfDay
                                     && x.DateShow <= endOfDay
                                     && x.BranchId == searchCondition.BranchId
+                                    && !x.CinemaRooms.DelFlag
                                     && ((x.FromHour * 60 + x.FromMinus) > now || DateTime.Now.Date != searchCondition.DateRecord.Value.Date))
                                 .Select(x => new ShowTimeDetailByDate()
                                 {
