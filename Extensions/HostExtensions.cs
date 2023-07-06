@@ -11,15 +11,15 @@ namespace CapstoneProject.Extensions
 {
     /// <summary>
     /// Lớp mở rộng để cài đặt các cấu hình lúc build host.
-    /// <para>Created at: 10/07/2020</para>
-    /// <para>Created by: QuyPN</para>
+    /// <para>Created at: 10/07/2023</para>
+    /// <para>Created by: VinhPhuc</para>
     /// </summary>
     public static class HostExtensions
     {
         /// <summary>
         /// Cấu hình việc ghi log và sử dụng serilog
-        /// <para>Created at: 10/07/2020</para>
-        /// <para>Created by: QuyPN</para>
+        /// <para>Created at: 10/07/2023</para>
+        /// <para>Created by: VinhPhuc</para>
         /// </summary>
         /// <param name="builder">Đối tượng build host hiện tại</param>
         /// <param name="serviceName">Tên service cần cấu hình</param>
@@ -57,8 +57,8 @@ namespace CapstoneProject.Extensions
 
         /// <summary>
         /// Cấu hình việc sử dụng file config của hệ thống
-        /// <para>Created at: 10/07/2020</para>
-        /// <para>Created by: QuyPN</para>
+        /// <para>Created at: 10/07/2023</para>
+        /// <para>Created by: VinhPhuc</para>
         /// </summary>
         /// <param name="builder">Đối tượng build host hiện tại</param>
         /// <param name="serviceName">Tên service cần cấu hình</param>

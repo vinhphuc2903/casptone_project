@@ -484,8 +484,8 @@ namespace CapstoneProject.Databases
         }
         /// <summary>
         /// Lưu thêm các thông tin cần thiết mặc định khi cập nhật dữ diệu vào Database.
-        /// <para>Created at: 10/07/2020</para>
-        /// <para>Created by: QuyPN</para>
+        /// <para>Created at: 10/07/2023</para>
+        /// <para>Created by: VinhPhuc</para>
         /// </summary>
         private void OnBeforeSaving()
         {
@@ -558,8 +558,8 @@ namespace CapstoneProject.Databases
 
         /// <summary>
         /// Lấy user id đang đăng nhập nếu có
-        /// <para>Created at: 08/08/2020</para>
-        /// <para>Created by: QuyPN</para>
+        /// <para>Created at: 08/08/2023</para>
+        /// <para>Created by: VinhPhuc</para>
         /// </summary>
         /// <returns>user id của user đang đăng nhập. Trả về 0 nếu không có thông tin user đăng nhập</returns>
         public string GetAccountId()
@@ -617,7 +617,7 @@ namespace CapstoneProject.Databases
 
         /// <summary>
         /// Lấy Ip của request hiện tại
-        /// <para>Created at: 15/05/2020</para>
+        /// <para>Created at: 15/05/2023</para>
         /// <para>Created by: DungNT</para>
         /// </summary>
         /// <returns>Ip của request hiện tại</returns>

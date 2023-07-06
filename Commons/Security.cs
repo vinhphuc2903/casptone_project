@@ -8,15 +8,15 @@ namespace CapstoneProject.Commons
 {
     /// <summary>
     /// Các xử lý liên quan đến mã hóa và giải mã dữ liệu
-    /// <para>Author: QuyPN</para>
-    /// <para>Created: 15/02/2020</para>
+    /// <para>Author: VinhPhuc</para>
+    /// <para>Created: 15/02/2023</para>
     /// </summary>
     public class Security
     {
         /// <summary>
         /// Mã hóa MD5 của 1 chuỗi có thêm chuối khóa đầu và cuối.
-        /// <para>Author: QuyPN</para>
-        /// <para>Created: 15/02/2020</para>
+        /// <para>Author: VinhPhuc</para>
+        /// <para>Created: 15/02/2023</para>
         /// </summary>
         /// <param name="str">Chuỗi cần mã hóa.</param>
         /// <param name="firstStr">Chuỗi bảo mật đầu</param>
@@ -38,8 +38,8 @@ namespace CapstoneProject.Commons
 
         /// <summary>
         /// Mã hóa MD5 của 1 chuỗi không có thêm chuối khóa đầu và cuối.
-        /// <para>Author: QuyPN</para>
-        /// <para>Created: 15/02/2020</para>
+        /// <para>Author: VinhPhuc</para>
+        /// <para>Created: 15/02/2023</para>
         /// </summary>
         /// <param name="str">Chuỗi cần mã hóa</param>
         /// <returns>Chuỗi sau khi đã được mã hóa</returns>
@@ -58,8 +58,8 @@ namespace CapstoneProject.Commons
 
         /// <summary>
         /// Mã hóa base64 của 1 chuỗi
-        /// <para>Author: QuyPN</para>
-        /// <para>Created: 15/02/2020</para>
+        /// <para>Author: VinhPhuc</para>
+        /// <para>Created: 15/02/2023</para>
         /// </summary>
         /// <param name="plainText">Chuỗi cần mã hóa</param>
         /// <returns>Chuỗi sau khi mã hóa</returns>
@@ -96,8 +96,8 @@ namespace CapstoneProject.Commons
 
         /// <summary>
         /// Chuyển mã base64 về chuỗi trước khi mã hóa.
-        /// <para>Author: QuyPN</para>
-        /// <para>Created: 15/02/2020</para>
+        /// <para>Author: VinhPhuc</para>
+        /// <para>Created: 15/02/2023</para>
         /// </summary>
         /// <param name="base64EncodedData">Chuỗi mã hóa</param>
         /// <returns>Chuỗi sau khi giải mã</returns>
@@ -134,7 +134,7 @@ namespace CapstoneProject.Commons
         /// <summary>
         /// Kiểm tra captcha token có hợp lệ hay ko
         /// <para>Author: DungNT</para>
-        /// <para>Created: 16/05/2020</para>
+        /// <para>Created: 16/05/2023</para>
         /// </summary>
         /// <param name="checkCaptcha">Chuỗi mã hóa</param>
         /// <returns>Trang thái kiểm tra: (true: hợp lệ)-(false: không hợp lệ)</returns>

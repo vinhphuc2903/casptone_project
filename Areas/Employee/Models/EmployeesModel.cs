@@ -43,6 +43,19 @@ namespace CapstoneProject.Areas.Employee.Models
         /// <param name="accountInfo"></param>
         /// <returns></returns>
         Task<ResponseInfo> CreateEmployee(EmployeeData accountInfo);
+        /// <summary>
+        /// Cập nhật tài khoản nhân viên
+        /// </summary>
+        /// <param name="employeeData"></param>
+        /// <returns></returns>
+        Task<ResponseInfo> UpdateAccountEmployee(EmployeeData employeeData);
+        /// <summary>
+        /// Xóa tài khoản nhân viên
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<ResponseInfo> DeleteAccountEmployee(int id);
+
     }
     public class EmployeesModel : CapstoneProjectModels, IEmployeesModel
     {
@@ -106,7 +119,7 @@ namespace CapstoneProject.Areas.Employee.Models
                     .Include(x => x.User.Communes)
                     .Include(x => x.User.Districts)
                     .Include(x => x.User.Provinces)
-                    .Select( x => new EmployeeData()
+                    .Select(x => new EmployeeData()
                     {
                         Id = x.Id,
                         Name = x.User.Name,
@@ -144,19 +157,25 @@ namespace CapstoneProject.Areas.Employee.Models
             ResponseInfo response = new ResponseInfo();
             try
             {
+                if (!await _indentityService.CheckIndentifyUser(R001.ADMIN.CODE))
+                {
+                    response.Code = CodeResponse.HAVE_ERROR;
+                    response.MsgNo = MSG_NO.ACCOUNT_NOT_HAVE_PERMISSION;
+                    return response;
+                }
                 _logger.LogInformation($"[{AppState.Instance.RequestId}][{_className}][{method}] Start");
                 string phone = Security.Base64Encode(accountInfo.Phone);
                 // Lấy thông tin tài khoản đang login
                 var userLogin = await _usersModel.GetUserIsLogin();
-                foreach(var role in userLogin.RoleId)
+                foreach (var role in userLogin.RoleId)
                 {
-                    if(role == R001.CSKH.CODE || role == R001.EMP.CODE || role == R001.USER.CODE)
+                    if (role == R001.CSKH.CODE || role == R001.EMP.CODE || role == R001.USER.CODE)
                     {
                         response.Code = CodeResponse.HAVE_ERROR;
                         response.MsgNo = MSG_NO.ACCOUNT_NOT_HAVE_PERMISSION;
                         return response;
                     }
-                }    
+                }
                 //Kiểm tra tên đăng nhập >= 8
                 if (accountInfo.Username.Length < 6)
                 {
@@ -276,6 +295,12 @@ namespace CapstoneProject.Areas.Employee.Models
             ResponseInfo response = new ResponseInfo();
             try
             {
+                if (!await _indentityService.CheckIndentifyUser(R001.ADMIN.CODE))
+                {
+                    response.Code = CodeResponse.HAVE_ERROR;
+                    response.MsgNo = MSG_NO.ACCOUNT_NOT_HAVE_PERMISSION;
+                    return response;
+                }
                 // Lấy thông tin tài khoản đang login
                 var userLogin = await _usersModel.GetUserIsLogin();
                 var user = await _context.Users.Where(x => !x.DelFlag && x.Username == userLogin.Username).FirstOrDefaultAsync();
@@ -357,6 +382,149 @@ namespace CapstoneProject.Areas.Employee.Models
                 //Thêm token
                 response.Data.Add("Token", await _loginModel.GetTokenLogin(userLogin.Id.ToString()));
                 response.Data.Add("Username", userLogin.Name);
+                return response;
+            }
+            catch (Exception e)
+            {
+                await _context.RollBack(transaction);
+                throw e;
+            }
+        }
+        public async Task<ResponseInfo> UpdateAccountEmployee(EmployeeData employeeData)
+        {
+
+            IDbContextTransaction transaction = null;
+            string method = GetActualAsyncMethodName();
+            ResponseInfo response = new ResponseInfo();
+            try
+            {
+                if (!await _indentityService.CheckIndentifyUser(R001.ADMIN.CODE))
+                {
+                    response.Code = CodeResponse.HAVE_ERROR;
+                    response.MsgNo = MSG_NO.ACCOUNT_NOT_HAVE_PERMISSION;
+                    return response;
+                }
+                var user = await _context.Users.Where(x => !x.DelFlag && x.EmployeeId == employeeData.Id).FirstOrDefaultAsync();
+                if (user == null)
+                {
+                    response.Code = CodeResponse.HAVE_ERROR;
+                    response.MsgNo = MSG_NO.EMPLOYEE_NOT_EXITED;
+                    return response;
+                }
+                var employee = await _context.Employee.Where(x => !x.DelFlag && x.Id == user.EmployeeId).FirstOrDefaultAsync();
+                if (employee == null)
+                {
+                    response.Code = CodeResponse.HAVE_ERROR;
+                    response.MsgNo = MSG_NO.EMPLOYEE_NOT_EXITED;
+                    return response;
+                }
+                // Kiểm tra nhưng thông tin thay đổi
+                string phone = Security.Base64Encode(employeeData.Phone);
+
+                // Kiểm tra số điện thoại
+                if (employeeData.Phone != user.Phone)
+                {
+                    var employeePhone = await _context.Employee.Where(x => !x.DelFlag && x.Phone == phone && x.Id != employeeData.Id).FirstOrDefaultAsync();
+                    // Kiểm tra số điện thoại
+                    if (employeePhone != null)
+                    {
+                        response.Code = CodeResponse.HAVE_ERROR;
+                        response.MsgNo = MSG_NO.PHONE_IS_USED;
+                        return response;
+                    }
+                }
+                // Kiểm tra tên đăng nhập
+
+                //Kiểm tra username
+                if (employeeData.Username != user.Username)
+                {
+                    //Kiểm tra username tồn tại chưa
+                    var userName = await _context.Users.Where(x => !x.DelFlag && x.Username == employeeData.Username && x.Id != employeeData.Id).FirstOrDefaultAsync();
+                    if (userName != null)
+                    {
+                        response.Code = CodeResponse.HAVE_ERROR;
+                        response.MsgNo = MSG_NO.USERNAME_IS_USED;
+                        return response;
+                    }
+                    //Kiểm tra tên đăng nhập
+                    if (employeeData.Username.Length < 8)
+                    {
+                        response.Code = CodeResponse.HAVE_ERROR;
+                        response.MsgNo = MSG_NO.LENGTH_USERNAME_NOT_OK;
+                        return response;
+                    }
+                }
+                // Kiểm tra giới tính
+                if (employeeData.Gender != user.Gender)
+                {
+                    if (!String.IsNullOrEmpty(employeeData.Gender))
+                    {
+                        if (employeeData.Gender != "M" && employeeData.Gender != "O" && employeeData.Gender != "F")
+                        {
+                            response.Code = CodeResponse.HAVE_ERROR;
+                            response.MsgNo = MSG_NO.GENDER_NOT_EXIST;
+                            return response;
+                        }
+                    }
+                }
+                //string firstSecurityString = Helpers.RenderToken("", 10);
+                //string lastSecurityString = Helpers.RenderToken("", 20).Substring(10, 10);
+
+                // Cập nhật tài khoản
+                user.Username = employeeData.Username;
+                user.Email = employeeData.Email;
+                user.Name = employeeData.Name;
+                user.DateOfBirth = employeeData.DateOfBirth;
+                user.Phone = phone;
+                user.Gender = employeeData.Gender;
+                user.Address = employeeData.Address;
+                user.DistrictId = employeeData.DistrictId;
+                user.CommuneId = employeeData.CommuneId;
+                user.ProvinceId = employeeData.ProvinceId;
+
+                employee.Phone = phone;
+                employee.DateStart = employeeData.DateStart.Value;
+                employee.PositionId = employeeData.PositionId;
+                employee.BranchId = employeeData.BranchId;
+                await _context.SaveChangesAsync();
+                return response;
+            }
+            catch (Exception e)
+            {
+                await _context.RollBack(transaction);
+                throw e;
+            }
+        }
+        public async Task<ResponseInfo> DeleteAccountEmployee(int id)
+        {
+            IDbContextTransaction transaction = null;
+            string method = GetActualAsyncMethodName();
+            ResponseInfo response = new ResponseInfo();
+            try
+            {
+                if (!await _indentityService.CheckIndentifyUser(R001.ADMIN.CODE))
+                {
+                    response.Code = CodeResponse.HAVE_ERROR;
+                    response.MsgNo = MSG_NO.ACCOUNT_NOT_HAVE_PERMISSION;
+                    return response;
+                }
+                var user = await _context.Users.Where(x => !x.DelFlag && x.EmployeeId == id).FirstOrDefaultAsync();
+                if (user == null)
+                {
+                    response.Code = CodeResponse.HAVE_ERROR;
+                    response.MsgNo = MSG_NO.EMPLOYEE_NOT_EXITED;
+                    return response;
+                }
+                var employee = await _context.Employee.Where(x => !x.DelFlag && x.Id == user.EmployeeId).FirstOrDefaultAsync();
+                if (employee == null)
+                {
+                    response.Code = CodeResponse.HAVE_ERROR;
+                    response.MsgNo = MSG_NO.EMPLOYEE_NOT_EXITED;
+                    return response;
+                }
+                user.DelFlag = true;
+                employee.DelFlag = true;
+                await _context.SaveChangesAsync();
                 return response;
             }
             catch (Exception e)

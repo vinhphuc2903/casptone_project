@@ -27,14 +27,45 @@ namespace CapstoneProject.Databases.Schemas.System.Film
 		/// Độ tuổi giới hạn
 		/// </summary>
 		public int AgeLimit { get; set; }
-		/// <summary>
-		/// Ngày bắt đầu chiếu phim
-		/// </summary>
-		public DateTime DateStart { get; set; }
+        /// <summary>
+        /// Ngày bắt đầu chiếu phim
+        /// </summary>
+        public DateTime DateStart { get; set; }
 		/// <summary>
 		/// Ngày kết thúc chiếu phim
 		/// </summary>
 		public DateTime? DateEnd { get; set; }
+		/// <summary>
+		/// Ngày phát hành
+		/// </summary>
+        public DateTime? DateRelease { get; set; }
+        /// <summary>
+        /// Ngày tạm hoãn
+        /// </summary>
+        public DateTime? DatePostpone { get; set; }
+		/// <summary>
+		/// Ngày bắt đầu lại
+		/// </summary>
+		public DateTime? DateStartPostpone { get; set; }
+		/// <summary>
+		/// Ngày gia hạn ( ngày kết thúc )
+		/// </summary>
+		public DateTime? DateExtend { get; set; }
+		/// <summary>
+		/// Lý do tạm hoãn
+		/// </summary>
+		/// <value></value>
+		public string? ReasonPostpone { get; set; }
+		/// <summary>
+		/// Lý do gia hạn
+		/// </summary>
+		/// <value></value>
+		public string? ReasonExtend { get; set; }
+		/// <summary>
+		/// Vốn đầu tư
+		/// </summary>
+		/// <value></value>
+		public double? Cost { get; set; }
 		/// <summary>
 		/// Số suất chiếu tối thiểu
 		/// </summary>

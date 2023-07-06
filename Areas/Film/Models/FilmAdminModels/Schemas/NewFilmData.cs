@@ -28,6 +28,37 @@ namespace CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas
         /// </summary>
         public DateTime? DateEnd { get; set; }
         /// <summary>
+		/// Ngày phát hành
+		/// </summary>
+        public DateTime? DateRelease { get; set; }
+        /// <summary>
+        /// Ngày tạm hoãn
+        /// </summary>
+        public DateTime? DatePostpone { get; set; }
+        /// <summary>
+        /// Ngày bắt đầu lại
+        /// </summary>
+        public DateTime? DateStartPostpone { get; set; }
+        /// <summary>
+        /// Ngày gia hạn ( ngày kết thúc )
+        /// </summary>
+        public DateTime? DateExtend { get; set; }
+        /// <summary>
+        /// Lý do tạm hoãn
+        /// </summary>
+        /// <value></value>
+        public string? ReasonPostpone { get; set; }
+        /// <summary>
+        /// Lý do gia hạn
+        /// </summary>
+        /// <value></value>
+        public string? ReasonExtend { get; set; }
+        /// <summary>
+		/// Vốn đầu tư
+		/// </summary>
+		/// <value></value>
+		public double? Cost { get; set; }
+        /// <summary>
         /// Ngôn ngữ
         /// </summary>
         public string? Language { get; set; }

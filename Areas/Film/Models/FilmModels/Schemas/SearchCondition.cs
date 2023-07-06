@@ -15,6 +15,7 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels.Schemas
         /// Thể loại film
         /// </summary>
         public int? TypeFilm { get; set; }
+        public int? CinemeRoomId { get; set; }
         /// <summary>
         /// Trang hiện tại.
         /// </summary>

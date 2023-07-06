@@ -14,6 +14,8 @@ using CinemaRoomDb = CapstoneProject.Databases.Schemas.System.CinemaRoom.CinemaR
 using Microsoft.EntityFrameworkCore;
 using CapstoneProject.Commons.Enum;
 using SeatDb = CapstoneProject.Databases.Schemas.System.CinemaRoom.Seat;
+using CapstoneProject.Commons.CodeMaster;
+using CapstoneProject.Services;
 
 namespace CapstoneProject.Areas.CinemaRoom.Models
 {
@@ -21,6 +23,7 @@ namespace CapstoneProject.Areas.CinemaRoom.Models
 	{
 		Task<List<CinemaRoomData>> GetAllCinemaRoom(SearchCondition searchCondition);
         Task<List<BranchData>> GetAllBranches(SearchCondition searchCondition);
+        Task<ResponseInfo> UpdateCinemaRoomData(CinemaRoomDataInput cinemaRoomData);
         Task<ResponseInfo> CreateCinemaRoomData(CinemaRoomDataInput cinemaRoomData);
         Task<ResponseInfo> DeleteCinemaRoomData(int id);
         Task<List<CinemaRoomDataInput>> GetAllCinemaRoomData(SearchCondition searchCondition);
@@ -31,14 +34,18 @@ namespace CapstoneProject.Areas.CinemaRoom.Models
         private readonly ILogger<CinemaRoomData> _logger;
         private readonly IConfiguration _configuration;
         private string _className = "";
+        private readonly IIdentityService _indentityService;
+
         public CinemaRoomModel(
             IConfiguration configuration,
             ILogger<CinemaRoomData> logger,
-            IServiceProvider provider
+            IServiceProvider provider,
+            IIdentityService identityService
         ) : base(provider)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _className = GetType().Name;
+            _indentityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
         public async Task<List<CinemaRoomDataInput>> GetAllCinemaRoomData(SearchCondition searchCondition)
@@ -119,6 +126,61 @@ namespace CapstoneProject.Areas.CinemaRoom.Models
                 throw ex;
             }
         }
+        public async Task<ResponseInfo> UpdateCinemaRoomData(CinemaRoomDataInput cinemaRoomData)
+        {
+            string method = GetActualAsyncMethodName();
+            IDbContextTransaction transaction = null;
+            try
+            {
+                ResponseInfo responseInfo = new ResponseInfo();
+                if (!await _indentityService.CheckIndentifyUser(R001.ADMIN.CODE))
+                {
+                    responseInfo.Code = CodeResponse.HAVE_ERROR;
+                    responseInfo.MsgNo = MSG_NO.ACCOUNT_NOT_HAVE_PERMISSION;
+                    return responseInfo;
+                }
+                var cinemaCheck = _context.CinemaRooms.Where(x => x.Id == cinemaRoomData.Id && !x.DelFlag).FirstOrDefault();
+                if(cinemaCheck != null)
+                {
+                    responseInfo.Code = CodeResponse.HAVE_ERROR;
+                    responseInfo.MsgNo = MSG_NO.NAME_IS_EXITED;
+                    return responseInfo;
+                }
+                cinemaCheck.Name = cinemaRoomData.Name;
+                cinemaCheck.TotalColumn = cinemaRoomData.TotalColumn;
+                cinemaCheck.TotalRow = cinemaRoomData.TotalRow;
+                cinemaCheck.TotalColumn = cinemaRoomData.TotalColumn * cinemaRoomData.TotalRow;
+                cinemaCheck.BranchId = cinemaRoomData.BranchId;
+                List<SeatDb> listSeatOld = await _context.Seats.Where(x => !x.DelFlag && x.CinemaRoomId == cinemaRoomData.Id).ToListAsync();
+                foreach(var seat in listSeatOld)
+                {
+                    seat.DelFlag = true;
+                }    
+                _context.SaveChanges();
+                List<SeatDb> seats = new List<SeatDb>();
+                for(int index = 0; index < cinemaRoomData.TotalRow; index++)
+                {
+                    char columnChar = (char)('A' + index);
+                    for (int col = 0; col < cinemaRoomData.TotalColumn; col++)
+                    {
+                        seats.Add(new SeatDb()
+                        {
+                            CinemaRoomId = cinemaCheck.Id,
+                            Type = 10,
+                            SeatCode = columnChar + (col + 1).ToString()
+                        });
+                    }    
+                }
+                _context.Seats.AddRange(seats);
+                _context.SaveChanges();
+                return responseInfo;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"Get List Film Error: {ex}");
+                throw ex;
+            }
+        }
         public async Task<ResponseInfo> CreateCinemaRoomData(CinemaRoomDataInput cinemaRoomData)
         {
             string method = GetActualAsyncMethodName();
@@ -126,8 +188,14 @@ namespace CapstoneProject.Areas.CinemaRoom.Models
             try
             {
                 ResponseInfo responseInfo = new ResponseInfo();
-                var cinemaCheck = _context.CinemaRooms.Where(x => x.Name == cinemaRoomData.Name && !x.DelFlag && x.BranchId == cinemaRoomData.BranchId).FirstOrDefault();
-                if(cinemaCheck != null)
+                if (!await _indentityService.CheckIndentifyUser(R001.ADMIN.CODE))
+                {
+                    responseInfo.Code = CodeResponse.HAVE_ERROR;
+                    responseInfo.MsgNo = MSG_NO.ACCOUNT_NOT_HAVE_PERMISSION;
+                    return responseInfo;
+                }
+                var cinemaCheck = _context.CinemaRooms.Where(x => x.Id == cinemaRoomData.Id && !x.DelFlag && x.BranchId == cinemaRoomData.BranchId).FirstOrDefault();
+                if (cinemaCheck != null)
                 {
                     responseInfo.Code = CodeResponse.HAVE_ERROR;
                     responseInfo.MsgNo = MSG_NO.NAME_IS_EXITED;
@@ -144,7 +212,7 @@ namespace CapstoneProject.Areas.CinemaRoom.Models
                 await _context.CinemaRooms.AddAsync(cinemaRoomDb);
                 _context.SaveChanges();
                 List<SeatDb> seats = new List<SeatDb>();
-                for(int index = 0; index < cinemaRoomData.TotalRow; index++)
+                for (int index = 0; index < cinemaRoomData.TotalRow; index++)
                 {
                     char columnChar = (char)('A' + index);
                     for (int col = 0; col < cinemaRoomData.TotalColumn; col++)
@@ -155,7 +223,7 @@ namespace CapstoneProject.Areas.CinemaRoom.Models
                             Type = 10,
                             SeatCode = columnChar + (col + 1).ToString()
                         });
-                    }    
+                    }
                 }
                 _context.Seats.AddRange(seats);
                 _context.SaveChanges();
@@ -174,6 +242,12 @@ namespace CapstoneProject.Areas.CinemaRoom.Models
             try
             {
                 ResponseInfo responseInfo = new ResponseInfo();
+                if (!await _indentityService.CheckIndentifyUser(R001.ADMIN.CODE))
+                {
+                    responseInfo.Code = CodeResponse.HAVE_ERROR;
+                    responseInfo.MsgNo = MSG_NO.ACCOUNT_NOT_HAVE_PERMISSION;
+                    return responseInfo;
+                }
                 CinemaRoomDb cinemaCheck = _context.CinemaRooms.Where(x => x.Id == id && !x.DelFlag).FirstOrDefault();
                 if (cinemaCheck == null)
                 {

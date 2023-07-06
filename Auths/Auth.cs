@@ -10,15 +10,15 @@ namespace CapstoneProject.Auths
 {
     /// <summary>
     /// Filter dùng để xác thực quyền truy caapf của user đối ới api.
-    /// <para>Author: QuyPN</para>
-    /// <para>Created: 08/08/2020</para>
+    /// <para>Author: VinhPhuc</para>
+    /// <para>Created: 08/06/2023</para>
     /// </summary>
     public class Auth : AuthorizeAttribute, IAuthorizationFilter
     {
         /// <summary>
         /// Ghi đè phương thức dùng để lọc request.
-        /// <para>Author: QuyPN</para>
-        /// <para>Created: 08/08/2020</para>
+        /// <para>Author: VinhPhuc</para>
+        /// <para>Created: 08/08/2023</para>
         /// </summary>
         /// <param name="filterContext">Data của 1 request.</param>
         public void OnAuthorization(AuthorizationFilterContext context)

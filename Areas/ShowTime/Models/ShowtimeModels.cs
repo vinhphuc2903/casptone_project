@@ -45,7 +45,7 @@ namespace CapstoneProject.Areas.ShowTime.Models
         /// <returns></returns>
         Task<ResponseInfo> AddShowTime(ShowTimeInput showTimeInput);
         /// <summary>
-        /// 
+        /// Tạo đồ ăn
         /// </summary>
         /// <param name="orderData"></param>
         /// <returns></returns>

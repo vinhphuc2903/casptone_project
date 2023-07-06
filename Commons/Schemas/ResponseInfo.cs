@@ -7,8 +7,8 @@ namespace CapstoneProject.Commons.Schemas
 {
     /// <summary>
     /// Lấy thông tin trả về từ ajax.
-    /// Author: QuyPN
-    /// Created at: 01/01/2020
+    /// Author: VinhPhuc
+    /// Created at: 01/01/2023
     /// </summary>
     public class ResponseInfo
     {

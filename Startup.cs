@@ -156,8 +156,10 @@ namespace CapstoneProject
             services.AddTransient<IIdentityService, IdentityService>();
             services.AddTransient<IMediaService, MediaService>();
             // Add db
+            // services.AddDbContext<DataContext>(options =>
+            //     options.UseSqlServer("Server=localhost;Database=CasptonePrjDB;User Id=sa;Password=123456aA@$;TrustServerCertificate=true;"));
             services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer("Server=localhost;Database=CasptonePrjDB;User Id=sa;Password=123456aA@$;TrustServerCertificate=true;"));
+                options.UseNpgsql("User ID=postgres;Password=jfAJQe7PI0FfX9neSnfH;Server=containers-us-west-47.railway.app;Port=5528;Database=railway;"));
         }
 
         // ConfigureContainer is where you can register things directly with Autofac

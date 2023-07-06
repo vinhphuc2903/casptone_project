@@ -31,6 +31,15 @@
             <response code="401">Chưa đăng nhập</response>
             <response code="500">Lỗi khi có exception</response>
         </member>
+        <member name="M:CapstoneProject.Areas.CinemeRoom.Controllers.CinemaRoomController.UpdateCinemaRoomData(CapstoneProject.Areas.CinemaRoom.Models.Schemas.CinemaRoomDataInput)">
+            <summary>
+            Cập nhật cinemaroom mới
+            <para>Created at: 14/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
         <member name="M:CapstoneProject.Areas.CinemeRoom.Controllers.CinemaRoomController.DeleteCinema(System.Int32)">
             <summary>
             Xóa cinemaroom
@@ -152,6 +161,24 @@
             <response code="401">Chưa đăng nhập</response>
             <response code="500">Lỗi khi có exception</response>
         </member>
+        <member name="M:CapstoneProject.Areas.Employee.Controllers.EmployesController.UpdateAccountEmployee(CapstoneProject.Areas.Employee.Models.Schemas.EmployeeData)">
+            <summary>
+            Tạo tài khoản
+            <para>Created at: 04/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Employee.Controllers.EmployesController.DeleteAccountEmployee(System.Int32)">
+            <summary>
+            Tạo tài khoản
+            <para>Created at: 04/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
         <member name="M:CapstoneProject.Areas.Employee.Models.IEmployeesModel.GetEmployees(CapstoneProject.Areas.Employee.Models.Schemas.SearchConditon)">
             <summary>
             Lấy danh sách nhân viên
@@ -163,6 +190,20 @@
             Tạo nhân viên mới
             </summary>
             <param name="accountInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CapstoneProject.Areas.Employee.Models.IEmployeesModel.UpdateAccountEmployee(CapstoneProject.Areas.Employee.Models.Schemas.EmployeeData)">
+            <summary>
+            Cập nhật tài khoản nhân viên
+            </summary>
+            <param name="employeeData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CapstoneProject.Areas.Employee.Models.IEmployeesModel.DeleteAccountEmployee(System.Int32)">
+            <summary>
+            Xóa tài khoản nhân viên
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="P:CapstoneProject.Areas.Employee.Models.Schemas.EmployeeData.Id">
@@ -252,6 +293,15 @@
             <response code="401">Chưa đăng nhập</response>
             <response code="500">Lỗi khi có exception</response>
         </member>
+        <member name="M:CapstoneProject.Areas.Film.Controllers.FilmAdminController.DeleteFilmData(System.Int32)">
+            <summary>
+            Xóa phim
+            <para>Created at: 14/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
         <member name="M:CapstoneProject.Areas.Film.Controllers.FilmController.GetListFilm(CapstoneProject.Areas.Film.Models.FilmModels.Schemas.SearchCondition)">
             <summary>
             Lấy tất cả bộ film theo điều kiện tìm kiếm
@@ -280,6 +330,15 @@
             <response code="500">Lỗi khi có exception</response>
         </member>
         <member name="M:CapstoneProject.Areas.Film.Controllers.FilmController.GetShowTimeByDateByBranch(CapstoneProject.Areas.Film.Models.FilmModels.Schemas.SearchCondition)">
+            <summary>
+            Lấy danh sách phim và lịch chiếu theo chi nhánh theo điều kiện tìm kiếm
+            <para>Created at: 22/05/2023</para>
+            <para>Created by: VinhPhuc</para>
+            </summary>
+            <response code="401">Chưa đăng nhập</response>
+            <response code="500">Lỗi khi có exception</response>
+        </member>
+        <member name="M:CapstoneProject.Areas.Film.Controllers.FilmController.GetShowTimeByDateByBranchV2(CapstoneProject.Areas.Film.Models.FilmModels.Schemas.SearchCondition)">
             <summary>
             Lấy danh sách phim và lịch chiếu theo chi nhánh theo điều kiện tìm kiếm
             <para>Created at: 22/05/2023</para>
@@ -321,6 +380,44 @@
             <summary>
             Ngày kết thúc chiếu phim
             </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.DateRelease">
+            <summary>
+            Ngày phát hành
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.DatePostpone">
+            <summary>
+            Ngày tạm hoãn
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.DateStartPostpone">
+            <summary>
+            Ngày bắt đầu lại
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.DateExtend">
+            <summary>
+            Ngày gia hạn ( ngày kết thúc )
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.ReasonPostpone">
+            <summary>
+            Lý do tạm hoãn
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.ReasonExtend">
+            <summary>
+            Lý do gia hạn
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.Cost">
+            <summary>
+            Vốn đầu tư
+            </summary>
+            <value></value>
         </member>
         <member name="P:CapstoneProject.Areas.Film.Models.FilmAdminModels.Schemas.NewFilmData.Language">
             <summary>
@@ -406,6 +503,13 @@
             <param name="searchCondition"></param>
             <returns></returns>
         </member>
+        <member name="M:CapstoneProject.Areas.Film.Models.FilmModels.IFilmModel.GetShowTimeByDateByBranchV2(CapstoneProject.Areas.Film.Models.FilmModels.Schemas.SearchCondition)">
+            <summary>
+            Lấy danh sách phim và lịch chiếu phim đó theo từng ngày v2
+            </summary>
+            <param name="searchCondition"></param>
+            <returns></returns>
+        </member>
         <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.FilmInfo.Name">
             <summary>
             Tên loại phim
@@ -478,6 +582,17 @@
         <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.FilmInfo.TrailerLink">
             <summary>
             Link trailer film Youtobe
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.FilmInfo.Cost">
+            <summary>
+            Vốn đầu tư
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.FilmInfo.DateRelease">
+            <summary>
+            Ngày phát hành
             </summary>
         </member>
         <member name="P:CapstoneProject.Areas.Film.Models.FilmModels.Schemas.RoomDetail.Name">
@@ -976,7 +1091,7 @@
         </member>
         <member name="M:CapstoneProject.Areas.ShowTime.Models.IShowtimeModels.CreateFood(CapstoneProject.Areas.ShowTime.Models.Schemas.FoodData)">
             <summary>
-            
+            Tạo đồ ăn
             </summary>
             <param name="orderData"></param>
             <returns></returns>
@@ -1284,30 +1399,30 @@
         <member name="T:CapstoneProject.Auths.Auth">
             <summary>
             Filter dùng để xác thực quyền truy caapf của user đối ới api.
-            <para>Author: QuyPN</para>
-            <para>Created: 08/08/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 08/06/2023</para>
             </summary>
         </member>
         <member name="M:CapstoneProject.Auths.Auth.OnAuthorization(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)">
             <summary>
             Ghi đè phương thức dùng để lọc request.
-            <para>Author: QuyPN</para>
-            <para>Created: 08/08/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 08/08/2023</para>
             </summary>
             <param name="filterContext">Data của 1 request.</param>
         </member>
         <member name="T:CapstoneProject.AutofacModules.AppModule">
             <summary>
             Đăng ký các dịch vụ dùng cho việc tạo và xử lý sự kiện thông qua autofac
-            <para>Created at: 10/07/2020</para>
-            <para>Created by: QuyPN</para>
+            <para>Created at: 10/07/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
         </member>
         <member name="M:CapstoneProject.AutofacModules.AppModule.Load(Autofac.ContainerBuilder)">
             <summary>
             Ghi đè phương thức load của autofac để đăng ký dịch vụ
-            <para>Created at: 10/07/2020</para>
-            <para>Created by: QuyPN</para>
+            <para>Created at: 10/07/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
             <param name="builder">builder dùng để đăng ký dịch vụ</param>
         </member>
@@ -1579,18 +1694,44 @@
         </member>
         <!-- Badly formed XML comment ignored for member "F:CapstoneProject.Commons.Enum.MSG_NO.DATE_CREATE_IS_7_DAY" -->
         <!-- Badly formed XML comment ignored for member "F:CapstoneProject.Commons.Enum.MSG_NO.DATE_TO_MUST_BE_LAGER_DATE_FROM" -->
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.FILM_IS_NOT_EXITED">
+            <summary>
+            Phim chiếu không tồn tại
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.DATE_START_NOT_OK">
+            <summary>
+            Ngày bắt đầu chiếu phải lớn hơn ngày tạm hoãn
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.DATE_EXTEND_NOT_OK">
+            <summary>
+            Ngày kết gia hạn phải lớn hơn ngày kết thúc
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.DATE_EXTEND_NOT_OK_V1">
+            <summary>
+            Vui lòng chọn ngày gia hạn để tiếp tục chiếu phim
+            </summary>
+        </member>
+        <member name="F:CapstoneProject.Commons.Enum.MSG_NO.DATE_RELESE_NOT_OK">
+            <summary>
+            Ngày phát hàng phải lớn hơn ngày bắt đầu
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:CapstoneProject.Commons.Enum.MSG_NO.EMPLOYEE_NOT_EXITED" -->
         <member name="T:CapstoneProject.Commons.Helpers">
             <summary>
             Các xử lý chung thường xuyên sử dụng trong hệ thống.
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/02/2023</para>
             </summary>
         </member>
         <member name="M:CapstoneProject.Commons.Helpers.RenderToken(System.String,System.Int32)">
             <summary>
             Sinh chuỗi token ngẫu nhiên theo id account đăng nhập, độ dài mặc định 100 ký tự.
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/02/2023</para>
             </summary>
             <param name="str">Chuỗi không trùng nhau sẽ cộng thêm vào token</param>
             <param name="length">Dộ dài của token, mặc định 100 ký tự</param>
@@ -1599,8 +1740,8 @@
         <member name="M:CapstoneProject.Commons.Helpers.CreateScanCode(System.String)">
             <summary>
             Tạo ra chuỗi code để scan mã số khách hàng
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/02/2023</para>
             </summary>
             <param name="customerId">Mã số khách hàng</param>
             <returns>Chuỗi scan khi thanh toán</returns>
@@ -1608,8 +1749,8 @@
         <member name="M:CapstoneProject.Commons.Helpers.DecodeScanCode(System.String)">
             <summary>
             Giải mã chuỗi scan ra mã khách hàng
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/02/2023</para>
             </summary>
             <param name="scanCode">Mã số khi scan</param>
             <returns>Chuỗi scan khi thanh toán</returns>
@@ -1617,8 +1758,8 @@
         <member name="M:CapstoneProject.Commons.Helpers.ConvertToUnSign(System.String,System.Boolean)">
             <summary>
             Chuyển từ tiếng việt có dấu thành tiếng việt không dấu.
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/02/2023</para>
             </summary>
             <param name="s">Chuỗi tiếng việt cần chuyển</param>
             <param name="isReplaceSpecialChracter">Có thay thế các ký tự đặc biệt hay không</param>
@@ -1627,8 +1768,8 @@
         <member name="M:CapstoneProject.Commons.Helpers.GetCookie(System.String,System.String)">
             <summary>
             Lấy dữ liệu từ cookies theo khóa, nếu không có dữ liệu thì trả về theo dữ liệu mặc định truyền vào hoặc rỗng
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/02/2023</para>
             </summary>
             <param name="key">Khóa cần lấy dữ liệu trong cookie</param>
             <param name="returnDefault">Kết quả trả về mặc định nếu không có dữ liệu trong cookie, mặc định là chuỗi rỗng</param>
@@ -1637,8 +1778,8 @@
         <member name="M:CapstoneProject.Commons.Helpers.DeleteFiles(System.Collections.Generic.List{System.String})">
             <summary>
             Xóa file theo danh sách url đã cung cấp.
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/02/2023</para>
             </summary>
             <param name="fileUrls">Danh sách url file sẽ xóa</param>
             <returns>True nếu xóa thành công tất cả các file. Exception nếu có lỗi.</returns>
@@ -1646,8 +1787,8 @@
         <member name="M:CapstoneProject.Commons.Helpers.DeleteFiles(System.String[])">
             <summary>
             Xóa file theo danh sách url đã cung cấp.
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/02/2023</para>
             </summary>
             <param name="fileUrls">Danh sách url file sẽ xóa</param>
             <returns>True nếu xóa thành công tất cả các file. Exception nếu có lỗi.</returns>
@@ -1655,8 +1796,8 @@
         <member name="M:CapstoneProject.Commons.Helpers.DeleteFile(System.String)">
             <summary>
             Xóa 1 file url đã cung cấp.
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/02/2023</para>
             </summary>
             <param name="fileUrl">Đường dẫn đến file cần xóa</param>
             <returns>True nếu xóa thành công file. Exception nếu có lỗi.</returns>
@@ -1664,8 +1805,8 @@
         <member name="M:CapstoneProject.Commons.Helpers.SaveFileUpload(Microsoft.AspNetCore.Http.IFormFile,System.String,System.String,System.Collections.Generic.List{System.String},System.Boolean,System.Int32)">
             <summary>
             Lưu file gửi từ client vào thư mục của server.
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/02/2023</para>
             </summary>
             <param name="file">File được gửi lên</param>
             <param name="folder">Đường dẫn đến thư mục muốn lưu (mặc định là /public/images/upload/)</param>
@@ -1682,8 +1823,8 @@
         <member name="M:CapstoneProject.Commons.Helpers.SqlServerEscapeString(System.String)">
             <summary>
             Thay thế các ký tự trong chuỗi search để có thể dùng được ở Store procedure.
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/02/2023</para>
             </summary>
             <param name="str">Chuỗi cần thay thế</param>
             <returns>Chuỗi sau khi đã thay thế</returns>
@@ -1716,8 +1857,8 @@
         <member name="T:CapstoneProject.Commons.ImgUploadWithThumb">
             <summary>
             Thông tin đường dẫn của hình ảnh đã upload đi kèm đường dẫn đến Thumb.
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/02/2023</para>
             </summary>
         </member>
         <member name="P:CapstoneProject.Commons.ImgUploadWithThumb.LinkImg">
@@ -1760,8 +1901,8 @@
         <member name="M:CapstoneProject.Commons.Paging.#ctor">
             <summary>
             Hàm khởi tạo mặc định để gán các tham số mặc định khi khởi tạo 1 biến để lưu phân trang.
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/02/2023</para>
             </summary>
         </member>
         <member name="M:CapstoneProject.Commons.Paging.#ctor(System.Int32,System.Int32,System.Int32)">
@@ -1777,8 +1918,8 @@
         <member name="T:CapstoneProject.Commons.Schemas.ResponseInfo">
             <summary>
             Lấy thông tin trả về từ ajax.
-            Author: QuyPN
-            Created at: 01/01/2020
+            Author: VinhPhuc
+            Created at: 01/01/2023
             </summary>
         </member>
         <member name="P:CapstoneProject.Commons.Schemas.ResponseInfo.Code">
@@ -1814,15 +1955,15 @@
         <member name="T:CapstoneProject.Commons.Security">
             <summary>
             Các xử lý liên quan đến mã hóa và giải mã dữ liệu
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/02/2023</para>
             </summary>
         </member>
         <member name="M:CapstoneProject.Commons.Security.GetMD5(System.String,System.String,System.String)">
             <summary>
             Mã hóa MD5 của 1 chuỗi có thêm chuối khóa đầu và cuối.
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/02/2023</para>
             </summary>
             <param name="str">Chuỗi cần mã hóa.</param>
             <param name="firstStr">Chuỗi bảo mật đầu</param>
@@ -1832,8 +1973,8 @@
         <member name="M:CapstoneProject.Commons.Security.GetSimpleMD5(System.String)">
             <summary>
             Mã hóa MD5 của 1 chuỗi không có thêm chuối khóa đầu và cuối.
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/02/2023</para>
             </summary>
             <param name="str">Chuỗi cần mã hóa</param>
             <returns>Chuỗi sau khi đã được mã hóa</returns>
@@ -1841,8 +1982,8 @@
         <member name="M:CapstoneProject.Commons.Security.Base64Encode(System.String)">
             <summary>
             Mã hóa base64 của 1 chuỗi
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/02/2023</para>
             </summary>
             <param name="plainText">Chuỗi cần mã hóa</param>
             <returns>Chuỗi sau khi mã hóa</returns>
@@ -1850,8 +1991,8 @@
         <member name="M:CapstoneProject.Commons.Security.Base64Decode(System.String)">
             <summary>
             Chuyển mã base64 về chuỗi trước khi mã hóa.
-            <para>Author: QuyPN</para>
-            <para>Created: 15/02/2020</para>
+            <para>Author: VinhPhuc</para>
+            <para>Created: 15/02/2023</para>
             </summary>
             <param name="base64EncodedData">Chuỗi mã hóa</param>
             <returns>Chuỗi sau khi giải mã</returns>
@@ -1860,7 +2001,7 @@
             <summary>
             Kiểm tra captcha token có hợp lệ hay ko
             <para>Author: DungNT</para>
-            <para>Created: 16/05/2020</para>
+            <para>Created: 16/05/2023</para>
             </summary>
             <param name="checkCaptcha">Chuỗi mã hóa</param>
             <returns>Trang thái kiểm tra: (true: hợp lệ)-(false: không hợp lệ)</returns>
@@ -2009,22 +2150,22 @@
         <member name="M:CapstoneProject.Databases.DataContext.OnBeforeSaving">
             <summary>
             Lưu thêm các thông tin cần thiết mặc định khi cập nhật dữ diệu vào Database.
-            <para>Created at: 10/07/2020</para>
-            <para>Created by: QuyPN</para>
+            <para>Created at: 10/07/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
         </member>
         <member name="M:CapstoneProject.Databases.DataContext.GetAccountId">
             <summary>
             Lấy user id đang đăng nhập nếu có
-            <para>Created at: 08/08/2020</para>
-            <para>Created by: QuyPN</para>
+            <para>Created at: 08/08/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
             <returns>user id của user đang đăng nhập. Trả về 0 nếu không có thông tin user đăng nhập</returns>
         </member>
         <member name="M:CapstoneProject.Databases.DataContext.GetRequestIp">
             <summary>
             Lấy Ip của request hiện tại
-            <para>Created at: 15/05/2020</para>
+            <para>Created at: 15/05/2023</para>
             <para>Created by: DungNT</para>
             </summary>
             <returns>Ip của request hiện tại</returns>
@@ -2317,6 +2458,44 @@
             <summary>
             Ngày kết thúc chiếu phim
             </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.DateRelease">
+            <summary>
+            Ngày phát hành
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.DatePostpone">
+            <summary>
+            Ngày tạm hoãn
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.DateStartPostpone">
+            <summary>
+            Ngày bắt đầu lại
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.DateExtend">
+            <summary>
+            Ngày gia hạn ( ngày kết thúc )
+            </summary>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.ReasonPostpone">
+            <summary>
+            Lý do tạm hoãn
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.ReasonExtend">
+            <summary>
+            Lý do gia hạn
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.Cost">
+            <summary>
+            Vốn đầu tư
+            </summary>
+            <value></value>
         </member>
         <member name="P:CapstoneProject.Databases.Schemas.System.Film.Films.MinNumberOfScreen">
             <summary>
@@ -2753,15 +2932,15 @@
         <member name="T:CapstoneProject.Extensions.AppExtensions">
             <summary>
             Lớp mở rộng để cấu hình app cho 1 microservice.
-            <para>Created at: 10/07/2020</para>
-            <para>Created by: QuyPN</para>
+            <para>Created at: 10/07/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
         </member>
         <member name="M:CapstoneProject.Extensions.AppExtensions.UseCustomSwagger(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String,System.String[])">
             <summary>
             Cấu hình việc sử dụng swagger cho app
-            <para>Created at: 10/07/2020</para>
-            <para>Created by: QuyPN</para>
+            <para>Created at: 10/07/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
             <param name="app">Application hiện tại của service</param>
             <param name="serviceName">Tên microservice đang cấu hình</param>
@@ -2771,8 +2950,8 @@
         <member name="M:CapstoneProject.Extensions.AppExtensions.UseCustomHealthChecks(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)">
             <summary>
             Cấu hình việc sử dụng kiểm tra trạng thái microservice cho app
-            <para>Created at: 10/07/2020</para>
-            <para>Created by: QuyPN</para>
+            <para>Created at: 10/07/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
             <param name="app">Application hiện tại của service</param>
             <param name="serviceName">Tên microservice đang cấu hình</param>
@@ -2781,8 +2960,8 @@
         <member name="M:CapstoneProject.Extensions.AppExtensions.UseCustomCors(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String,System.String)">
             <summary>
             Cấu hình việc sử dụng cross origin cho app
-            <para>Created at: 10/07/2020</para>
-            <para>Created by: QuyPN</para>
+            <para>Created at: 10/07/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
             <param name="app">Application hiện tại của service</param>
             <param name="serviceName">Tên microservice đang cấu hình</param>
@@ -2792,15 +2971,15 @@
         <member name="T:CapstoneProject.Extensions.HostExtensions">
             <summary>
             Lớp mở rộng để cài đặt các cấu hình lúc build host.
-            <para>Created at: 10/07/2020</para>
-            <para>Created by: QuyPN</para>
+            <para>Created at: 10/07/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
         </member>
         <member name="M:CapstoneProject.Extensions.HostExtensions.UseCustomLog(Microsoft.AspNetCore.Hosting.IWebHostBuilder,System.String)">
             <summary>
             Cấu hình việc ghi log và sử dụng serilog
-            <para>Created at: 10/07/2020</para>
-            <para>Created by: QuyPN</para>
+            <para>Created at: 10/07/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
             <param name="builder">Đối tượng build host hiện tại</param>
             <param name="serviceName">Tên service cần cấu hình</param>
@@ -2809,8 +2988,8 @@
         <member name="M:CapstoneProject.Extensions.HostExtensions.CustomConfigureAppConfiguration(Microsoft.AspNetCore.Hosting.IWebHostBuilder)">
             <summary>
             Cấu hình việc sử dụng file config của hệ thống
-            <para>Created at: 10/07/2020</para>
-            <para>Created by: QuyPN</para>
+            <para>Created at: 10/07/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
             <param name="builder">Đối tượng build host hiện tại</param>
             <param name="serviceName">Tên service cần cấu hình</param>
@@ -2819,15 +2998,15 @@
         <member name="T:CapstoneProject.Extensions.ServicesExtensions">
             <summary>
             Lớp mở rộng để cấu hình các dịch vụ cần thiết cho 1 microservice
-            <para>Created at: 10/07/2020</para>
-            <para>Created by: QuyPN</para>
+            <para>Created at: 10/07/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
         </member>
         <member name="M:CapstoneProject.Extensions.ServicesExtensions.AddCustomCors(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
             <summary>
             Cấu hình cross orgin cho API
-            <para>Created at: 10/07/2020</para>
-            <para>Created by: QuyPN</para>
+            <para>Created at: 10/07/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
             <param name="services">Các dịch vụ của API hiện tại</param>
             <param name="configuration">Các cấu hình API hiện tại</param>
@@ -2837,8 +3016,8 @@
         <member name="M:CapstoneProject.Extensions.ServicesExtensions.AddCustomApiVersioning(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             Cấu hình sử dụng version cho API
-            <para>Created at: 10/07/2020</para>
-            <para>Created by: QuyPN</para>
+            <para>Created at: 10/07/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
             <param name="services">Các dịch vụ của API hiện tại</param>
             <param name="configuration">Các cấu hình API hiện tại</param>
@@ -2847,8 +3026,8 @@
         <member name="M:CapstoneProject.Extensions.ServicesExtensions.AddCustomSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String,System.String)">
             <summary>
             Cấu hình sử dụng Swagger để tạo API doc và test API
-            <para>Created at: 10/07/2020</para>
-            <para>Created by: QuyPN</para>
+            <para>Created at: 10/07/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
             <param name="services">Các dịch vụ của API hiện tại</param>
             <param name="configuration">Các cấu hình API hiện tại</param>
@@ -2859,8 +3038,8 @@
         <member name="M:CapstoneProject.Extensions.ServicesExtensions.AddCustomAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             Cấu hình sử dụng xác thực cho API
-            <para>Created at: 10/07/2020</para>
-            <para>Created by: QuyPN</para>
+            <para>Created at: 10/07/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
             <param name="services">Các dịch vụ của API hiện tại</param>
             <param name="configuration">Các cấu hình API hiện tại</param>
@@ -2869,384 +3048,36 @@
         <member name="T:CapstoneProject.Extensions.SwaggerExcludeAttribute">
             <summary>
             Thuộc tính để thêm vào property để bỏ qua khi render swagger UI
-            <para>Created at: 08/08/2020</para>
-            <para>Created by: QuyPN</para>
+            <para>Created at: 08/08/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
         </member>
         <member name="T:CapstoneProject.Extensions.SwaggerParameterFilter">
             <summary>
             Lọc các tham số của API sẽ render trên UI, bỏ qua các tham số trên dường dẫn (api_version) và thêm các giá trị mặc định cho các tham số
-            <para>Created at: 08/08/2020</para>
-            <para>Created by: QuyPN</para>
+            <para>Created at: 08/08/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
         </member>
         <member name="M:CapstoneProject.Extensions.SwaggerParameterFilter.Swashbuckle#AspNetCore#SwaggerGen#IOperationFilter#Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
             <summary>
             Ghi đè phương thức để lọc tham số
-            <para>Created at: 08/08/2020</para>
-            <para>Created by: QuyPN</para>
+            <para>Created at: 08/08/2023</para>
+            <para>Created by: VinhPhuc</para>
             </summary>
             <param name="operation"></param>
             <param name="context"></param>
         </member>
-        <member name="T:CapstoneProject.Migrations.InitialCreate">
+        <member name="T:CapstoneProject.Migrations.database">
             <inheritdoc />
         </member>
-        <member name="M:CapstoneProject.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:CapstoneProject.Migrations.database.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:CapstoneProject.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:CapstoneProject.Migrations.database.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:CapstoneProject.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.Add_Table_User">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Add_Table_User.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Add_Table_User.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Add_Table_User.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.updatetable">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatetable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatetable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatetable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.datanull">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.datanull.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.datanull.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.datanull.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.Addnewtable">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Addnewtable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Addnewtable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Addnewtable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.updatedatabase">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatedatabase.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatedatabase.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatedatabase.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.TypeFilmDetails">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.TypeFilmDetails.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.TypeFilmDetails.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.TypeFilmDetails.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.Updateint">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Updateint.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Updateint.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Updateint.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.Addnameroom">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Addnameroom.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Addnameroom.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Addnameroom.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.addnameticket">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.addnameticket.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.addnameticket.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.addnameticket.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.addtableaddress">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.addtableaddress.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.addtableaddress.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.addtableaddress.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.updatedbda">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatedbda.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatedbda.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatedbda.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.updatesa">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatesa.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatesa.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatesa.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.Addbranches">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Addbranches.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Addbranches.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Addbranches.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.Addbranchshowtime">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Addbranchshowtime.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Addbranchshowtime.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Addbranchshowtime.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.addposition">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.addposition.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.addposition.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.addposition.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.adddatestart">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.adddatestart.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.adddatestart.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.adddatestart.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.updatedatetime">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatedatetime.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatedatetime.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatedatetime.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.addtypeticket">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.addtypeticket.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.addtypeticket.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.addtypeticket.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.updatefood">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatefood.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatefood.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatefood.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.updatedbname">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatedbname.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatedbname.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatedbname.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.addpayment">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.addpayment.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.addpayment.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.addpayment.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.Imagelink">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Imagelink.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Imagelink.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Imagelink.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.Imagelinkim">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Imagelinkim.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Imagelinkim.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.Imagelinkim.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.createorder">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.createorder.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.createorder.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.createorder.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.updaterelationshiporderpm">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updaterelationshiporderpm.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updaterelationshiporderpm.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updaterelationshiporderpm.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.updatelinkimgbranch">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatelinkimgbranch.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatelinkimgbranch.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatelinkimgbranch.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.updatedborderTicketDetail">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatedborderTicketDetail.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatedborderTicketDetail.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatedborderTicketDetail.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.updatedborderTicketDetails">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatedborderTicketDetails.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatedborderTicketDetails.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.updatedborderTicketDetails.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:CapstoneProject.Migrations.orderedaT">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.orderedaT.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.orderedaT.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:CapstoneProject.Migrations.orderedaT.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:CapstoneProject.Migrations.database.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="F:CapstoneProject.Program.ServiceName">

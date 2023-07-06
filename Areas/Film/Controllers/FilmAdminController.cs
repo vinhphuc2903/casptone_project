@@ -85,6 +85,26 @@ namespace CapstoneProject.Areas.Film.Controllers
                 return StatusCode(500);
             }
         }
+        /// <summary>
+        /// Xóa phim
+        /// <para>Created at: 14/05/2023</para>
+        /// <para>Created by: VinhPhuc</para>
+        /// </summary>
+        /// <response code="401">Chưa đăng nhập</response>
+        /// <response code="500">Lỗi khi có exception</response>
+        [HttpDelete("delete-film")]
+        public async Task<ActionResult> DeleteFilmData([FromQuery] int FilmId)
+        {
+            try
+            {
+                return Ok(await _filmAdminModel.DeleteFilm(FilmId));
+            }
+            catch (Exception e)
+            {
+                //await _logService.SaveLogException(e);
+                return StatusCode(500);
+            }
+        }
     }
 }
 

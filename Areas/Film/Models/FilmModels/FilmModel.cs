@@ -29,6 +29,9 @@ using CapstoneProject.Databases.Schemas.System.Ticket;
 using CapstoneProject.Databases.Schemas.System.CinemaRoom;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Data;
+using Azure;
+using CapstoneProject.Commons.CodeMaster;
+using CapstoneProject.Commons.Enum;
 
 namespace CapstoneProject.Areas.Film.Models.FilmModels
 {
@@ -63,6 +66,12 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
         /// <param name="searchCondition"></param>
         /// <returns></returns>
         Task<ListShowTimeByDate> GetShowTimeByDateByBranch(SearchCondition searchCondition);
+        /// <summary>
+        /// Lấy danh sách phim và lịch chiếu phim đó theo từng ngày v2
+        /// </summary>
+        /// <param name="searchCondition"></param>
+        /// <returns></returns>
+        Task<List<ListShowTimeByDate>> GetShowTimeByDateByBranchV2(SearchCondition searchCondition);
     }
     public class FilmModel : CapstoneProjectModels, IFilmModel
     {
@@ -108,7 +117,7 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
                 }
                 DateTime startOfDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
                 DateTime endOfDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59);
-                
+
                 // Phim đang chiếu nhưng không được cập nhật trạng thái
 
                 var listFilm = _context.Films.Where(x => !x.DelFlag
@@ -120,16 +129,68 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
                                                         || x.DateStart.Date >= searchCondition.DateStart.Value.Date)
                                                         && (searchCondition.DateEnd == null
                                                         || x.DateEnd.Value.Date <= searchCondition.DateEnd.Value.Date)
-                                                        && (String.IsNullOrEmpty(searchCondition.Status)
-                                                        || x.Status == searchCondition.Status
-                                                        || searchCondition.Status == "50")
+                                                        //&& (String.IsNullOrEmpty(searchCondition.Status)
+                                                        //|| x.Status == searchCondition.Status
+                                                        //|| searchCondition.Status == "50")
                                                         //&& (String.IsNullOrEmpty(searchCondition.Status)
                                                         //    || searchCondition.Status != "40"
                                                         //    || (x.DateEnd >= DateTimeOffset.Now)
                                                         //)
+                                                        //&& (String.IsNullOrEmpty(searchCondition.Status)
+                                                        //    || searchCondition.Status != "50"
+                                                        //    || (x.DateEnd < DateTimeOffset.Now && x.Status != "40")
+                                                        //)
+                                                        // Phim sắp chiếu
+                                                        && (
+                                                            String.IsNullOrEmpty(searchCondition.Status)
+                                                            || searchCondition.Status != "10"
+                                                            || (searchCondition.Status == "10"
+                                                                && x.DateStart > startOfDay)
+                                                        )
+                                                        //Phim đang chiếu
                                                         && (String.IsNullOrEmpty(searchCondition.Status)
-                                                            || searchCondition.Status != "50"
-                                                            || (x.DateEnd < DateTimeOffset.Now && x.Status != "40")
+                                                            || searchCondition.Status != "20"
+                                                            || (searchCondition.Status == "20"
+                                                                &&
+                                                                (
+                                                                    (x.DateStart <= startOfDay
+                                                                    && x.DateEnd >= startOfDay)
+                                                                    || (
+                                                                        x.DateStartPostpone <= startOfDay
+                                                                        && x.DateExtend >= startOfDay
+                                                                    )
+                                                                    || (
+                                                                        x.DatePostpone == null
+                                                                        && x.DateExtend >= startOfDay
+                                                                    )
+                                                                )
+                                                                && (
+                                                                    x.DatePostpone == null
+                                                                    || x.DatePostpone > startOfDay
+                                                                )
+                                                            )
+                                                        )
+                                                        // Phim tạm hoãn
+                                                        && (String.IsNullOrEmpty(searchCondition.Status)
+                                                            || searchCondition.Status != "30"
+                                                            || (searchCondition.Status == "30"
+                                                                && x.DatePostpone <= startOfDay
+                                                                && (
+                                                                    x.DateStartPostpone == null
+                                                                    || x.DateStartPostpone <= startOfDay
+                                                                )
+                                                            )
+                                                        )
+                                                        // Phim đã chiếu
+                                                        && (String.IsNullOrEmpty(searchCondition.Status)
+                                                            || searchCondition.Status != "40"
+                                                            || (searchCondition.Status == "40"
+                                                                && x.DateEnd < startOfDay
+                                                                && (
+                                                                    x.DateExtend == null
+                                                                    || x.DateExtend < startOfDay
+                                                                )
+                                                            )
                                                         )
                                                     )
                                                     .Select(x => new FilmInfo()
@@ -147,7 +208,9 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
                                                         DateStart = x.DateStart,
                                                         DateEnd = x.DateEnd,
                                                         Status = x.Status,
-                                                        Language = x.Language
+                                                        Language = x.Language,
+                                                        Cost = x.Cost,
+                                                        DateRelease = x.DateRelease
                                                     })
                                                     .OrderByDescending(x => x.Id);
                 if (listFilm == null)
@@ -318,11 +381,11 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
                    )
                    .OrderBy(x => x.Id)
                    .ToListAsync();
-                foreach(var tickets in ticketDbs)
+                foreach (var tickets in ticketDbs)
                 {
                     tickets.Type = "10";
                     _context.SaveChangesAsync();
-                }    
+                }
                 if (showTimeDetail.ShowtimeData == null) return showTimeDetail;
                 showTimeDetail.ListTicketData = await _context.Ticket
                     .Where(x => !x.DelFlag && x.ShowtimeId == ShowTimeId)
@@ -372,19 +435,42 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
             IDbContextTransaction transaction = null;
             try
             {
-                if(searchCondition == null)
+                if (searchCondition == null)
                 {
                     searchCondition = new SearchCondition();
                 }
                 DateTime startOfDay = new DateTime(searchCondition.DateRecord.Value.Year, searchCondition.DateRecord.Value.Month, searchCondition.DateRecord.Value.Day, 0, 0, 0);
-                DateTime endOfDay = new DateTime(searchCondition.DateRecord.Value.Year, searchCondition.DateRecord.Value.Month, searchCondition.DateRecord.Value.Day, 23, 59, 59);
+                if (searchCondition.DateEnd == null)
+                {
+                    searchCondition.DateEnd = startOfDay;
+                }
+                DateTime endOfDay = new DateTime(searchCondition.DateEnd.Value.Year, searchCondition.DateEnd.Value.Month, searchCondition.DateEnd.Value.Day, 23, 59, 59);
                 ListShowTimeByDate listShowTimeByDate = new ListShowTimeByDate();
                 int timeFrom = DateTime.Now.Minute + DateTime.Now.Hour * 60;
                 int now = DateTime.Now.Hour * 60 + DateTime.Now.Minute;
                 var showTimeByDates = _context.Films
                     .Include(x => x.ShowTime)
                     .ThenInclude(x => x.CinemaRooms)
-                    .Where(x => !x.DelFlag && x.DateEnd >= DateTimeOffset.Now && x.Status == "20")
+                    .Where(x => !x.DelFlag && x.DateEnd >= DateTimeOffset.Now
+                        //Phim đang chiếu
+                        &&
+                        (
+                            (x.DateStart <= startOfDay
+                            && x.DateEnd >= startOfDay)
+                            || (
+                                x.DateStartPostpone <= startOfDay
+                                && x.DateExtend >= startOfDay
+                            )
+                            || (
+                                x.DatePostpone == null
+                                && x.DateExtend >= startOfDay
+                            )
+                        )
+                        && (
+                            x.DatePostpone == null
+                            || x.DatePostpone > startOfDay
+                        )
+                    )
                     .Select(
                         x => new ShowTimeByDate()
                         {
@@ -410,6 +496,10 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
                                     && x.DateShow >= startOfDay
                                     && x.DateShow <= endOfDay
                                     && x.BranchId == searchCondition.BranchId
+                                    && (
+                                        searchCondition.CinemeRoomId == null
+                                        || x.CinemaRoomId == searchCondition.CinemeRoomId
+                                    )
                                     && !x.CinemaRooms.DelFlag
                                     && ((x.FromHour * 60 + x.FromMinus) > now || DateTime.Now.Date != searchCondition.DateRecord.Value.Date))
                                 .Select(x => new ShowTimeDetailByDate()
@@ -422,6 +512,10 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
                                 }).ToList()
                         }
                     );
+                if (searchCondition.CinemeRoomId != null)
+                {
+                    showTimeByDates = showTimeByDates.Where(x => x.showTimeDetailByDates.Any());
+                }
                 var totalCount = showTimeByDates.Count();
                 if (totalCount == 0) return listShowTimeByDate;
                 listShowTimeByDate.Paging = new Paging(totalCount, searchCondition.CurrentPage, searchCondition.PageSize);
@@ -429,6 +523,121 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels
                                                 .Take(searchCondition.PageSize)
                                                 .ToListAsync();
                 return listShowTimeByDate;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"Get List Film Error: {ex}");
+                throw ex;
+            }
+        }
+        public async Task<List<ListShowTimeByDate>> GetShowTimeByDateByBranchV2(SearchCondition searchCondition)
+        {
+            string method = GetActualAsyncMethodName();
+            IDbContextTransaction transaction = null;
+            try
+            {
+                if (searchCondition == null)
+                {
+                    searchCondition = new SearchCondition();
+                }
+                DateTime startOfDay = new DateTime(searchCondition.DateRecord.Value.Year, searchCondition.DateRecord.Value.Month, searchCondition.DateRecord.Value.Day, 0, 0, 0);
+                if (searchCondition.DateEnd == null)
+                {
+                    searchCondition.DateEnd = startOfDay;
+                }
+                DateTime endOfDay = new DateTime(searchCondition.DateEnd.Value.Year, searchCondition.DateEnd.Value.Month, searchCondition.DateEnd.Value.Day, 23, 59, 59);
+                List<ListShowTimeByDate> listShowTimeByDateReturn = new List<ListShowTimeByDate>();
+                int i = 0;
+                for (var from = startOfDay; from <= endOfDay; from = from.AddDays(1))
+                {
+                    i++;
+                    if (i == 7) break;
+                    DateTime endOfDaySearch = new DateTime(from.Year, from.Month, from.Day, 23, 59, 59);
+                    ListShowTimeByDate listShowTimeByDate = new ListShowTimeByDate();
+                    listShowTimeByDate.DateRecord = from;
+                    int timeFrom = DateTime.Now.Minute + DateTime.Now.Hour * 60;
+                    int now = DateTime.Now.Hour * 60 + DateTime.Now.Minute;
+                    var showTimeByDates = _context.Films
+                        .Include(x => x.ShowTime)
+                        .ThenInclude(x => x.CinemaRooms)
+                        .Where(x => !x.DelFlag && x.DateEnd >= DateTimeOffset.Now
+                            //Phim đang chiếu
+                            &&
+                            (
+                                (x.DateStart <= startOfDay
+                                && x.DateEnd >= startOfDay)
+                                || (
+                                    x.DateStartPostpone <= startOfDay
+                                    && x.DateExtend >= startOfDay
+                                )
+                                || (
+                                    x.DatePostpone == null
+                                    && x.DateExtend >= startOfDay
+                                )
+                            )
+                            && (
+                                x.DatePostpone == null
+                                || x.DatePostpone > startOfDay
+                            )
+                        )
+                        .Select(
+                            x => new ShowTimeByDate()
+                            {
+                                filmInfo = new FilmInfo()
+                                {
+                                    Id = x.Id,
+                                    Name = x.Name,
+                                    Actor = x.Actor,
+                                    Director = x.Director,
+                                    AgeLimit = x.AgeLimit,
+                                    Time = x.Time,
+                                    Introduce = x.Introduce,
+                                    TrailerLink = x.TrailerLink,
+                                    Country = x.Country,
+                                    BackgroundImage = x.BackgroundImage,
+                                    DateStart = x.DateStart,
+                                    DateEnd = x.DateEnd,
+                                    Status = x.Status,
+                                    Language = x.Language
+                                },
+                                showTimeDetailByDates = x.ShowTime
+                                    .Where(x => !x.DelFlag
+                                        && x.DateShow >= from
+                                        && x.DateShow <= endOfDaySearch
+                                        && x.BranchId == searchCondition.BranchId
+                                        && (
+                                            searchCondition.CinemeRoomId == null
+                                            || x.CinemaRoomId == searchCondition.CinemeRoomId
+                                        )
+                                        && !x.CinemaRooms.DelFlag
+                                        && ((x.FromHour * 60 + x.FromMinus) > now || DateTime.Now.Date != searchCondition.DateRecord.Value.Date))
+                                    .Select(x => new ShowTimeDetailByDate()
+                                    {
+                                        FromHour = x.FromHour,
+                                        ToHour = x.ToHour,
+                                        FromMinus = x.FromMinus,
+                                        ToMinus = x.ToMinus,
+                                        Id = x.Id
+                                    }).ToList()
+                            }
+                        );
+                    if (searchCondition.CinemeRoomId != null)
+                    {
+                        showTimeByDates = showTimeByDates.Where(x => x.showTimeDetailByDates.Any());
+                    }
+                    var totalCount = showTimeByDates.Count();
+                    if (totalCount == 0)
+                    {
+                        continue;
+                    }
+
+                    listShowTimeByDate.Paging = new Paging(totalCount, searchCondition.CurrentPage, searchCondition.PageSize);
+                    listShowTimeByDate.showTimeByDates = await showTimeByDates.Skip((searchCondition.CurrentPage - 1) * searchCondition.PageSize)
+                                                    .Take(searchCondition.PageSize)
+                                                    .ToListAsync();
+                    listShowTimeByDateReturn.Add(listShowTimeByDate);
+                }
+                return listShowTimeByDateReturn;
             }
             catch (Exception ex)
             {

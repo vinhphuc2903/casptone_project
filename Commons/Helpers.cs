@@ -14,15 +14,15 @@ namespace CapstoneProject.Commons
 {
     /// <summary>
     /// Các xử lý chung thường xuyên sử dụng trong hệ thống.
-    /// <para>Author: QuyPN</para>
-    /// <para>Created: 15/02/2020</para>
+    /// <para>Author: VinhPhuc</para>
+    /// <para>Created: 15/02/2023</para>
     /// </summary>
     public class Helpers
     {
         /// <summary>
         /// Sinh chuỗi token ngẫu nhiên theo id account đăng nhập, độ dài mặc định 100 ký tự.
-        /// <para>Author: QuyPN</para>
-        /// <para>Created: 15/02/2020</para>
+        /// <para>Author: VinhPhuc</para>
+        /// <para>Created: 15/02/2023</para>
         /// </summary>
         /// <param name="str">Chuỗi không trùng nhau sẽ cộng thêm vào token</param>
         /// <param name="length">Dộ dài của token, mặc định 100 ký tự</param>
@@ -49,8 +49,8 @@ namespace CapstoneProject.Commons
 
         /// <summary>
         /// Tạo ra chuỗi code để scan mã số khách hàng
-        /// <para>Author: QuyPN</para>
-        /// <para>Created: 15/02/2020</para>
+        /// <para>Author: VinhPhuc</para>
+        /// <para>Created: 15/02/2023</para>
         /// </summary>
         /// <param name="customerId">Mã số khách hàng</param>
         /// <returns>Chuỗi scan khi thanh toán</returns>
@@ -74,8 +74,8 @@ namespace CapstoneProject.Commons
 
         /// <summary>
         /// Giải mã chuỗi scan ra mã khách hàng
-        /// <para>Author: QuyPN</para>
-        /// <para>Created: 15/02/2020</para>
+        /// <para>Author: VinhPhuc</para>
+        /// <para>Created: 15/02/2023</para>
         /// </summary>
         /// <param name="scanCode">Mã số khi scan</param>
         /// <returns>Chuỗi scan khi thanh toán</returns>
@@ -160,8 +160,8 @@ namespace CapstoneProject.Commons
 
         /// <summary>
         /// Chuyển từ tiếng việt có dấu thành tiếng việt không dấu.
-        /// <para>Author: QuyPN</para>
-        /// <para>Created: 15/02/2020</para>
+        /// <para>Author: VinhPhuc</para>
+        /// <para>Created: 15/02/2023</para>
         /// </summary>
         /// <param name="s">Chuỗi tiếng việt cần chuyển</param>
         /// <param name="isReplaceSpecialChracter">Có thay thế các ký tự đặc biệt hay không</param>
@@ -193,8 +193,8 @@ namespace CapstoneProject.Commons
 
         /// <summary>
         /// Lấy dữ liệu từ cookies theo khóa, nếu không có dữ liệu thì trả về theo dữ liệu mặc định truyền vào hoặc rỗng
-        /// <para>Author: QuyPN</para>
-        /// <para>Created: 15/02/2020</para>
+        /// <para>Author: VinhPhuc</para>
+        /// <para>Created: 15/02/2023</para>
         /// </summary>
         /// <param name="key">Khóa cần lấy dữ liệu trong cookie</param>
         /// <param name="returnDefault">Kết quả trả về mặc định nếu không có dữ liệu trong cookie, mặc định là chuỗi rỗng</param>
@@ -218,8 +218,8 @@ namespace CapstoneProject.Commons
 
         /// <summary>
         /// Xóa file theo danh sách url đã cung cấp.
-        /// <para>Author: QuyPN</para>
-        /// <para>Created: 15/02/2020</para>
+        /// <para>Author: VinhPhuc</para>
+        /// <para>Created: 15/02/2023</para>
         /// </summary>
         /// <param name="fileUrls">Danh sách url file sẽ xóa</param>
         /// <returns>True nếu xóa thành công tất cả các file. Exception nếu có lỗi.</returns>
@@ -241,8 +241,8 @@ namespace CapstoneProject.Commons
 
         /// <summary>
         /// Xóa file theo danh sách url đã cung cấp.
-        /// <para>Author: QuyPN</para>
-        /// <para>Created: 15/02/2020</para>
+        /// <para>Author: VinhPhuc</para>
+        /// <para>Created: 15/02/2023</para>
         /// </summary>
         /// <param name="fileUrls">Danh sách url file sẽ xóa</param>
         /// <returns>True nếu xóa thành công tất cả các file. Exception nếu có lỗi.</returns>
@@ -264,8 +264,8 @@ namespace CapstoneProject.Commons
 
         /// <summary>
         /// Xóa 1 file url đã cung cấp.
-        /// <para>Author: QuyPN</para>
-        /// <para>Created: 15/02/2020</para>
+        /// <para>Author: VinhPhuc</para>
+        /// <para>Created: 15/02/2023</para>
         /// </summary>
         /// <param name="fileUrl">Đường dẫn đến file cần xóa</param>
         /// <returns>True nếu xóa thành công file. Exception nếu có lỗi.</returns>
@@ -299,8 +299,8 @@ namespace CapstoneProject.Commons
 
         /// <summary>
         /// Lưu file gửi từ client vào thư mục của server.
-        /// <para>Author: QuyPN</para>
-        /// <para>Created: 15/02/2020</para>
+        /// <para>Author: VinhPhuc</para>
+        /// <para>Created: 15/02/2023</para>
         /// </summary>
         /// <param name="file">File được gửi lên</param>
         /// <param name="folder">Đường dẫn đến thư mục muốn lưu (mặc định là /public/images/upload/)</param>
@@ -358,8 +358,8 @@ namespace CapstoneProject.Commons
 
         /// <summary>
         /// Upload nhiều hình ảnh 1 lúc đồng thời tạo thumb cho các hình ảnh đó.
-        /// <para>Author: QuyPN</para>
-        /// <para>Created: 15/02/2020</para>
+        /// <para>Author: VinhPhuc</para>
+        /// <para>Created: 15/02/2023</para>
         /// </summary>
         /// <param name="files">Các file hình ảnh được gửi lên từ client</param>
         /// <param name="folder">Thư mục sẽ lưu ảnh chính (mặc định là /public/images/upload/)</param>
@@ -479,8 +479,8 @@ namespace CapstoneProject.Commons
 
         /// <summary>
         /// Thay thế các ký tự trong chuỗi search để có thể dùng được ở Store procedure.
-        /// <para>Author: QuyPN</para>
-        /// <para>Created: 15/02/2020</para>
+        /// <para>Author: VinhPhuc</para>
+        /// <para>Created: 15/02/2023</para>
         /// </summary>
         /// <param name="str">Chuỗi cần thay thế</param>
         /// <returns>Chuỗi sau khi đã thay thế</returns>
@@ -604,8 +604,8 @@ namespace CapstoneProject.Commons
 
     /// <summary>
     /// Thông tin đường dẫn của hình ảnh đã upload đi kèm đường dẫn đến Thumb.
-    /// <para>Author: QuyPN</para>
-    /// <para>Created: 15/02/2020</para>
+    /// <para>Author: VinhPhuc</para>
+    /// <para>Created: 15/02/2023</para>
     /// </summary>
     public class ImgUploadWithThumb
     {

@@ -13,15 +13,15 @@ namespace CapstoneProject.Extensions
 {
     /// <summary>
     /// Lớp mở rộng để cấu hình app cho 1 microservice.
-    /// <para>Created at: 10/07/2020</para>
-    /// <para>Created by: QuyPN</para>
+    /// <para>Created at: 10/07/2023</para>
+    /// <para>Created by: VinhPhuc</para>
     /// </summary>
     public static class AppExtensions
     {
         /// <summary>
         /// Cấu hình việc sử dụng swagger cho app
-        /// <para>Created at: 10/07/2020</para>
-        /// <para>Created by: QuyPN</para>
+        /// <para>Created at: 10/07/2023</para>
+        /// <para>Created by: VinhPhuc</para>
         /// </summary>
         /// <param name="app">Application hiện tại của service</param>
         /// <param name="serviceName">Tên microservice đang cấu hình</param>
@@ -73,8 +73,8 @@ namespace CapstoneProject.Extensions
 
         /// <summary>
         /// Cấu hình việc sử dụng kiểm tra trạng thái microservice cho app
-        /// <para>Created at: 10/07/2020</para>
-        /// <para>Created by: QuyPN</para>
+        /// <para>Created at: 10/07/2023</para>
+        /// <para>Created by: VinhPhuc</para>
         /// </summary>
         /// <param name="app">Application hiện tại của service</param>
         /// <param name="serviceName">Tên microservice đang cấu hình</param>
@@ -126,8 +126,8 @@ namespace CapstoneProject.Extensions
 
         /// <summary>
         /// Cấu hình việc sử dụng cross origin cho app
-        /// <para>Created at: 10/07/2020</para>
-        /// <para>Created by: QuyPN</para>
+        /// <para>Created at: 10/07/2023</para>
+        /// <para>Created by: VinhPhuc</para>
         /// </summary>
         /// <param name="app">Application hiện tại của service</param>
         /// <param name="serviceName">Tên microservice đang cấu hình</param>

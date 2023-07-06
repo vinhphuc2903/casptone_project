@@ -28,15 +28,15 @@ namespace CapstoneProject.Extensions
 {
     /// <summary>
     /// Lớp mở rộng để cấu hình các dịch vụ cần thiết cho 1 microservice
-    /// <para>Created at: 10/07/2020</para>
-    /// <para>Created by: QuyPN</para>
+    /// <para>Created at: 10/07/2023</para>
+    /// <para>Created by: VinhPhuc</para>
     /// </summary>
     public static class ServicesExtensions
     {
         /// <summary>
         /// Cấu hình cross orgin cho API
-        /// <para>Created at: 10/07/2020</para>
-        /// <para>Created by: QuyPN</para>
+        /// <para>Created at: 10/07/2023</para>
+        /// <para>Created by: VinhPhuc</para>
         /// </summary>
         /// <param name="services">Các dịch vụ của API hiện tại</param>
         /// <param name="configuration">Các cấu hình API hiện tại</param>
@@ -63,8 +63,8 @@ namespace CapstoneProject.Extensions
 
         /// <summary>
         /// Cấu hình sử dụng version cho API
-        /// <para>Created at: 10/07/2020</para>
-        /// <para>Created by: QuyPN</para>
+        /// <para>Created at: 10/07/2023</para>
+        /// <para>Created by: VinhPhuc</para>
         /// </summary>
         /// <param name="services">Các dịch vụ của API hiện tại</param>
         /// <param name="configuration">Các cấu hình API hiện tại</param>
@@ -94,8 +94,8 @@ namespace CapstoneProject.Extensions
 
         /// <summary>
         /// Cấu hình sử dụng Swagger để tạo API doc và test API
-        /// <para>Created at: 10/07/2020</para>
-        /// <para>Created by: QuyPN</para>
+        /// <para>Created at: 10/07/2023</para>
+        /// <para>Created by: VinhPhuc</para>
         /// </summary>
         /// <param name="services">Các dịch vụ của API hiện tại</param>
         /// <param name="configuration">Các cấu hình API hiện tại</param>
@@ -184,8 +184,8 @@ namespace CapstoneProject.Extensions
 
         /// <summary>
         /// Cấu hình sử dụng xác thực cho API
-        /// <para>Created at: 10/07/2020</para>
-        /// <para>Created by: QuyPN</para>
+        /// <para>Created at: 10/07/2023</para>
+        /// <para>Created by: VinhPhuc</para>
         /// </summary>
         /// <param name="services">Các dịch vụ của API hiện tại</param>
         /// <param name="configuration">Các cấu hình API hiện tại</param>
@@ -266,8 +266,8 @@ namespace CapstoneProject.Extensions
 
         /// <summary>
         /// Cấu hình kiểm tra tình trạng của microservice
-        /// <para>Created at: 10/07/2020</para>
-        /// <para>Created by: QuyPN</para>
+        /// <para>Created at: 10/07/2023</para>
+        /// <para>Created by: VinhPhuc</para>
         /// </summary>
         /// <param name="services">Các dịch vụ của API hiện tại</param>
         /// <param name="configuration">Các cấu hình API hiện tại</param>
@@ -307,8 +307,8 @@ namespace CapstoneProject.Extensions
 
     /// <summary>
     /// Thêm một số cài đặt cấu hình khác
-    /// <para>Created at: 10/07/2020</para>
-    /// <para>Created by: QuyPN</para>
+    /// <para>Created at: 10/07/2023</para>
+    /// <para>Created by: VinhPhuc</para>
     /// </summary>
     /// <param name="services">Các dịch vụ của API hiện tại</param>
     /// <param name="configuration">Các cấu hình API hiện tại</param>
@@ -361,8 +361,8 @@ namespace CapstoneProject.Extensions
 
     /// <summary>
     /// Thuộc tính để thêm vào property để bỏ qua khi render swagger UI
-    /// <para>Created at: 08/08/2020</para>
-    /// <para>Created by: QuyPN</para>
+    /// <para>Created at: 08/08/2023</para>
+    /// <para>Created by: VinhPhuc</para>
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class SwaggerExcludeAttribute : Attribute
@@ -371,15 +371,15 @@ namespace CapstoneProject.Extensions
 
     /// <summary>
     /// Lọc các tham số của API sẽ render trên UI, bỏ qua các tham số trên dường dẫn (api_version) và thêm các giá trị mặc định cho các tham số
-    /// <para>Created at: 08/08/2020</para>
-    /// <para>Created by: QuyPN</para>
+    /// <para>Created at: 08/08/2023</para>
+    /// <para>Created by: VinhPhuc</para>
     /// </summary>
     public class SwaggerParameterFilter : IOperationFilter
     {
         /// <summary>
         /// Ghi đè phương thức để lọc tham số
-        /// <para>Created at: 08/08/2020</para>
-        /// <para>Created by: QuyPN</para>
+        /// <para>Created at: 08/08/2023</para>
+        /// <para>Created by: VinhPhuc</para>
         /// </summary>
         /// <param name="operation"></param>
         /// <param name="context"></param>

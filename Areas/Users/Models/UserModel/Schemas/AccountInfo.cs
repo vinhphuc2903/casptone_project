@@ -9,6 +9,7 @@ namespace CapstoneProject.Areas.Users.Models.UserModel.Schemas
 		{
 			
 		}
+        public int? Id { get; set; }
         /// <summary>
         /// Tên đăng nhập
         /// </summary>

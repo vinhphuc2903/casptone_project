@@ -61,5 +61,45 @@ namespace CapstoneProject.Areas.Employee.Controllers
                 return StatusCode(500);
             }
         }
+        /// <summary>
+        /// Tạo tài khoản
+        /// <para>Created at: 04/05/2023</para>
+        /// <para>Created by: VinhPhuc</para>
+        /// </summary>
+        /// <response code="401">Chưa đăng nhập</response>
+        /// <response code="500">Lỗi khi có exception</response>
+        [HttpPut("update-employee")]
+        public async Task<ActionResult> UpdateAccountEmployee([FromBody] EmployeeData employeeData)
+        {
+            try
+            {
+                return Ok(await _employeesModel.UpdateAccountEmployee(employeeData));
+            }
+            catch (Exception e)
+            {
+                //await _logService.SaveLogException(e);
+                return StatusCode(500);
+            }
+        }
+        /// <summary>
+        /// Tạo tài khoản
+        /// <para>Created at: 04/05/2023</para>
+        /// <para>Created by: VinhPhuc</para>
+        /// </summary>
+        /// <response code="401">Chưa đăng nhập</response>
+        /// <response code="500">Lỗi khi có exception</response>
+        [HttpDelete("delete-employee")]
+        public async Task<ActionResult> DeleteAccountEmployee([FromQuery] int employeeId)
+        {
+            try
+            {
+                return Ok(await _employeesModel.DeleteAccountEmployee(employeeId));
+            }
+            catch (Exception e)
+            {
+                //await _logService.SaveLogException(e);
+                return StatusCode(500);
+            }
+        }
     }
 }

@@ -30,8 +30,8 @@ namespace CapstoneProject.Commons
 
         /// <summary>
         /// Hàm khởi tạo mặc định để gán các tham số mặc định khi khởi tạo 1 biến để lưu phân trang.
-        /// <para>Author: QuyPN</para>
-        /// <para>Created: 15/02/2020</para>
+        /// <para>Author: VinhPhuc</para>
+        /// <para>Created: 15/02/2023</para>
         /// </summary>
         public Paging()
         {

@@ -71,6 +71,17 @@ namespace CapstoneProject.Areas.Film.Models.FilmModels.Schemas
         /// </summary>
         public string TrailerLink { get; set; }
 
+        /// <summary>
+		/// Vốn đầu tư
+		/// </summary>
+		/// <value></value>
+		public double? Cost { get; set; }
+
+        /// <summary>
+		/// Ngày phát hành
+		/// </summary>
+        public DateTime? DateRelease { get; set; }
+
         public IEnumerable<string> ListTypeFilm { get; set; }
 
     }

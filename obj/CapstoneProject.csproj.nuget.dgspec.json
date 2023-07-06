@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/CapstoneProject.csproj": {}
+    "/Users/vinhphuc/Desktop/CapstoneProject/BE/casptoneProjectPostgree/CapstoneProject/CapstoneProject.csproj": {}
   },
   "projects": {
-    "/Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/CapstoneProject.csproj": {
+    "/Users/vinhphuc/Desktop/CapstoneProject/BE/casptoneProjectPostgree/CapstoneProject/CapstoneProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/CapstoneProject.csproj",
+        "projectUniqueName": "/Users/vinhphuc/Desktop/CapstoneProject/BE/casptoneProjectPostgree/CapstoneProject/CapstoneProject.csproj",
         "projectName": "CapstoneProject",
-        "projectPath": "/Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/CapstoneProject.csproj",
+        "projectPath": "/Users/vinhphuc/Desktop/CapstoneProject/BE/casptoneProjectPostgree/CapstoneProject/CapstoneProject.csproj",
         "packagesPath": "/Users/vinhphuc/.nuget/packages/",
-        "outputPath": "/Users/vinhphuc/Desktop/CapstoneProject/BE/CapstoneProject/CapstoneProject/obj/",
+        "outputPath": "/Users/vinhphuc/Desktop/CapstoneProject/BE/casptoneProjectPostgree/CapstoneProject/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/vinhphuc/.nuget/NuGet/NuGet.Config"
@@ -135,6 +135,10 @@
             "Microsoft.VisualStudio.TemplateWizardInterface": {
               "target": "Package",
               "version": "[17.5.33428.366, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[7.0.4, )"
             },
             "Serilog": {
               "target": "Package",

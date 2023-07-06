@@ -86,6 +86,26 @@ namespace CapstoneProject.Areas.CinemeRoom.Controllers
             }
         }
         /// <summary>
+        /// Cập nhật cinemaroom mới
+        /// <para>Created at: 14/05/2023</para>
+        /// <para>Created by: VinhPhuc</para>
+        /// </summary>
+        /// <response code="401">Chưa đăng nhập</response>
+        /// <response code="500">Lỗi khi có exception</response>
+        [HttpPut()]
+        public async Task<ActionResult> UpdateCinemaRoomData([FromBody] CinemaRoomDataInput cinemaRoomData)
+        {
+            try
+            {
+                return Ok(await _cinemaRoomModel.UpdateCinemaRoomData(cinemaRoomData));
+            }
+            catch (Exception e)
+            {
+                //await _logService.SaveLogException(e);
+                return StatusCode(500);
+            }
+        }
+        /// <summary>
         /// Xóa cinemaroom
         /// <para>Created at: 14/05/2023</para>
         /// <para>Created by: VinhPhuc</para>
